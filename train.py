@@ -5,7 +5,6 @@ from collections import OrderedDict
 import torch
 
 from utils import Vocab, MultiWozReader
-from damd_multiwoz.config import global_config as cfg
 from damd_multiwoz.eval import MultiWozEvaluator
 from transformers import (AdamW, T5Tokenizer, BartTokenizer, WEIGHTS_NAME,CONFIG_NAME, get_linear_schedule_with_warmup)
 from T5 import MiniT5
@@ -27,8 +26,19 @@ class Model(object):
             self.tokenizer = BartTokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
             self.model = MiniBART.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
         vocab = Vocab(self.model, self.tokenizer)
-        self.reader = MultiWozReader(vocab,args)
+        
+        # check what dataset should be used
+        if args.dataset == 'multiwoz':
+            self.reader = MultiWozReader(vocab,args)
+            self.evaluator = MultiWozEvaluator(self.reader) # evaluator class
+        elif args.dataset == 'camrest':
+            self.reader = CamRestReader(vocab,args) #implement reader T_T
+            # self.evaluator = CamRestEvaluator(self.reader)
+        # elif args.dataset == 'smd':
+            # self.reader = SMDReader(vocab,args)
+            # self.evaluator = SMDEvaluator(self.reader)
         self.evaluator = MultiWozEvaluator(self.reader) # evaluator class
+
         self.optim = AdamW(self.model.parameters(), lr=args.lr)
         self.args = args
         self.model.to(args.device)
@@ -302,11 +312,32 @@ def main():
     parser.add_argument("--lr_decay", type=float, default=0.8, help="Learning rate decay")
     parser.add_argument("--noupdate_dst", action='store_true', help="dont use update base DST")
     parser.add_argument("--back_bone", type=str, default="t5", help="choose t5 or bart")
+    parser.add_argument("--dataset", type=str, default="multiwoz", help="choose the dataset: multiwoz, camrest, or smd")
+    parser.add_argument("--exp_setting", type=str, default="en", help="choose the experiment setting between en,id,cross,bi,bi-en,and bi-id")
     #parser.add_argument("--dst_weight", type=int, default=1)
     parser.add_argument("--fraction", type=float, default=1.0)
     args = parser.parse_args()
 
+    if args.dataset == 'multiwoz':
+        from damd_multiwoz.config import global_config as cfg
+    elif args.dataset == 'camrest':
+        if args.exp_setting == 'en':
+            from config import camrest_config_en as cfg
+        elif args.exp_setting == 'id':
+            from config import camrest_config_id as cfg
+        elif args.exp_setting == 'cross':
+            from config import camrest_config_cross as cfg
+        elif args.exp_setting == 'bi':
+            from config import camrest_config_bi as cfg
+        elif args.exp_setting == 'bi-en':
+            from config import camrest_config_bien as cfg
+        elif args.exp_setting == 'bi-id':
+            from config import camrest_config_biid as cfg
+    elif args.dataset == 'smd':
+        from config import smd_config as cfg
+
     cfg.mode = args.mode
+    cfg.exp_setting = args.exp_setting
     if args.mode == 'test' or args.mode == 'relex':
         parse_arg_cfg(args)
         cfg_load = json.loads(open(os.path.join(args.model_path, 'exp_cfg.json'), 'r').read())
