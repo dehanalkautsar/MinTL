@@ -1,3 +1,5 @@
+import sys
+sys.path.append("damd_multiwoz")
 import json, random, sqlite3
 from ontology import all_domains, db_domains
 
