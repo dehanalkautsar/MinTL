@@ -4,8 +4,8 @@ from copy import deepcopy
 from collections import OrderedDict
 import torch
 
-from utils import Vocab, MultiWozReader
-from damd_multiwoz.eval import MultiWozEvaluator
+from utils import Vocab, MultiWozReader, CamRestReader
+# from damd_multiwoz.eval import MultiWozEvaluator
 from transformers import (AdamW, T5Tokenizer, BartTokenizer, WEIGHTS_NAME,CONFIG_NAME, get_linear_schedule_with_warmup)
 from T5 import MiniT5
 from BART import MiniBART
@@ -37,7 +37,7 @@ class Model(object):
         # elif args.dataset == 'smd':
             # self.reader = SMDReader(vocab,args)
             # self.evaluator = SMDEvaluator(self.reader)
-        self.evaluator = MultiWozEvaluator(self.reader) # evaluator class
+        # self.evaluator = MultiWozEvaluator(self.reader) # evaluator class
 
         self.optim = AdamW(self.model.parameters(), lr=args.lr)
         self.args = args
@@ -50,7 +50,7 @@ class Model(object):
         self.model = type(self.model).from_pretrained(self.args.model_path)
         self.model.to(self.args.device)
 
-    def train(self):
+    def train(self, cfg):
         btm = time.time()
         step = 0
         prev_min_loss = 1000
@@ -69,7 +69,7 @@ class Model(object):
             log_resp = 0
             log_cnt = 0
             sw = time.time()
-            data_iterator = self.reader.get_batches('train')
+            data_iterator = self.reader.get_batches('train', cfg)
             for iter_num, dial_batch in enumerate(data_iterator):
                 py_prev = {'pv_bspn': None}
                 for turn_num, turn_batch in enumerate(dial_batch):
@@ -176,10 +176,10 @@ class Model(object):
         self.eval()
 
 
-    def validate(self, data='dev', do_test=False):
+    def validate(self, cfg, data='dev', do_test=False):
         self.model.eval()
         valid_loss, count = 0, 0
-        data_iterator = self.reader.get_batches(data)
+        data_iterator = self.reader.get_batches(data, cfg)
         result_collection = {}
         for batch_num, dial_batch in enumerate(data_iterator):
             py_prev = {'bspn': None}
@@ -210,11 +210,11 @@ class Model(object):
             self.eval()
         return valid_loss
 
-    def eval(self, data='test'):
+    def eval(self, cfg, data='test'):
         self.model.eval()
         self.reader.result_file = None
         result_collection = {}
-        data_iterator = self.reader.get_batches(data)
+        data_iterator = self.reader.get_batches(data, cfg)
         for batch_num, dial_batch in tqdm.tqdm(enumerate(data_iterator)):
             py_prev = {'bspn': None}
             for turn_num, turn_batch in enumerate(dial_batch):
@@ -276,7 +276,7 @@ class Model(object):
         return param_cnt
 
 
-def parse_arg_cfg(args):
+def parse_arg_cfg(args, cfg):
     if args.cfg:
         for pair in args.cfg:
             k, v = tuple(pair.split('='))
@@ -339,7 +339,7 @@ def main():
     cfg.mode = args.mode
     cfg.exp_setting = args.exp_setting
     if args.mode == 'test' or args.mode == 'relex':
-        parse_arg_cfg(args)
+        parse_arg_cfg(args, cfg)
         cfg_load = json.loads(open(os.path.join(args.model_path, 'exp_cfg.json'), 'r').read())
         for k, v in cfg_load.items():
             if k in ['mode', 'cuda', 'cuda_device', 'eval_per_domain', 'use_true_pv_resp',
@@ -354,7 +354,7 @@ def main():
             setattr(cfg, k, v)
             cfg.result_path = os.path.join(args.model_path, 'result.csv')
     else:
-        parse_arg_cfg(args)
+        parse_arg_cfg(args, cfg)
         if args.model_path=="":
             args.model_path = 'experiments/{}_sd{}_lr{}_bs{}_sp{}_dc{}_cw{}_model_{}_noupdate{}_{}/'.format('-'.join(cfg.exp_domains), cfg.seed, args.lr, cfg.batch_size,
                                                                                             cfg.early_stop_count, args.lr_decay, args.context_window, args.pretrained_checkpoint, args.noupdate_dst, args.fraction)
@@ -376,10 +376,10 @@ def main():
         with open(os.path.join(args.model_path, 'exp_cfg.json'), 'w') as f:
             json.dump(cfg.__dict__, f, indent=2)
         m = Model(args)
-        m.train()
+        m.train(cfg)
     elif args.mode == 'test':
         m = Model(args,test=True)
-        m.eval(data='test')
+        m.eval(cfg=cfg, data='test')
     elif args.mode == 'relex':
         m = Model(args,test=True)
         output_path = os.path.join(args.model_path, 'generation.csv')

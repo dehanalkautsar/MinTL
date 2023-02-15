@@ -15,7 +15,6 @@ from gensim.models import KeyedVectors
 
 from damd_multiwoz import ontology
 from damd_multiwoz.db_ops import MultiWozDB
-from damd_multiwoz.config import global_config as cfg
 
 def clean_replace(s, r, t, forward=True, backward=False):
     def clean_replace_single(s, r, t, forward, backward, sidx=0):
@@ -140,7 +139,7 @@ class _ReaderBase(object):
         return OrderedDict(sorted(turn_bucket.items(), key=lambda i:i[0]))
 
 
-    def _construct_mini_batch(self, data):
+    def _construct_mini_batch(self, data, cfg):
         all_batches = []
         batch = []
         for dial in data:
@@ -200,7 +199,7 @@ class _ReaderBase(object):
         return dialogs
 
 
-    def get_batches(self, set_name):
+    def get_batches(self, set_name, cfg):
         global dia_count
         log_str = ''
         name_to_set = {'train': self.train, 'test': self.test, 'dev': self.dev}
@@ -211,7 +210,7 @@ class _ReaderBase(object):
         for k in turn_bucket:
             if set_name != 'test' and k==1 or k>=17:
                 continue
-            batches = self._construct_mini_batch(turn_bucket[k])
+            batches = self._construct_mini_batch(turn_bucket[k], cfg=cfg)
             log_str += "turn num:%d, dial num: %d, batch num: %d last batch len: %d\n"%(
                     k, len(turn_bucket[k]), len(batches), len(batches[-1]))
             # print("turn num:%d, dial num:v%d, batch num: %d, "%(k, len(turn_bucket[k]), len(batches)))
@@ -260,6 +259,7 @@ class _ReaderBase(object):
 
 class MultiWozReader(_ReaderBase):
     def __init__(self, vocab=None, args=None):
+        from damd_multiwoz.config import global_config as cfg
         super().__init__()
         self.nlp = spacy.load('en_core_web_sm')
         self.db = MultiWozDB(cfg.dbs)
@@ -804,12 +804,12 @@ class CamRestReader(_ReaderBase):
         self.vocab = vocab
         self.vocab_size = vocab.vocab_size
 
-        self._load_data()
+        self._load_data(cfg=cfg)
 
-    def _load_data(self, save_temp=False):
-        self.data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.data_path+cfg.data_file, 'r', encoding='utf-8').read().lower())))
+    def _load_data(self, cfg, save_temp=False):
+        self.data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.data_path+cfg.data_file, 'r', encoding='utf-8').read().lower()), self.db))
         tr,de,_ = self._split_data(self.data, (8,1,1))
-        self.test_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.test_list, 'r', encoding='utf-8').read().lower())))
+        self.test_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.test_list, 'r', encoding='utf-8').read().lower()), self.db))
         _,_,te = self._split_data(self.test_data, (8,1,1))
         self.train, self.dev, self.test = [] , [], []
         train_count = 0
@@ -951,15 +951,7 @@ class CamRestReader(_ReaderBase):
         dial_context = []
         delete_op = self.vocab.tokenizer.encode("<None>") #delete operation
         prev_constraint_dict = {}
-        encoded_dial.append({
-                    'dial_id': dial_id,
-                    'turn_num': turn_num,
-                    'user': prev_response + user,
-                    'response': response,
-                    'bspan': constraint + requested,
-                    'u_len': len(prev_response + user),
-                    'm_len': len(response),
-                })
+
         for idx, t in enumerate(dial):
             enc = {}
             enc['dial_id'] = fn
@@ -969,6 +961,7 @@ class CamRestReader(_ReaderBase):
             # enc['usdx'] = self.vocab.tokenizer.encode(t['user_delex']) + self.vocab.tokenizer.encode('<eos_u>')
             enc['resp'] = self.vocab.tokenizer.encode(t['response']) + self.vocab.tokenizer.encode('<eos_r>')
             # enc['resp_nodelex'] = self.vocab.tokenizer.encode(t['resp_nodelex']) + self.vocab.tokenizer.encode('<eos_r>')
+            if len(t['bspan']) == 0: t['bspan'].append("")
             enc['bspn'] = self.vocab.tokenizer.encode(t['bspan']) + self.vocab.tokenizer.encode('<eos_b>')
             # constraint_dict = self.bspan_to_constraint_dict(t['constraint'])
             # update_bspn = self.check_update(prev_constraint_dict, constraint_dict)
@@ -1131,15 +1124,16 @@ class CamRestReader(_ReaderBase):
         if self.args.noupdate_dst:
             # here we use state_update denote the belief span (bspn)...
             state_update, state_input = self.padOutput(batch['bspn'], pad_token)
-        else:
-            state_update, state_input = self.padOutput(batch['update_bspn'], pad_token)
+        # else: # error because CamRest doesnt have very complete ontology like multiwoz
+        #     state_update, state_input = self.padOutput(batch['update_bspn'], pad_token)
         response, response_input = self.padOutput(batch['resp'], pad_token)
         inputs["state_update"] = torch.tensor(state_update,dtype=torch.long) # batch_size, seq_len
         inputs["response"] = torch.tensor(response,dtype=torch.long)
         inputs["state_input"] = torch.tensor(np.concatenate( (np.ones((batch_size,1))*dst_start_token  , state_input[:,:-1]), axis=1 ) ,dtype=torch.long)
         inputs["response_input"] = torch.tensor( np.concatenate( ( np.array(batch['input_pointer']), response_input[:,:-1]), axis=1 ) ,dtype=torch.long)
-        inputs["turn_domain"] = batch["turn_domain"]
+        # inputs["turn_domain"] = batch["turn_domain"]
         inputs["input_pointer"] = torch.tensor(np.array(batch['input_pointer']),dtype=torch.long)
+
         # for k in inputs:
         #     if k=="masks":
         #         print(k)

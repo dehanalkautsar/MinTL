@@ -1,10 +1,10 @@
 import logging, time, os
 
 class _CamRest_Config:
-    def __init__(self):
-        self._camrest_init()
+    def __init__(self, exp_setting):
+        self._camrest_init(exp_setting)
 
-    def _camrest_damd_init(self, exp_setting): # copied from multiwoz_config
+    def _camrest_init(self, exp_setting): # copied from multiwoz_config
         # self.vocab_path_train = os.path.join(os.path.dirname(__file__), 'data/multi-woz-processed/vocab')
         # self.vocab_path_eval = None
         self.data_path = os.path.join(os.path.dirname(__file__),'data/CamRest676/')
@@ -269,10 +269,10 @@ class _SMD_Config:
         logger = logging.getLogger()
         logger.setLevel(logging.INFO)
 
-camrest_config_en = _Camrest_Config('en')
-camrest_config_id = _Camrest_Config('id')
-camrest_config_cross = _Camrest_Config('cross')
-camrest_config_bi = _Camrest_Config('bi')
-camrest_config_bien = _Camrest_Config('bi-en')
-camrest_config_biid = _Camrest_Config('bi-id')
+camrest_config_en = _CamRest_Config('en')
+camrest_config_id = _CamRest_Config('id')
+camrest_config_cross = _CamRest_Config('cross')
+camrest_config_bi = _CamRest_Config('bi')
+camrest_config_bien = _CamRest_Config('bi-en')
+camrest_config_biid = _CamRest_Config('bi-id')
 smd_config = _SMD_Config()
