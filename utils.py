@@ -841,6 +841,7 @@ class CamRestReader(_ReaderBase):
                 requested = turn['requested']
                 turn_num = turn['turn_num']
                 dial_id = turn['dial_id']
+                pointer = f'[db_state{turn["db_state"]}]'
 
                 # final input
                 encoded_dial.append({
@@ -849,6 +850,7 @@ class CamRestReader(_ReaderBase):
                     'user': prev_response + user,
                     'response': response,
                     'bspan': constraint + requested,
+                    'pointer': pointer,
                     'u_len': len(prev_response + user),
                     'm_len': len(response),
                 })
@@ -875,10 +877,11 @@ class CamRestReader(_ReaderBase):
                         requested.extend(word_tokenize(slot['slots'][0][1]))
                 degree = len(self.db_search(constraint))
                 requested = sorted(requested)
-                # constraint.append('EOS_Z1')
-                # requested.append('EOS_Z2')
                 user = word_tokenize(turn['usr']['transcript'])
                 response = word_tokenize(self._replace_entity(turn['sys']['sent'], vk_map, constraint))
+                matched_entities = self.db_search(constraint)
+                constraint.append('EOS_Z1')
+                requested.append('EOS_Z2')
                 tokenized_dial.append({
                     'dial_id': dial_id,
                     'turn_num': turn_num,
@@ -887,6 +890,7 @@ class CamRestReader(_ReaderBase):
                     'constraint': constraint,
                     'requested': requested,
                     'degree': degree,
+                    'db_state': 2 if len(matched_entities) >= 2 else len(matched_entities),
                 })
                 # if construct_vocab:
                 #     for word in user + response + constraint + requested:
@@ -958,7 +962,6 @@ class CamRestReader(_ReaderBase):
             enc['user'] = self.vocab.tokenizer.encode(t['user']) + self.vocab.tokenizer.encode(['<eos_u>'])
             # dial_context.append( self.vocab.tokenizer.encode(t['user']) + self.vocab.tokenizer.encode('<eos_u>') )
             # enc['user'] = list(chain(*dial_context[-self.args.context_window:])) # here we use user to represent dialogue history
-            # enc['usdx'] = self.vocab.tokenizer.encode(t['user_delex']) + self.vocab.tokenizer.encode('<eos_u>')
             enc['resp'] = self.vocab.tokenizer.encode(t['response']) + self.vocab.tokenizer.encode('<eos_r>')
             # enc['resp_nodelex'] = self.vocab.tokenizer.encode(t['resp_nodelex']) + self.vocab.tokenizer.encode('<eos_r>')
             if len(t['bspan']) == 0: t['bspan'].append("")
@@ -966,13 +969,7 @@ class CamRestReader(_ReaderBase):
             # constraint_dict = self.bspan_to_constraint_dict(t['constraint'])
             # update_bspn = self.check_update(prev_constraint_dict, constraint_dict)
             # enc['update_bspn'] = self.vocab.tokenizer.encode(update_bspn)
-            # #'bspn': '[hotel] area north type guest house stay 5 day tuesday people 5 [train] leave sunday destination london liverpool street departure cambridge', 
-            # enc['bsdx'] = self.vocab.tokenizer.encode(t['cons_delex']) + self.vocab.tokenizer.encode('<eos_b>')
-            # enc['aspn'] = self.vocab.tokenizer.encode(t['sys_act']) + self.vocab.tokenizer.encode('<eos_a>')
-            # enc['dspn'] = self.vocab.tokenizer.encode(t['turn_domain']) + self.vocab.tokenizer.encode('<eos_d>')
-            # enc['pointer'] = [int(i) for i in t['pointer'].split(',')]
-            # # print(self.vocab.tokenizer.encode("[db_state0]"))
-            # # print(self.vocab.tokenizer.encode("[db_state4]"))
+            enc['input_pointer'] = self.vocab.tokenizer.encode(t['pointer'])
             # if sum(enc['pointer'][:-2])==0:
             #     enc['input_pointer'] = self.vocab.tokenizer.encode("[db_state0]")
             # else:
@@ -1121,7 +1118,8 @@ class CamRestReader(_ReaderBase):
         input_ids, masks = self.padInput(input_ids, pad_token)
         inputs["input_ids"] = torch.tensor(input_ids,dtype=torch.long)
         inputs["masks"] = torch.tensor(masks,dtype=torch.long)
-        if self.args.noupdate_dst:
+        # for CamRest
+        if self.args.noupdate_dst or True:
             # here we use state_update denote the belief span (bspn)...
             state_update, state_input = self.padOutput(batch['bspn'], pad_token)
         # else: # error because CamRest doesnt have very complete ontology like multiwoz
@@ -1132,7 +1130,7 @@ class CamRestReader(_ReaderBase):
         inputs["state_input"] = torch.tensor(np.concatenate( (np.ones((batch_size,1))*dst_start_token  , state_input[:,:-1]), axis=1 ) ,dtype=torch.long)
         inputs["response_input"] = torch.tensor( np.concatenate( ( np.array(batch['input_pointer']), response_input[:,:-1]), axis=1 ) ,dtype=torch.long)
         # inputs["turn_domain"] = batch["turn_domain"]
-        inputs["input_pointer"] = torch.tensor(np.array(batch['input_pointer']),dtype=torch.long)
+        # inputs["input_pointer"] = torch.tensor(np.array(batch['input_pointer']),dtype=torch.long)
 
         # for k in inputs:
         #     if k=="masks":
