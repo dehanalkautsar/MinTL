@@ -1187,7 +1187,7 @@ class CamRestReader(_ReaderBase):
         return updated_bspn
         
 
-    def wrap_result(self, result_dict, eos_syntax=None):
+    def wrap_result(self, result_dict, cfg, eos_syntax=None):
         decode_fn = self.vocab.sentence_decode
         results = []
         eos_syntax = ontology.eos_tokens if not eos_syntax else eos_syntax

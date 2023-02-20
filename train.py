@@ -134,7 +134,7 @@ class Model(object):
                                                                            turn_num+1))
             epoch_sup_loss = log_loss/(log_cnt+ 1e-8)
             do_test = False
-            valid_loss = self.validate(do_test=do_test)
+            valid_loss = self.validate(cfg=cfg, do_test=do_test)
             logging.info('epoch: %d, train loss: %.3f, valid loss: %.3f, total time: %.1fmin' % (epoch+1, epoch_sup_loss,
                     valid_loss, (time.time()-sw)/60))
 
@@ -199,7 +199,7 @@ class Model(object):
 
             result_collection.update(self.reader.inverse_transpose_batch(dial_batch))
 
-        results, _ = self.reader.wrap_result(result_collection)
+        results, _ = self.reader.wrap_result(result_collection, cfg=cfg)
         bleu, success, match = self.evaluator.validation_metric(results)
         score = 0.5 * (success + match) + bleu
         valid_loss = 130 - score
@@ -207,7 +207,7 @@ class Model(object):
         self.model.train()
         if do_test:
             print('result preview...')
-            self.eval()
+            self.eval(cfg)
         return valid_loss
 
     def eval(self, cfg, data='test'):
@@ -233,7 +233,7 @@ class Model(object):
              
             result_collection.update(self.reader.inverse_transpose_batch(dial_batch))
 
-        results, field = self.reader.wrap_result(result_collection)
+        results, field = self.reader.wrap_result(result_collection, cfg=cfg)
 
         self.reader.save_result('w', results, field)
 
