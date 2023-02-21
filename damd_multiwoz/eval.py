@@ -3,6 +3,8 @@ from collections import Counter, OrderedDict
 from nltk.util import ngrams
 #import spacy
 import ontology
+import sys
+sys.path.append("damd_multiwoz")
 from config import global_config as cfg
 from clean_dataset import clean_slot_values
 

@@ -6,6 +6,7 @@ import torch
 
 from utils import Vocab, MultiWozReader, CamRestReader
 # from damd_multiwoz.eval import MultiWozEvaluator
+from evaluator import CamRestEvaluator
 from transformers import (AdamW, T5Tokenizer, BartTokenizer, WEIGHTS_NAME,CONFIG_NAME, get_linear_schedule_with_warmup)
 from T5 import MiniT5
 from BART import MiniBART
@@ -32,8 +33,8 @@ class Model(object):
             self.reader = MultiWozReader(vocab,args)
             self.evaluator = MultiWozEvaluator(self.reader) # evaluator class
         elif args.dataset == 'camrest':
-            self.reader = CamRestReader(vocab,args) #implement reader T_T
-            # self.evaluator = CamRestEvaluator(self.reader)
+            self.reader = CamRestReader(vocab,args)
+            self.evaluator = CamRestEvaluator(self.reader)
         # elif args.dataset == 'smd':
             # self.reader = SMDReader(vocab,args)
             # self.evaluator = SMDEvaluator(self.reader)
@@ -189,7 +190,9 @@ class Model(object):
                 for k in inputs:
                     if k!="turn_domain":
                         inputs[k] = inputs[k].to(self.args.device)
-                if self.args.noupdate_dst:
+                if self.args.noupdate_dst and (self.args.dataset == 'camrest' or self.args.dataset == 'smd'):
+                    dst_outputs, resp_outputs = self.model.inference_sequicity(tokenizer=self.tokenizer, reader=self.reader, prev=py_prev, input_ids=inputs['input_ids'],attention_mask=inputs["masks"], db=inputs["input_pointer"], dataset_type=self.args.dataset)
+                elif self.args.noupdate_dst:
                     dst_outputs, resp_outputs = self.model.inference_sequicity(tokenizer=self.tokenizer, reader=self.reader, prev=py_prev, input_ids=inputs['input_ids'],attention_mask=inputs["masks"], turn_domain=inputs["turn_domain"], db=inputs["input_pointer"])
                 else:
                     dst_outputs, resp_outputs = self.model.inference(tokenizer=self.tokenizer, reader=self.reader, prev=py_prev, input_ids=inputs['input_ids'],attention_mask=inputs["masks"], turn_domain=inputs["turn_domain"], db=inputs["input_pointer"])

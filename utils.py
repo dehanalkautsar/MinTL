@@ -803,6 +803,8 @@ class CamRestReader(_ReaderBase):
 
         self.vocab = vocab
         self.vocab_size = vocab.vocab_size
+        self.entities = []
+        self.entity_dict = {}
 
         self._load_data(cfg=cfg)
 
@@ -812,6 +814,9 @@ class CamRestReader(_ReaderBase):
         self.test_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.test_list, 'r', encoding='utf-8').read().lower()), self.db))
         _,_,te = self._split_data(self.test_data, (8,1,1))
         self.train, self.dev, self.test = [] , [], []
+        self.ontology = json.loads(open(cfg.ontology).read().lower())
+        self.get_entities(self.ontology)
+
         train_count = 0
 
         for dial in tr:
@@ -820,14 +825,20 @@ class CamRestReader(_ReaderBase):
             train_count += 1
         for dial in de:
             dial_id = dial[0]['dial_id']
-            self.train.append(self._get_encoded_data(dial_id,dial))
+            self.dev.append(self._get_encoded_data(dial_id,dial))
         for dial in te:
             dial_id = dial[0]['dial_id']
-            self.train.append(self._get_encoded_data(dial_id,dial))
+            self.test.append(self._get_encoded_data(dial_id,dial))
 
         random.shuffle(self.train)
         random.shuffle(self.dev)
         random.shuffle(self.test)
+
+    def get_entities(self, entity_data):
+        for k in entity_data['informable']:
+            self.entities.extend(entity_data['informable'][k])
+            for item in entity_data['informable'][k]:
+                self.entity_dict[item] = k
 
     def _get_encoded_data_sequicity(self, tokenized_data):
         encoded_data = []
@@ -1130,7 +1141,7 @@ class CamRestReader(_ReaderBase):
         inputs["state_input"] = torch.tensor(np.concatenate( (np.ones((batch_size,1))*dst_start_token  , state_input[:,:-1]), axis=1 ) ,dtype=torch.long)
         inputs["response_input"] = torch.tensor( np.concatenate( ( np.array(batch['input_pointer']), response_input[:,:-1]), axis=1 ) ,dtype=torch.long)
         # inputs["turn_domain"] = batch["turn_domain"]
-        # inputs["input_pointer"] = torch.tensor(np.array(batch['input_pointer']),dtype=torch.long)
+        inputs["input_pointer"] = torch.tensor(np.array(batch['input_pointer']),dtype=torch.long)
 
         # for k in inputs:
         #     if k=="masks":
@@ -1193,8 +1204,6 @@ class CamRestReader(_ReaderBase):
         eos_syntax = ontology.eos_tokens if not eos_syntax else eos_syntax
 
         if cfg.bspn_mode == 'bspn':
-            # field = ['dial_id', 'turn_num', 'user', 'bspn_gen','bspn', 'resp_gen', 'resp', 'aspn_gen', 'aspn',
-            #             'dspn_gen', 'dspn', 'pointer']
             field = ['dial_id', 'turn_num', 'user', 'bspn_gen','bspn', 'resp_gen', 'resp']
         elif not cfg.enable_dst:
             field = ['dial_id', 'turn_num', 'user', 'bsdx_gen','bsdx', 'resp_gen', 'resp', 'aspn_gen', 'aspn',

@@ -12,37 +12,32 @@ class _CamRest_Config:
             self.data_file = 'CamRest/CamRest676.json'
             self.test_list = os.path.join(os.path.dirname(__file__),'data/CamRest676/CamRest/CamRest676.json')
             self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/CamRest/CamRestDB.json')
+            self.ontology = os.path.join(os.path.dirname(__file__),'data/CamRest676/CamRest/CamRestOTGY.json')
         elif exp_setting == 'id':
             self.data_file = 'IndoCamRest/IndoCamRest676.json'
             self.test_list = os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/IndoCamRest676.json')
             self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/KB_indo.json')
+            self.ontology = os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/ontology_indo.json')
         elif exp_setting == 'cross':
             self.data_file = 'CamRest/CamRest676.json'
             self.test_list = os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/IndoCamRest676.json')
             self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/kb_indo_bi.json')
+            self.ontology = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/ontology_indo_bi.json')
         elif exp_setting == 'bi':
             self.data_file = 'bi/IndoCamRest676_bi.json'
             self.test_list = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/IndoCamRest676_bi.json')
             self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/kb_indo_bi.json')
+            self.ontology = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/ontology_indo_bi.json')
         elif exp_setting == 'bi-en':
             self.data_file = 'bi/IndoCamRest676_bi.json'
             self.test_list = os.path.join(os.path.dirname(__file__),'data/CamRest676/CamRest/CamRest676.json')
             self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/kb_indo_bi.json')
+            self.ontology = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/ontology_indo_bi.json')
         elif exp_setting == 'bi-id':
             self.data_file = 'bi/IndoCamRest676_bi.json'
             self.test_list = os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/IndoCamRest676.json')
             self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/kb_indo_bi.json')
-        # self.dev_list = os.path.join(os.path.dirname(__file__),'data/multi-woz/valListFile.json')
-        # self.test_list = os.path.join(os.path.dirname(__file__),'data/multi-woz/testListFile.json')
-        # self.dbs = {
-        #     'attraction': os.path.join(os.path.dirname(__file__),'db/attraction_db_processed.json'),
-        #     'hospital': os.path.join(os.path.dirname(__file__),'db/hospital_db_processed.json'),
-        #     'hotel': os.path.join(os.path.dirname(__file__),'db/hotel_db_processed.json'),
-        #     'police': os.path.join(os.path.dirname(__file__),'db/police_db_processed.json'),
-        #     'restaurant': os.path.join(os.path.dirname(__file__), 'db/restaurant_db_processed.json'),
-        #     'taxi': os.path.join(os.path.dirname(__file__),'db/taxi_db_processed.json'),
-        #     'train': os.path.join(os.path.dirname(__file__),'db/train_db_processed.json'),
-        # }
+            self.ontology = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/ontology_indo_bi.json')
         self.glove_path = os.path.join(os.path.dirname(__file__),'data/glove/glove.6B.50d.txt')
         # self.domain_file_path = os.path.join(os.path.dirname(__file__),'data/multi-woz-processed/domain_files.json')
         # self.slot_value_set_path = os.path.join(os.path.dirname(__file__),'db/value_set_processed.json')

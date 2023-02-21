@@ -422,9 +422,13 @@ class MiniT5(T5ForConditionalGeneration):
         input_ids=None,
         attention_mask=None,
         turn_domain=None,
-        db=None
+        db=None,
+        dataset_type='multiwoz'
     ):  
         #start = time.time()
+        for id, input in enumerate(input_ids):
+            print(tokenizer.decode(input))
+
         dst_outputs = self.generate(input_ids=input_ids,
                             attention_mask=attention_mask,
                             eos_token_id=tokenizer.encode("<eos_b>")[0],
@@ -437,19 +441,24 @@ class MiniT5(T5ForConditionalGeneration):
         #length = len(dst_outputs[0])
         # compute the DB state using the updated domain
         db_state = []
-        for bi, bspn_list in enumerate(dst_outputs):
-            db_vector = reader.bspan_to_DBpointer(tokenizer.decode(bspn_list), turn_domain[bi])
-            if sum(db_vector)==0:
-                db_state.append(tokenizer.encode("[db_state0]"))
-            else:
-                db_state.append([tokenizer.encode("[db_state0]")[0] + db_vector.index(1)+1]) 
-            # use gold booking pointer, because we cannot issue BOOKING API
-            
-            if db[bi][0]>=tokenizer.encode("[db_state0+bookfail]")[0]:
-                if db[bi][0]>=tokenizer.encode("[db_state0+booksuccess]")[0]:
-                    db_state[-1][0]+=10
+
+        if dataset_type == 'multiwoz':
+            for bi, bspn_list in enumerate(dst_outputs):
+                db_vector = reader.bspan_to_DBpointer(tokenizer.decode(bspn_list), turn_domain[bi])
+                if sum(db_vector)==0:
+                    db_state.append(tokenizer.encode("[db_state0]"))
                 else:
-                    db_state[-1][0]+=5
+                    db_state.append([tokenizer.encode("[db_state0]")[0] + db_vector.index(1)+1]) 
+                # use gold booking pointer, because we cannot issue BOOKING API
+                
+                if db[bi][0]>=tokenizer.encode("[db_state0+bookfail]")[0]:
+                    if db[bi][0]>=tokenizer.encode("[db_state0+booksuccess]")[0]:
+                        db_state[-1][0]+=10
+                    else:
+                        db_state[-1][0]+=5
+        # elif dataset_type == 'camrest':
+            # for bi, bspn_list in enumerate(dst_outputs):
+                # print(bi,tokenizer.decode(bspn_list))
         
 
         db_state = torch.tensor(
