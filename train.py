@@ -159,7 +159,7 @@ class Model(object):
                     file_handler = logging.FileHandler(os.path.join(self.args.model_path, 'eval_log%s.json'%cfg.seed))
                     logging.getLogger('').addHandler(file_handler)
                     logging.info(str(cfg))
-                    self.eval()
+                    self.eval(cfg)
                     return
                 # if not weight_decay_count:
                 #     self.optim = AdamW(model.parameters(), lr=args.lr)
@@ -174,7 +174,7 @@ class Model(object):
         file_handler = logging.FileHandler(os.path.join(self.args.model_path, 'eval_log%s.json'%cfg.seed))
         logging.getLogger('').addHandler(file_handler)
         logging.info(str(cfg))
-        self.eval()
+        self.eval(cfg)
 
 
     def validate(self, cfg, data='dev', do_test=False):
@@ -226,7 +226,9 @@ class Model(object):
                 for k in inputs:
                     if k!="turn_domain":
                         inputs[k] = inputs[k].to(self.args.device)
-                if self.args.noupdate_dst:
+                if self.args.noupdate_dst and (self.args.dataset == 'camrest' or self.args.dataset == 'smd'):
+                    dst_outputs, resp_outputs = self.model.inference_sequicity(tokenizer=self.tokenizer, reader=self.reader, prev=py_prev, input_ids=inputs['input_ids'],attention_mask=inputs["masks"], db=inputs["input_pointer"], dataset_type=self.args.dataset)
+                elif self.args.noupdate_dst:
                     dst_outputs, resp_outputs = self.model.inference_sequicity(tokenizer=self.tokenizer, reader=self.reader, prev=py_prev, input_ids=inputs['input_ids'],attention_mask=inputs["masks"], turn_domain=inputs["turn_domain"], db=inputs["input_pointer"])
                 else:
                     dst_outputs, resp_outputs = self.model.inference(tokenizer=self.tokenizer, reader=self.reader, prev=py_prev, input_ids=inputs['input_ids'],attention_mask=inputs["masks"], turn_domain=inputs["turn_domain"], db=inputs["input_pointer"])
@@ -238,22 +240,27 @@ class Model(object):
 
         results, field = self.reader.wrap_result(result_collection, cfg=cfg)
 
-        self.reader.save_result('w', results, field)
-
         metric_results = self.evaluator.run_metrics(results, eval_act=False)
-        metric_field = list(metric_results[0].keys())
-        req_slots_acc = metric_results[0]['req_slots_acc']
-        info_slots_acc = metric_results[0]['info_slots_acc']
+        metric_field = list(metric_results[0].keys()) 
 
-        self.reader.save_result('w', metric_results, metric_field,
-                                            write_title='EVALUATION RESULTS:')
-        self.reader.save_result('a', [info_slots_acc], list(info_slots_acc.keys()),
-                                            write_title='INFORM ACCURACY OF EACH SLOTS:')
-        self.reader.save_result('a', [req_slots_acc], list(req_slots_acc.keys()),
-                                            write_title='REQUEST SUCCESS RESULTS:')
-        self.reader.save_result('a', results, field+['wrong_domain', 'wrong_act', 'wrong_inform'],
-                                            write_title='DECODED RESULTS:')
-        self.reader.save_result_report(metric_results)
+        if self.args.dataset == 'multiwoz':
+            self.reader.save_result('w', results, field)
+            req_slots_acc = metric_results[0]['req_slots_acc']
+            info_slots_acc = metric_results[0]['info_slots_acc']
+            self.reader.save_result('w', metric_results, metric_field,
+                                                write_title='EVALUATION RESULTS:')
+            self.reader.save_result('a', [info_slots_acc], list(info_slots_acc.keys()),
+                                                write_title='INFORM ACCURACY OF EACH SLOTS:')
+            self.reader.save_result('a', [req_slots_acc], list(req_slots_acc.keys()),
+                                                write_title='REQUEST SUCCESS RESULTS:')
+            self.reader.save_result('a', results, field+['wrong_domain', 'wrong_act', 'wrong_inform'],
+                                                write_title='DECODED RESULTS:')
+            self.reader.save_result_report(metric_results)
+        else: # camrest or smd
+            self.reader.save_result('w', metric_results, metric_field, cfg=cfg,
+                                                write_title='EVALUATION RESULTS:')
+            self.reader.save_result('a', results, field, cfg=cfg, write_title='DECODED RESULTS')
+
 
         # self.reader.metric_record(metric_results)
         self.model.train()

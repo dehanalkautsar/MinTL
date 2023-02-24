@@ -4,7 +4,7 @@ from nltk.util import ngrams
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
-import math, re, argparse
+import math, re, argparse, logging
 import json
 import functools
 import pickle
@@ -141,6 +141,18 @@ class CamRestEvaluator(object):
 		for item in self.entity_dict:
 			s = clean_replace(s, item, '{}_SLOT'.format(self.entity_dict[item]))
 		return s
+
+	def run_metrics(self, data, eval_act=True):
+		for i,row in enumerate(data):
+			data[i]['resp_gen'] = self.clean(data[i]['resp_gen'])
+			data[i]['resp'] = self.clean(data[i]['resp'])
+		
+		bleu = self.bleu_metric(data)
+		match = self.match_metric(data)
+		success = self.success_f1_metric(data)
+		logging.info('[TEST PHASE] match: %2.5f  success: %2.5f  bleu: %2.5f'%(match[0], success, bleu))
+
+		return [{'bleu':bleu, 'success':success, 'match':match[0]}]
 
 	def validation_metric(self, data):
 		for i,row in enumerate(data):

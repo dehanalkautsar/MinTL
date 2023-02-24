@@ -116,6 +116,9 @@ class _CamRest_Config:
         self.nucleur_p = 0.
         self.record_mode = False
 
+        # result settings
+        self.result_path = os.path.join(self.eval_load_path, 'result.csv')
+
     def __str__(self):
         s = ''
         for k,v in self.__dict__.items():

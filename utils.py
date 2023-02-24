@@ -224,7 +224,7 @@ class _ReaderBase(object):
             yield self.transpose_batch(batch)
 
 
-    def save_result(self, write_mode, results, field, write_title=False):
+    def save_result(self, write_mode, results, field, cfg, write_title=False):
         with open(cfg.result_path, write_mode) as rf:
             if write_title:
                 rf.write(write_title+'\n')
