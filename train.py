@@ -206,7 +206,7 @@ class Model(object):
         bleu, success, match = self.evaluator.validation_metric(results)
         score = 0.5 * (success + match) + bleu
         valid_loss = 130 - score
-        logging.info('validation [CTR] match: %2.1f  success: %2.1f  bleu: %2.1f'%(match, success, bleu))
+        logging.info('validation [CTR] match: %2.5f  success: %2.5f  bleu: %2.5f'%(match, success, bleu))
         self.model.train()
         if do_test:
             print('result preview...')

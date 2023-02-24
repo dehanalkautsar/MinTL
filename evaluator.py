@@ -101,7 +101,7 @@ class BLEUScorer(object):
         s = math.fsum(w * math.log(p_n) \
                       for w, p_n in zip(weights, p_ns) if p_n)
         bleu = bp * math.exp(s)
-        return bleu * 100
+        return bleu
 
 
 def report(func):
@@ -115,6 +115,7 @@ def report(func):
 class CamRestEvaluator(object):
 	def __init__(self, reader):
 		self.reader = reader
+		self.entity_dict = self.reader.entity_dict
 		self.all_data = self.reader.train + self.reader.dev + self.reader.test
 		self.test_data = self.reader.test
 
@@ -145,14 +146,12 @@ class CamRestEvaluator(object):
 		for i,row in enumerate(data):
 			data[i]['resp_gen'] = self.clean(data[i]['resp_gen'])
 			data[i]['resp'] = self.clean(data[i]['resp'])
-
+		
 		bleu = self.bleu_metric(data)
-		print("bleu:",bleu)
 		match = self.match_metric(data)
-		print("match:", match)
-		success, match, req_offer_counts, dial_num = self.context_to_response_eval(data,
-                                                                                        same_eval_as_cambridge=cfg.same_eval_as_cambridge)
-		return bleu, success, match
+		success = self.success_f1_metric(data)
+		
+		return bleu, success, match[0]
 
 	def bleu_metric(self,data,type='bleu'):
 		gen, truth = [],[]
@@ -164,7 +163,7 @@ class CamRestEvaluator(object):
 		sc = BLEUScorer().score(zip(wrap_generated, wrap_truth))
 		return sc
 
-	def match_metric(self, data, sub='match',raw_data=None):
+	def match_metric(self, data, sub='match'):
 		dials = self.pack_dial(data)
 		match,total = 0,1e-8
 		success = 0
@@ -201,7 +200,38 @@ class CamRestEvaluator(object):
 				
 				total += 1
 
+		#try print(total)
 		return match / total, success / total
+	
+	def success_f1_metric(self, data, sub='successf1'):
+		dials = self.pack_dial(data)
+		tp,fp,fn = 0,0,0
+		for dial_id in dials:
+			truth_req, gen_req = set(),set()
+			dial = dials[dial_id]
+			for turn_num, turn in enumerate(dial):
+				gen_response_token = turn['resp_gen'].split()
+				response_token = turn['resp'].split()
+				for idx, w in enumerate(gen_response_token):
+					if w.endswith('SLOT') and w != 'SLOT':
+						gen_req.add(w.split('_')[0])
+				for idx, w in enumerate(response_token):
+					if w.endswith('SLOT') and w != 'SLOT':
+						truth_req.add(w.split('_')[0])
+
+			gen_req.discard('name')
+			truth_req.discard('name')
+			for req in gen_req:
+				if req in truth_req:
+					tp += 1
+				else:
+					fp += 1
+			for req in truth_req:
+				if req not in gen_req:
+					fn += 1
+		precision, recall = tp / (tp + fp + 1e-8), tp / (tp + fn + 1e-8)
+		f1 = 2 * precision * recall / (precision + recall + 1e-8)
+		return f1
 
 	def _extract_constraint(self, z):
 		z = z.split()
@@ -213,4 +243,4 @@ class CamRestEvaluator(object):
 		if 'moderately' in s:
 			s.discard('moderately')
 			s.add('moderate')
-		return s.intersection(self.entities)	
+		return s.intersection(self.reader.entities)	
