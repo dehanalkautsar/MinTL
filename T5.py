@@ -3,6 +3,7 @@ from copy import deepcopy
 import torch
 from torch.nn import CrossEntropyLoss
 import time
+import re
 
 class MiniT5(T5ForConditionalGeneration):
     def __init__(self, config):
@@ -426,8 +427,6 @@ class MiniT5(T5ForConditionalGeneration):
         dataset_type='multiwoz'
     ):  
         #start = time.time()
-        for id, input in enumerate(input_ids):
-            print(tokenizer.decode(input))
 
         dst_outputs = self.generate(input_ids=input_ids,
                             attention_mask=attention_mask,
@@ -456,17 +455,20 @@ class MiniT5(T5ForConditionalGeneration):
                         db_state[-1][0]+=10
                     else:
                         db_state[-1][0]+=5
-        # elif dataset_type == 'camrest':
-            # for bi, bspn_list in enumerate(dst_outputs):
-                # print(bi,tokenizer.decode(bspn_list))
+        elif dataset_type == 'camrest':
+            for bi, bspn_list in enumerate(dst_outputs):
+                bspan_str = tokenizer.decode(bspn_list)
+                constraint_str = re.sub(' EOS_Z1.+','',bspan_str)
+                constraint_list = constraint_str.split()
+                degree = len(reader.db_search(constraint_list))
+                state = 2 if degree >= 2 else degree
+                db_state.append(tokenizer.encode(f"[db_state{state}]"))
         
-
         db_state = torch.tensor(
                     db_state,
                     dtype=torch.long,
                     device=next(self.parameters()).device,
                 )
-
 
         resp_outputs = self.generate(input_ids=input_ids,
                             attention_mask=attention_mask,

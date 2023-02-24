@@ -844,7 +844,7 @@ class CamRestReader(_ReaderBase):
         encoded_data = []
         for dial in tokenized_data:
             encoded_dial = []
-            prev_response = []
+            prev_response = ""
             for turn in dial:
                 user = turn['user']
                 response = turn['response']
@@ -859,11 +859,9 @@ class CamRestReader(_ReaderBase):
                     'dial_id': dial_id,
                     'turn_num': turn_num,
                     'user': prev_response + user,
-                    'response': response,
-                    'bspan': constraint + requested,
+                    'response': response + ' <eos_r>',
+                    'bspan': constraint + ' ' + requested,
                     'pointer': pointer,
-                    'u_len': len(prev_response + user),
-                    'm_len': len(response),
                 })
                 # modified
                 prev_response = response
@@ -888,20 +886,19 @@ class CamRestReader(_ReaderBase):
                         requested.extend(word_tokenize(slot['slots'][0][1]))
                 degree = len(self.db_search(constraint))
                 requested = sorted(requested)
-                user = word_tokenize(turn['usr']['transcript'])
-                response = word_tokenize(self._replace_entity(turn['sys']['sent'], vk_map, constraint))
-                matched_entities = self.db_search(constraint)
+                user = turn['usr']['transcript']
+                response = turn['sys']['sent']
                 constraint.append('EOS_Z1')
-                requested.append('EOS_Z2')
+                # requested.append('EOS_Z2')
                 tokenized_dial.append({
                     'dial_id': dial_id,
                     'turn_num': turn_num,
                     'user': user,
                     'response': response,
-                    'constraint': constraint,
-                    'requested': requested,
+                    'constraint': ' '.join(constraint),
+                    'requested': ' '.join(requested),
                     'degree': degree,
-                    'db_state': 2 if len(matched_entities) >= 2 else len(matched_entities),
+                    'db_state': 2 if degree >= 2 else degree, # 0 if no match, 1 if 1 entity match, 2 if >= 2 entities match
                 })
                 # if construct_vocab:
                 #     for word in user + response + constraint + requested:
@@ -973,7 +970,7 @@ class CamRestReader(_ReaderBase):
             enc['user'] = self.vocab.tokenizer.encode(t['user']) + self.vocab.tokenizer.encode(['<eos_u>'])
             # dial_context.append( self.vocab.tokenizer.encode(t['user']) + self.vocab.tokenizer.encode('<eos_u>') )
             # enc['user'] = list(chain(*dial_context[-self.args.context_window:])) # here we use user to represent dialogue history
-            enc['resp'] = self.vocab.tokenizer.encode(t['response']) + self.vocab.tokenizer.encode('<eos_r>')
+            enc['resp'] = self.vocab.tokenizer.encode(t['response'])
             # enc['resp_nodelex'] = self.vocab.tokenizer.encode(t['resp_nodelex']) + self.vocab.tokenizer.encode('<eos_r>')
             if len(t['bspan']) == 0: t['bspan'].append("")
             enc['bspn'] = self.vocab.tokenizer.encode(t['bspan']) + self.vocab.tokenizer.encode('<eos_b>')

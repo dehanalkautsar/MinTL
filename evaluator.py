@@ -147,8 +147,8 @@ class CamRestEvaluator(object):
 			data[i]['resp'] = self.clean(data[i]['resp'])
 
 		bleu = self.bleu_metric(data)
-		match = self.match_metric(data)
 		print("bleu:",bleu)
+		match = self.match_metric(data)
 		print("match:", match)
 		success, match, req_offer_counts, dial_num = self.context_to_response_eval(data,
                                                                                         same_eval_as_cambridge=cfg.same_eval_as_cambridge)
