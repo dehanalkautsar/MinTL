@@ -426,6 +426,7 @@ class MiniT5(T5ForConditionalGeneration):
         db=None,
         dataset_type='multiwoz'
     ):  
+    # TODO: inference time is soooo long
         #start = time.time()
 
         dst_outputs = self.generate(input_ids=input_ids,

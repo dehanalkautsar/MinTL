@@ -79,7 +79,10 @@ class _CamRest_Config:
         self.enable_dst = True
 
         # training settings
-        self.lr = 0.005
+        if exp_setting == 'en':
+            self.lr = 0.005
+        else:
+            self.lr = 0.0005 #coba dikurangi 10^-1
         self.label_smoothing = .0
         self.lr_decay = 0.5
         self.batch_size = 32

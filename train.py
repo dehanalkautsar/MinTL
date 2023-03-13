@@ -21,8 +21,12 @@ class BartTokenizer(BartTokenizer):
 class Model(object):
     def __init__(self, args, test=False):
         if args.back_bone=="t5":  
-            self.tokenizer = T5Tokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
-            self.model = MiniT5.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
+            if args.exp_setting=='en':
+                self.tokenizer = T5Tokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
+                self.model = MiniT5.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
+            elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id':
+                self.tokenizer = T5Tokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
+                self.model = MiniT5.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
         elif args.back_bone=="bart":
             self.tokenizer = BartTokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
             self.model = MiniBART.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
@@ -76,6 +80,22 @@ class Model(object):
                 for turn_num, turn_batch in enumerate(dial_batch):
                     first_turn = (turn_num==0)
                     inputs = self.reader.convert_batch(turn_batch, py_prev, first_turn=first_turn, dst_start_token=self.model.config.decoder_start_token_id)
+                    # # #
+                    # copy_input = deepcopy(inputs)
+                    # for i in range(5):
+                    #     for el in copy_input:
+                    #         for j in range(len(copy_input[el][i])):
+                    #             copy_input[el][i][j] = copy_input[el][i][j] if copy_input[el][i][j] >=0 else 0
+                    #     print(f"INPUT_IDS     : {self.tokenizer.decode(copy_input['input_ids'][i])}")
+                    #     print(f"RESPONSE      : {self.tokenizer.decode(copy_input['response'][i])}")
+                    #     print(f"RESPONSE_INPUT: {self.tokenizer.decode(copy_input['response_input'][i])}")
+                    #     print(f"INPUT_POINTER : {self.tokenizer.decode(copy_input['input_pointer'][i])}")
+                    #     print(f"MASKS : {copy_input['masks'][i]}")
+                    #     print(f"DECODED MASKS : {self.tokenizer.decode(copy_input['masks'][i])}")
+                    #     print(f"STATE_INPUT : {self.tokenizer.decode(copy_input['state_input'][i])}")
+                    #     print(f"STATE_UPDATE : {self.tokenizer.decode(copy_input['state_update'][i])}")
+                    #     print("------"*10)
+                    # # #
                     for k in inputs:
                         if k!="turn_domain":
                             inputs[k] = inputs[k].to(self.args.device)
@@ -205,7 +225,7 @@ class Model(object):
         results, _ = self.reader.wrap_result(result_collection, cfg=cfg)
         bleu, success, match = self.evaluator.validation_metric(results)
         score = 0.5 * (success + match) + bleu
-        valid_loss = 130 - score
+        valid_loss = 1.3 - score
         logging.info('validation [CTR] match: %2.5f  success: %2.5f  bleu: %2.5f'%(match, success, bleu))
         self.model.train()
         if do_test:
