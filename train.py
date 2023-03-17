@@ -9,6 +9,7 @@ from utils import Vocab, MultiWozReader, CamRestReader
 from evaluator import CamRestEvaluator
 from transformers import (AdamW, T5Tokenizer, BartTokenizer, WEIGHTS_NAME,CONFIG_NAME, get_linear_schedule_with_warmup)
 from T5 import MiniT5
+from MT5 import MT5ForConditionalGeneration
 from BART import MiniBART
 
 class BartTokenizer(BartTokenizer):
@@ -26,7 +27,7 @@ class Model(object):
                 self.model = MiniT5.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
             elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id':
                 self.tokenizer = T5Tokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
-                self.model = MiniT5.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
+                self.model = MT5ForConditionalGeneration.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
         elif args.back_bone=="bart":
             self.tokenizer = BartTokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
             self.model = MiniBART.from_pretrained(args.model_path if test else args.pretrained_checkpoint)

@@ -89,7 +89,7 @@ class _CamRest_Config:
         self.epoch_num = 100
         self.early_stop_count = 5
         self.weight_decay_count = 3
-        self.teacher_force = 100
+        self.teacher_force = 100 # cb dicari tahu
         self.multi_acts_training = False
         self.multi_act_sampling_num = 1
         self.valid_loss = 'score'
