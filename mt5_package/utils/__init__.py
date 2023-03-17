@@ -77,7 +77,7 @@ from .hub import (
     get_file_from_repo,
     get_full_repo_name,
     has_file,
-    http_user_agent,
+#     http_user_agent,
     is_offline_mode,
     is_remote_url,
     move_cache,

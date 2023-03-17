@@ -49,7 +49,8 @@ from huggingface_hub.utils import (
 )
 from requests.exceptions import HTTPError
 
-from . import __version__, logging
+# from . import __version__, logging
+from . import logging
 from .generic import working_or_temp_dir
 from .import_utils import (
     ENV_VARS_TRUE_VALUES,
@@ -193,27 +194,27 @@ def define_sagemaker_information():
     return sagemaker_object
 
 
-def http_user_agent(user_agent: Union[Dict, str, None] = None) -> str:
-    """
-    Formats a user-agent string with basic info about a request.
-    """
-    ua = f"transformers/{__version__}; python/{sys.version.split()[0]}; session_id/{SESSION_ID}"
-    if is_torch_available():
-        ua += f"; torch/{_torch_version}"
-    if is_tf_available():
-        ua += f"; tensorflow/{_tf_version}"
-    if DISABLE_TELEMETRY:
-        return ua + "; telemetry/off"
-    if is_training_run_on_sagemaker():
-        ua += "; " + "; ".join(f"{k}/{v}" for k, v in define_sagemaker_information().items())
-    # CI will set this value to True
-    if os.environ.get("TRANSFORMERS_IS_CI", "").upper() in ENV_VARS_TRUE_VALUES:
-        ua += "; is_ci/true"
-    if isinstance(user_agent, dict):
-        ua += "; " + "; ".join(f"{k}/{v}" for k, v in user_agent.items())
-    elif isinstance(user_agent, str):
-        ua += "; " + user_agent
-    return ua
+# def http_user_agent(user_agent: Union[Dict, str, None] = None) -> str:
+#     """
+#     Formats a user-agent string with basic info about a request.
+#     """
+#     ua = f"transformers/{__version__}; python/{sys.version.split()[0]}; session_id/{SESSION_ID}"
+#     if is_torch_available():
+#         ua += f"; torch/{_torch_version}"
+#     if is_tf_available():
+#         ua += f"; tensorflow/{_tf_version}"
+#     if DISABLE_TELEMETRY:
+#         return ua + "; telemetry/off"
+#     if is_training_run_on_sagemaker():
+#         ua += "; " + "; ".join(f"{k}/{v}" for k, v in define_sagemaker_information().items())
+#     # CI will set this value to True
+#     if os.environ.get("TRANSFORMERS_IS_CI", "").upper() in ENV_VARS_TRUE_VALUES:
+#         ua += "; is_ci/true"
+#     if isinstance(user_agent, dict):
+#         ua += "; " + "; ".join(f"{k}/{v}" for k, v in user_agent.items())
+#     elif isinstance(user_agent, str):
+#         ua += "; " + user_agent
+#     return ua
 
 
 def extract_commit_hash(resolved_file: Optional[str], commit_hash: Optional[str]):

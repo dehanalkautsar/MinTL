@@ -19,7 +19,7 @@ import json
 import os
 from typing import Any, Dict, Optional, Union
 
-from .. import __version__
+# from .. import __version__
 from ..configuration_utils import PretrainedConfig
 from ..utils import (
     GENERATION_CONFIG_NAME,
@@ -282,7 +282,7 @@ class GenerationConfig(PushToHubMixin):
         # interface.
         self._from_model_config = kwargs.pop("_from_model_config", False)
         self._commit_hash = kwargs.pop("_commit_hash", None)
-        self.transformers_version = kwargs.pop("transformers_version", __version__)
+#         self.transformers_version = kwargs.pop("transformers_version", __version__)
 
         # Additional attributes without default values
         if not self._from_model_config:
@@ -625,7 +625,7 @@ class GenerationConfig(PushToHubMixin):
             del output["_commit_hash"]
 
         # Transformers version when serializing this file
-        output["transformers_version"] = __version__
+#         output["transformers_version"] = __version__
 
         self.dict_torch_dtype_to_str(output)
         return output

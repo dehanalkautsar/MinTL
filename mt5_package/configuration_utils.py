@@ -25,7 +25,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 
 from packaging import version
 
-from . import __version__
+# from . import __version__
 from .dynamic_module_utils import custom_object_save
 from .utils import (
     CONFIG_NAME,
@@ -799,7 +799,7 @@ class PretrainedConfig(PushToHubMixin):
             del output["_commit_hash"]
 
         # Transformers version when serializing the model
-        output["transformers_version"] = __version__
+#         output["transformers_version"] = __version__
 
         self.dict_torch_dtype_to_str(output)
 
@@ -944,13 +944,13 @@ def get_configuration_file(configuration_files: List[str]) -> str:
 
     # Defaults to FULL_CONFIGURATION_FILE and then try to look at some newer versions.
     configuration_file = CONFIG_NAME
-    transformers_version = version.parse(__version__)
-    for v in available_versions:
-        if version.parse(v) <= transformers_version:
-            configuration_file = configuration_files_map[v]
-        else:
-            # No point going further since the versions are sorted.
-            break
+#     transformers_version = version.parse(__version__)
+#     for v in available_versions:
+#         if version.parse(v) <= transformers_version:
+#             configuration_file = configuration_files_map[v]
+#         else:
+#             # No point going further since the versions are sorted.
+#             break
 
     return configuration_file
 
