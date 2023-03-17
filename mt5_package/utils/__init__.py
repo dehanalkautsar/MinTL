@@ -17,7 +17,7 @@
 
 from packaging import version
 
-from .. import __version__
+# from .. import __version__
 from .constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD, IMAGENET_STANDARD_MEAN, IMAGENET_STANDARD_STD
 from .doc import (
     add_code_sample_docstrings,
@@ -192,18 +192,18 @@ DUMMY_INPUTS = [[7, 6, 0, 0, 1], [1, 2, 3, 0, 0], [0, 0, 0, 4, 5]]
 DUMMY_MASK = [[1, 1, 1, 1, 1], [1, 1, 1, 0, 0], [0, 0, 0, 1, 1]]
 
 
-def check_min_version(min_version):
-    if version.parse(__version__) < version.parse(min_version):
-        if "dev" in min_version:
-            error_message = (
-                "This example requires a source install from HuggingFace Transformers (see "
-                "`https://huggingface.co/transformers/installation.html#installing-from-source`),"
-            )
-        else:
-            error_message = f"This example requires a minimum version of {min_version},"
-        error_message += f" but the version found is {__version__}.\n"
-        raise ImportError(
-            error_message
-            + "Check out https://huggingface.co/transformers/examples.html for the examples corresponding to other "
-            "versions of HuggingFace Transformers."
-        )
+# def check_min_version(min_version):
+#     if version.parse(__version__) < version.parse(min_version):
+#         if "dev" in min_version:
+#             error_message = (
+#                 "This example requires a source install from HuggingFace Transformers (see "
+#                 "`https://huggingface.co/transformers/installation.html#installing-from-source`),"
+#             )
+#         else:
+#             error_message = f"This example requires a minimum version of {min_version},"
+#         error_message += f" but the version found is {__version__}.\n"
+#         raise ImportError(
+#             error_message
+#             + "Check out https://huggingface.co/transformers/examples.html for the examples corresponding to other "
+#             "versions of HuggingFace Transformers."
+#         )
