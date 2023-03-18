@@ -9,7 +9,7 @@ from utils import Vocab, MultiWozReader, CamRestReader
 from evaluator import CamRestEvaluator
 from transformers import (AdamW, T5Tokenizer, BartTokenizer, WEIGHTS_NAME,CONFIG_NAME, get_linear_schedule_with_warmup)
 from T5 import MiniT5
-from MT5 import MT5ForConditionalGeneration
+from MT5 import MiniMT5
 from BART import MiniBART
 
 class BartTokenizer(BartTokenizer):
@@ -27,7 +27,7 @@ class Model(object):
                 self.model = MiniT5.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
             elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id':
                 self.tokenizer = T5Tokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
-                self.model = MT5ForConditionalGeneration.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
+                self.model = MiniMT5.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
         elif args.back_bone=="bart":
             self.tokenizer = BartTokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
             self.model = MiniBART.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
@@ -56,7 +56,7 @@ class Model(object):
         self.model = type(self.model).from_pretrained(self.args.model_path)
         self.model.to(self.args.device)
 
-    def train(self, cfg):
+    def train(self, cfg, args):
         btm = time.time()
         step = 0
         prev_min_loss = 1000
@@ -114,7 +114,10 @@ class Model(object):
                                         decoder_input_ids=inputs["state_input"],
                                         lm_labels=inputs["state_update"]
                                         )
-                    dst_loss = outputs[0]
+                    if args.exp_setting == 'en':
+                        dst_loss = outputs[0]
+                    elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id':
+                        dst_loss = outputs.loss
 
             
                     # outputs = self.model(input_ids=inputs["input_ids"],
@@ -125,12 +128,20 @@ class Model(object):
 
                     # print(inputs["response_input"])
                     # print(inputs["response"])
-                    outputs = self.model(encoder_outputs=outputs[-1:], #skip loss and logits
-                                        attention_mask=inputs["masks"],
-                                        decoder_input_ids=inputs["response_input"],
-                                        lm_labels=inputs["response"]
-                                        )
-                    resp_loss = outputs[0]
+                    if args.exp_setting == 'en':
+                        outputs = self.model(encoder_outputs=outputs[-1:], #skip loss and logits
+                                            attention_mask=inputs["masks"],
+                                            decoder_input_ids=inputs["response_input"],
+                                            lm_labels=inputs["response"]
+                                            )
+                        resp_loss = outputs[0]
+                    elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id':
+                        outputs = self.model(encoder_outputs=outputs.encoder_last_hidden_state, #skip loss and logits
+                                            attention_mask=inputs["masks"],
+                                            decoder_input_ids=inputs["response_input"],
+                                            lm_labels=inputs["response"]
+                                            )
+                        resp_loss = outputs.loss
 
                     py_prev['bspn'] = turn_batch['bspn']
 
@@ -407,7 +418,7 @@ def main():
         with open(os.path.join(args.model_path, 'exp_cfg.json'), 'w') as f:
             json.dump(cfg.__dict__, f, indent=2)
         m = Model(args)
-        m.train(cfg)
+        m.train(cfg,args)
     elif args.mode == 'test':
         m = Model(args,test=True)
         m.eval(cfg=cfg, data='test')
