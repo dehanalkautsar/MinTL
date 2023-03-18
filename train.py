@@ -114,10 +114,7 @@ class Model(object):
                                         decoder_input_ids=inputs["state_input"],
                                         lm_labels=inputs["state_update"]
                                         )
-                    if args.exp_setting == 'en':
-                        dst_loss = outputs[0]
-                    elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id':
-                        dst_loss = outputs.loss
+                    dst_loss = outputs[0]
 
             
                     # outputs = self.model(input_ids=inputs["input_ids"],
@@ -125,23 +122,15 @@ class Model(object):
                     #                     decoder_input_ids=inputs["response_input"],
                     #                     lm_labels=inputs["response"]
                     #                     )
-
                     # print(inputs["response_input"])
                     # print(inputs["response"])
-                    if args.exp_setting == 'en':
-                        outputs = self.model(encoder_outputs=outputs[-1:], #skip loss and logits
+
+                    outputs = self.model(encoder_outputs=outputs[-1:], #skip loss and logits
                                             attention_mask=inputs["masks"],
                                             decoder_input_ids=inputs["response_input"],
                                             lm_labels=inputs["response"]
                                             )
-                        resp_loss = outputs[0]
-                    elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id':
-                        outputs = self.model(encoder_outputs=outputs.encoder_last_hidden_state, #skip loss and logits
-                                            attention_mask=inputs["masks"],
-                                            decoder_input_ids=inputs["response_input"],
-                                            lm_labels=inputs["response"]
-                                            )
-                        resp_loss = outputs.loss
+                    resp_loss = outputs[0]
 
                     py_prev['bspn'] = turn_batch['bspn']
 

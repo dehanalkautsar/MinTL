@@ -18,6 +18,7 @@ import copy
 import math
 import os
 import warnings
+from copy import deepcopy
 from typing import Optional, Tuple, Union
 
 import torch
@@ -970,6 +971,7 @@ class MT5Stack(MT5PreTrainedModel):
         # If a 2D or 3D attention mask is provided for the cross-attention
         # we need to make broadcastable to [batch_size, num_heads, seq_length, seq_length]
         if self.is_decoder and encoder_hidden_states is not None:
+            # print(encoder_hidden_states.size())
             encoder_batch_size, encoder_sequence_length, _ = encoder_hidden_states.size()
             encoder_hidden_shape = (encoder_batch_size, encoder_sequence_length)
             if encoder_attention_mask is None:
@@ -2036,7 +2038,8 @@ class MiniMT5(MT5ForConditionalGeneration):
             lm_head = self.lm_head
 
         use_cache = use_cache if use_cache is not None else self.config.use_cache
-        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+        # return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+        return_dict = False # make it same with transformers 2.8.0 version
 
         # FutureWarning: head_mask was separated into two input args - head_mask, decoder_head_mask
         if head_mask is not None and decoder_head_mask is None:
@@ -2121,7 +2124,8 @@ class MiniMT5(MT5ForConditionalGeneration):
             # TODO(thom): Add z_loss https://github.com/tensorflow/mesh/blob/fa19d69eafc9a482aff0b59ddd96b025c0cb207d/mesh_tensorflow/layers.py#L666
 
         if not return_dict:
-            output = (lm_logits,) + decoder_outputs[1:] + encoder_outputs
+            # output = (lm_logits,) + decoder_outputs[1:] + encoder_outputs
+            output = (lm_logits,) + encoder_outputs
             return ((loss,) + output) if loss is not None else output
 
         return Seq2SeqLMOutput(
