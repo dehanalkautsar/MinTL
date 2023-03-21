@@ -17,6 +17,7 @@
 import copy
 import math
 import os
+import re
 import warnings
 from copy import deepcopy
 from typing import Optional, Tuple, Union
@@ -46,6 +47,9 @@ from mt5_package.utils import (
 )
 from mt5_package.utils.model_parallel_utils import assert_device_map, get_device_map
 from mt5_package.models.mt5.configuration_mt5 import MT5Config
+
+from mt5_package.generation.utils import GenerationMixin
+from mt5_package.generation.configuration_utils import GenerationConfig
 
 
 logger = logging.get_logger(__name__)
@@ -972,6 +976,8 @@ class MT5Stack(MT5PreTrainedModel):
         # we need to make broadcastable to [batch_size, num_heads, seq_length, seq_length]
         if self.is_decoder and encoder_hidden_states is not None:
             # print(encoder_hidden_states.size())
+            # print("---"*5)
+            # print(encoder_hidden_states[0])
             encoder_batch_size, encoder_sequence_length, _ = encoder_hidden_states.size()
             encoder_hidden_shape = (encoder_batch_size, encoder_sequence_length)
             if encoder_attention_mask is None:
@@ -1991,6 +1997,7 @@ class MT5EncoderModel(MT5PreTrainedModel):
 class MiniMT5(MT5ForConditionalGeneration):
     def __init__(self, config):
         super().__init__(config)
+        self.generate = GenerationMixin.generate
 		#make a copy of decoder for dst
         decoder_config = deepcopy(config)
         decoder_config.is_decoder = True
@@ -2038,8 +2045,8 @@ class MiniMT5(MT5ForConditionalGeneration):
             lm_head = self.lm_head
 
         use_cache = use_cache if use_cache is not None else self.config.use_cache
-        # return_dict = return_dict if return_dict is not None else self.config.use_return_dict
-        return_dict = False # make it same with transformers 2.8.0 version
+        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+        # return_dict = False # make it same with transformers 2.8.0 version
 
         # FutureWarning: head_mask was separated into two input args - head_mask, decoder_head_mask
         if head_mask is not None and decoder_head_mask is None:
@@ -2138,4 +2145,172 @@ class MiniMT5(MT5ForConditionalGeneration):
             encoder_last_hidden_state=encoder_outputs.last_hidden_state,
             encoder_hidden_states=encoder_outputs.hidden_states,
             encoder_attentions=encoder_outputs.attentions,
+            # maybe tambah param baru encoder_outputs
         )
+
+    def inference(
+        self,
+        tokenizer,
+        reader,
+        prev,
+        input_ids=None,
+        attention_mask=None,
+        turn_domain=None,
+        db=None
+    ):  
+        #start = time.time()
+        dst_outputs = self.generate(self,inputs=input_ids,
+                            generation_config=GenerationConfig(
+                                max_new_tokens=50,
+                                pad_token_id=0,
+                                eos_token_id=tokenizer.encode("<eos_b>")[0],
+                                decoder_start_token_id=self.config.decoder_start_token_id,
+                            ),
+                            attention_mask=attention_mask
+                            # eos_token_id=tokenizer.encode("<eos_b>")[0],
+                            # decoder_start_token_id=self.config.decoder_start_token_id,
+                            # max_length=200,
+                            )
+        #dst_time = time.time()-start
+        #print(dst_time)
+        dst_outputs = dst_outputs.tolist()
+        #length = len(dst_outputs[0])
+        #print(dst_outputs)
+        # DST_UPDATE -> DST
+        #check whether need to add eos
+        #dst_outputs = [dst+tokenizer.encode("<eos_b>") for dst in dst_outputs]
+        batch_size = input_ids.shape[0]
+        constraint_dict_updates = [reader.bspan_to_constraint_dict(tokenizer.decode(dst_outputs[i])) for i in range(batch_size)]
+
+        if prev['bspn']:
+            # update the belief state
+            dst_outputs = [reader.update_bspn(prev_bspn=prev['bspn'][i], bspn_update=dst_outputs[i]) for i in range(batch_size)]
+        
+
+        # compute the DB state using the updated domain
+        db_state = []
+        for bi, bspn_list in enumerate(dst_outputs):
+            # if not constraint_dict_updates[bi]:
+            #     # if nothing to update
+            #     db_state.append(tokenizer.encode("[db_state0]"))
+            # else:
+            #     turn_domain = 'general'
+            #     for domain in constraint_dict_updates[bi].keys():
+            #         #the last updated domain
+            #         turn_domain=domain
+            # follow damd for fair comparison
+            db_vector = reader.bspan_to_DBpointer(tokenizer.decode(bspn_list), turn_domain[bi])
+            if sum(db_vector)==0:
+                db_state.append(tokenizer.encode("[db_state0]"))
+            else:
+                db_state.append([tokenizer.encode("[db_state0]")[0] + db_vector.index(1)+1]) 
+            # use gold booking pointer, because we cannot issue BOOKING API
+            
+            if db[bi][0]>=tokenizer.encode("[db_state0+bookfail]")[0]:
+                if db[bi][0]>=tokenizer.encode("[db_state0+booksuccess]")[0]:
+                    db_state[-1][0]+=10
+                else:
+                    db_state[-1][0]+=5
+
+
+
+        db_state = torch.tensor(
+                    db_state,
+                    dtype=torch.long,
+                    device=next(self.parameters()).device,
+                )
+
+        resp_outputs = self.generate(self,inputs=input_ids,
+                            generation_config=GenerationConfig(
+                                max_new_tokens=50,
+                                pad_token_id=0,
+                                eos_token_id=tokenizer.encode("<eos_b>")[0],
+                                decoder_start_token_id=self.config.decoder_start_token_id,
+                            ),
+                            attention_mask=attention_mask
+                            # eos_token_id=tokenizer.encode("<eos_r>")[0],
+                            # decoder_start_token_id=db_state,
+                            # max_length=200,
+                            )
+
+        resp_outputs = resp_outputs[:,1:].tolist() #skip DB state
+        # print("DST:", tokenizer.decode(dst_outputs[0]))
+        # print("RESP:", tokenizer.decode(resp_outputs[0]))
+        return dst_outputs, resp_outputs#, dst_time, length
+
+    def inference_sequicity(
+        self,
+        tokenizer,
+        reader,
+        prev,
+        input_ids=None,
+        attention_mask=None,
+        turn_domain=None,
+        db=None,
+        dataset_type='multiwoz'
+    ):  
+    # TODO: inference time is soooo long
+        #start = time.time()
+        # print(tokenizer.encode("<eos_b>")[0])
+        # print(tokenizer.encode("<eos_r>")[0])
+        # print(tokenizer.encode("<eos_u>")[0])
+        
+        dst_outputs = self.generate(self, inputs=input_ids,
+                            generation_config=GenerationConfig(
+                                max_new_tokens=50,
+                                pad_token_id=0,
+                                eos_token_id=tokenizer.encode("<eos_b>")[0],
+                                decoder_start_token_id=self.config.decoder_start_token_id,
+                            ),
+                            attention_mask=attention_mask,
+                            )
+        #dst_time = time.time() - start
+        #print(dst_time)
+        dst_outputs = dst_outputs.tolist()
+        #length = len(dst_outputs[0])
+        # compute the DB state using the updated domain
+        db_state = []
+
+        if dataset_type == 'multiwoz':
+            for bi, bspn_list in enumerate(dst_outputs):
+                db_vector = reader.bspan_to_DBpointer(tokenizer.decode(bspn_list), turn_domain[bi])
+                if sum(db_vector)==0:
+                    db_state.append(tokenizer.encode("[db_state0]"))
+                else:
+                    db_state.append([tokenizer.encode("[db_state0]")[0] + db_vector.index(1)+1]) 
+                # use gold booking pointer, because we cannot issue BOOKING API
+                
+                if db[bi][0]>=tokenizer.encode("[db_state0+bookfail]")[0]:
+                    if db[bi][0]>=tokenizer.encode("[db_state0+booksuccess]")[0]:
+                        db_state[-1][0]+=10
+                    else:
+                        db_state[-1][0]+=5
+        elif dataset_type == 'camrest':
+            for bi, bspn_list in enumerate(dst_outputs):
+                bspan_str = tokenizer.decode(bspn_list)
+                constraint_str = re.sub(' EOS_Z1.+','',bspan_str)
+                constraint_list = constraint_str.split()
+                degree = len(reader.db_search(constraint_list))
+                state = 2 if degree >= 2 else degree
+                db_state.append(tokenizer.encode(f"[db_state{state}]"))
+        
+        db_state = torch.tensor(
+                    db_state,
+                    dtype=torch.long,
+                    device=next(self.parameters()).device,
+                )
+
+        resp_outputs = self.generate(self, inputs=input_ids,
+                            generation_config=GenerationConfig(
+                                max_new_tokens=50,
+                                pad_token_id=0,
+                                eos_token_id=tokenizer.encode("<eos_r>")[0],
+                                decoder_start_token_id=db_state
+                            ),
+                            attention_mask=attention_mask
+                            )
+
+        resp_outputs = resp_outputs[:,1:].tolist() #skip DB state
+        print("DST:", tokenizer.decode(dst_outputs[0]))
+        print("RESP:", tokenizer.decode(resp_outputs[0]))
+        return dst_outputs, resp_outputs#, dst_time, length

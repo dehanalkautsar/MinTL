@@ -59,7 +59,7 @@ class _CamRest_Config:
         self.truncated = False
 
         # model settings
-        self.vocab_size = 1600
+        self.vocab_size = 2200
         self.embed_size = 50
         self.hidden_size = 100
         self.pointer_dim = 6 # fixed

@@ -112,25 +112,40 @@ class Model(object):
                     outputs = self.model(input_ids=inputs["input_ids"],
                                         attention_mask=inputs["masks"],
                                         decoder_input_ids=inputs["state_input"],
-                                        lm_labels=inputs["state_update"]
+                                        lm_labels=inputs["state_update"],
+                                        return_dict=False
                                         )
                     dst_loss = outputs[0]
+                    # if args.exp_setting=='en':
+                    #     dst_loss = outputs[0]
+                    # elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id':
+                    #     dst_loss = outputs.loss
 
-            
-                    # outputs = self.model(input_ids=inputs["input_ids"],
-                    #                     attention_mask=inputs["masks"],
-                    #                     decoder_input_ids=inputs["response_input"],
-                    #                     lm_labels=inputs["response"]
-                    #                     )
-                    # print(inputs["response_input"])
-                    # print(inputs["response"])
+                    # print(f"4.{bool(outputs.encoder_last_hidden_state)}")
 
                     outputs = self.model(encoder_outputs=outputs[-1:], #skip loss and logits
                                             attention_mask=inputs["masks"],
                                             decoder_input_ids=inputs["response_input"],
-                                            lm_labels=inputs["response"]
+                                            lm_labels=inputs["response"],
+                                            return_dict=False
                                             )
                     resp_loss = outputs[0]
+                    # if args.exp_setting=='en':
+                    #     outputs = self.model(encoder_outputs=outputs[-1:], #skip loss and logits
+                    #                         attention_mask=inputs["masks"],
+                    #                         decoder_input_ids=inputs["response_input"],
+                    #                         lm_labels=inputs["response"]
+                    #                         )
+                    #     resp_loss = outputs[0]
+                    # elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id':
+                    #     print(outputs.encoder_last_hidden_state.shape)
+                    #     # print(outputs.encoder_last_hidden_state[0][0])
+                    #     outputs = self.model(encoder_outputs=outputs.encoder_last_hidden_state,
+                    #                         attention_mask=inputs["masks"],
+                    #                         decoder_input_ids=inputs["response_input"],
+                    #                         lm_labels=inputs["response"]
+                    #                         )
+                    #     resp_loss = outputs.loss
 
                     py_prev['bspn'] = turn_batch['bspn']
 
@@ -160,7 +175,7 @@ class Model(object):
             logging.info('epoch: %d, train loss: %.3f, valid loss: %.3f, total time: %.1fmin' % (epoch+1, epoch_sup_loss,
                     valid_loss, (time.time()-sw)/60))
 
-            if valid_loss <= prev_min_loss:
+            if valid_loss < prev_min_loss:
                 early_stop_count = cfg.early_stop_count
                 weight_decay_count = cfg.weight_decay_count
                 prev_min_loss = valid_loss

@@ -571,6 +571,7 @@ class GenerationMixin:
         if inputs is not None:
             return inputs
 
+        print("_maybe_initialize error: you must not go in here bcs bos_token_id become input_tensor")
         encoder_outputs = model_kwargs.get("encoder_outputs")
         if self.config.is_encoder_decoder and encoder_outputs is not None:
             # make dummy input_ids with value -100, as a sanity check ensuring that they won't be used for encoding
@@ -630,8 +631,10 @@ class GenerationMixin:
         # 3. make sure that encoder returns `ModelOutput`
         model_input_name = model_input_name if model_input_name is not None else self.main_input_name
         encoder_kwargs["return_dict"] = True
+        # encoder_kwargs["return_dict"] = False # edited so the output will be the same as transformers 2.8.0
         encoder_kwargs[model_input_name] = inputs_tensor
         model_kwargs["encoder_outputs"]: ModelOutput = encoder(**encoder_kwargs)
+        # print(model_kwargs["encoder_outputs"])
 
         return model_kwargs
 
@@ -1211,6 +1214,7 @@ class GenerationMixin:
         model_kwargs = generation_config.update(**kwargs)  # All unused kwargs must be model kwargs
         generation_config.validate()
         self._validate_model_kwargs(model_kwargs.copy())
+        print(f"1. model_kwargs= {model_kwargs.keys()}")
 
         # 2. Set generation parameters if not already defined
         logits_processor = logits_processor if logits_processor is not None else LogitsProcessorList()
@@ -1226,6 +1230,7 @@ class GenerationMixin:
             if isinstance(eos_token_id, list):
                 eos_token_id = eos_token_id[0]
             logger.warning(f"Setting `pad_token_id` to `eos_token_id`:{eos_token_id} for open-end generation.")
+            print("2. You must not go in here: pad_token_id = eos_token_id")
             generation_config.pad_token_id = eos_token_id
 
         # 3. Define model inputs
@@ -1236,6 +1241,8 @@ class GenerationMixin:
         inputs_tensor, model_input_name, model_kwargs = self._prepare_model_inputs(
             inputs, generation_config.bos_token_id, model_kwargs
         )
+        print(f"3. inputs_size: {inputs_tensor.shape}")
+        print(f"3a. first inputs: {inputs_tensor[0]}")
         batch_size = inputs_tensor.shape[0]
 
         # 4. Define other model kwargs
@@ -1245,6 +1252,7 @@ class GenerationMixin:
 
         accepts_attention_mask = "attention_mask" in set(inspect.signature(self.forward).parameters.keys())
         requires_attention_mask = "encoder_outputs" not in model_kwargs
+        print(f"4a. accepts_att_mask & requires_attention_mask: {str(accepts_attention_mask), str(requires_attention_mask)}")
 
         if model_kwargs.get("attention_mask", None) is None and requires_attention_mask and accepts_attention_mask:
             model_kwargs["attention_mask"] = self._prepare_attention_mask_for_generation(
@@ -1253,6 +1261,7 @@ class GenerationMixin:
 
         # decoder-only models should use left-padding for generation
         if not self.config.is_encoder_decoder:
+            print(f"4b. we should not go to here: is_not_encoder_decoder")
             if (
                 generation_config.pad_token_id is not None
                 and torch.sum(inputs_tensor[:, -1] == generation_config.pad_token_id) > 0
@@ -1265,12 +1274,14 @@ class GenerationMixin:
         if self.config.is_encoder_decoder and "encoder_outputs" not in model_kwargs:
             # if model is encoder decoder encoder_outputs are created
             # and added to `model_kwargs`
+            print("4c. creating encoder_outputs")
             model_kwargs = self._prepare_encoder_decoder_kwargs_for_generation(
                 inputs_tensor, model_kwargs, model_input_name
             )
 
         # 5. Prepare `input_ids` which will be used for auto-regressive generation
         if self.config.is_encoder_decoder:
+            print("5a. is_encoder_decoder")
             input_ids = self._prepare_decoder_input_ids_for_generation(
                 batch_size,
                 decoder_start_token_id=generation_config.decoder_start_token_id,
@@ -1316,6 +1327,7 @@ class GenerationMixin:
             )
 
         # 7. determine generation mode
+        print(f"7. input_ids: {input_ids}")
         is_constraint_gen_mode = (
             generation_config.constraints is not None or generation_config.force_words_ids is not None
         )
@@ -1389,6 +1401,7 @@ class GenerationMixin:
             prefix_allowed_tokens_fn=prefix_allowed_tokens_fn,
             logits_processor=logits_processor,
         )
+        print(f"type of logits_processor: {bool(logits_processor)}")
 
         # 9. prepare stopping criteria
         stopping_criteria = self._get_stopping_criteria(
@@ -1396,6 +1409,7 @@ class GenerationMixin:
         )
         # 10. go into different generation modes
         if is_greedy_gen_mode:
+            print("10. greedy_gen: True")
             if generation_config.num_return_sequences > 1:
                 raise ValueError(
                     f"num_return_sequences has to be 1, but is {generation_config.num_return_sequences} when doing"
