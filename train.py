@@ -25,7 +25,7 @@ class Model(object):
             if args.exp_setting=='en':
                 self.tokenizer = T5Tokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
                 self.model = MiniT5.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
-            elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id':
+            elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id' or args.exp_setting=='id' or args.exp_setting=='cross':
                 self.tokenizer = T5Tokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
                 self.model = MiniMT5.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
         elif args.back_bone=="bart":
@@ -101,34 +101,36 @@ class Model(object):
                         if k!="turn_domain":
                             inputs[k] = inputs[k].to(self.args.device)
 
-                    #     print(k)
-                    #     print(inputs[k])
- 
-                    # batch_size = inputs["input_ids"].shape[0]
-                    # input_seq_len = inputs["input_ids"].shape[1]
-                    # dst_seq_len = inputs["state_input"].shape[1]
-                    # resp_seq_len = inputs["response"].shape[1]
-                    # print(f"batch_size:{batch_size},seq_len:{input_seq_len}, dst:{dst_seq_len}, resp:{resp_seq_len}")
-                    outputs = self.model(input_ids=inputs["input_ids"],
+                    if args.exp_setting == 'en':
+                        outputs = self.model(input_ids=inputs["input_ids"],
                                         attention_mask=inputs["masks"],
                                         decoder_input_ids=inputs["state_input"],
                                         lm_labels=inputs["state_update"],
-                                        return_dict=False
+                                        # return_dict=False # not using this because not using MT5Mini
                                         )
-                    dst_loss = outputs[0]
-                    # if args.exp_setting=='en':
-                    #     dst_loss = outputs[0]
-                    # elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id':
-                    #     dst_loss = outputs.loss
-
-                    # print(f"4.{bool(outputs.encoder_last_hidden_state)}")
-
-                    outputs = self.model(encoder_outputs=outputs[-1:], #skip loss and logits
+                    elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id' or args.exp_setting=='id' or args.exp_setting=='cross':
+                        outputs = self.model(input_ids=inputs["input_ids"],
                                             attention_mask=inputs["masks"],
-                                            decoder_input_ids=inputs["response_input"],
-                                            lm_labels=inputs["response"],
+                                            decoder_input_ids=inputs["state_input"],
+                                            lm_labels=inputs["state_update"],
                                             return_dict=False
                                             )
+                    dst_loss = outputs[0]
+
+                    if args.exp_setting == 'en':
+                        outputs = self.model(encoder_outputs=outputs[-1:], #skip loss and logits
+                                                attention_mask=inputs["masks"],
+                                                decoder_input_ids=inputs["response_input"],
+                                                lm_labels=inputs["response"],
+                                                # return_dict=False # not using this because not using MT5Mini
+                                                )
+                    elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id' or args.exp_setting=='id' or args.exp_setting=='cross':
+                        outputs = self.model(encoder_outputs=outputs[-1:], #skip loss and logits
+                                                attention_mask=inputs["masks"],
+                                                decoder_input_ids=inputs["response_input"],
+                                                lm_labels=inputs["response"],
+                                                return_dict=False
+                                                )
                     resp_loss = outputs[0]
                     # if args.exp_setting=='en':
                     #     outputs = self.model(encoder_outputs=outputs[-1:], #skip loss and logits

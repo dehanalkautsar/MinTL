@@ -2311,6 +2311,6 @@ class MiniMT5(MT5ForConditionalGeneration):
                             )
 
         resp_outputs = resp_outputs[:,1:].tolist() #skip DB state
-        print("DST:", tokenizer.decode(dst_outputs[0]))
-        print("RESP:", tokenizer.decode(resp_outputs[0]))
+        # print("DST:", tokenizer.decode(dst_outputs[0]))
+        # print("RESP:", tokenizer.decode(resp_outputs[0]))
         return dst_outputs, resp_outputs#, dst_time, length
