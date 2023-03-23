@@ -1935,6 +1935,7 @@ class SMDReader(_ReaderBase):
         inputs["response_input"] = torch.tensor( np.concatenate( ( np.array(batch['input_pointer']), response_input[:,:-1]), axis=1 ) ,dtype=torch.long)
         # inputs["turn_domain"] = batch["turn_domain"]
         inputs["input_pointer"] = torch.tensor(np.array(batch['input_pointer']),dtype=torch.long)
+        inputs["dial_id"] = torch.tensor(np.array(batch['dial_id']),dtype=torch.int)
 
         # for k in inputs:
         #     if k=="masks":

@@ -424,7 +424,8 @@ class MiniT5(T5ForConditionalGeneration):
         attention_mask=None,
         turn_domain=None,
         db=None,
-        dataset_type='multiwoz'
+        dataset_type='multiwoz',
+        dial_id=None
     ):  
     # TODO: inference time is soooo long
         #start = time.time()
@@ -462,6 +463,14 @@ class MiniT5(T5ForConditionalGeneration):
                 constraint_str = re.sub(' EOS_Z1.+','',bspan_str)
                 constraint_list = constraint_str.split()
                 degree = len(reader.db_search(constraint_list))
+                state = 2 if degree >= 2 else degree
+                db_state.append(tokenizer.encode(f"[db_state{state}]"))
+        elif dataset_type == 'smd':
+            for bi, bspn_list in enumerate(dst_outputs):
+                bspan_str = tokenizer.decode(bspn_list)
+                constraint_str = re.sub(' EOS_Z1.+','',bspan_str)
+                constraint_list = constraint_str.split()
+                degree = reader.db_degree(constraint_list, reader.db[dial_id[bi].item()])
                 state = 2 if degree >= 2 else degree
                 db_state.append(tokenizer.encode(f"[db_state{state}]"))
         

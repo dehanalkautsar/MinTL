@@ -228,7 +228,7 @@ class Model(object):
                     if k!="turn_domain":
                         inputs[k] = inputs[k].to(self.args.device)
                 if self.args.noupdate_dst and (self.args.dataset == 'camrest' or self.args.dataset == 'smd'):
-                    dst_outputs, resp_outputs = self.model.inference_sequicity(tokenizer=self.tokenizer, reader=self.reader, prev=py_prev, input_ids=inputs['input_ids'],attention_mask=inputs["masks"], db=inputs["input_pointer"], dataset_type=self.args.dataset)
+                    dst_outputs, resp_outputs = self.model.inference_sequicity(tokenizer=self.tokenizer, reader=self.reader, prev=py_prev, input_ids=inputs['input_ids'],attention_mask=inputs["masks"], db=inputs["input_pointer"], dataset_type=self.args.dataset, dial_id=inputs["dial_id"])
                 elif self.args.noupdate_dst:
                     dst_outputs, resp_outputs = self.model.inference_sequicity(tokenizer=self.tokenizer, reader=self.reader, prev=py_prev, input_ids=inputs['input_ids'],attention_mask=inputs["masks"], turn_domain=inputs["turn_domain"], db=inputs["input_pointer"])
                 else:
