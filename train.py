@@ -4,7 +4,7 @@ from copy import deepcopy
 from collections import OrderedDict
 import torch
 
-from utils import Vocab, MultiWozReader, CamRestReader
+from utils import Vocab, MultiWozReader, CamRestReader, SMDReader
 # from damd_multiwoz.eval import MultiWozEvaluator
 from evaluator import CamRestEvaluator
 from transformers import (AdamW, T5Tokenizer, BartTokenizer, WEIGHTS_NAME,CONFIG_NAME, get_linear_schedule_with_warmup)
@@ -28,7 +28,7 @@ class Model(object):
             elif args.exp_setting=='bi' or args.exp_setting=='bi-en' or args.exp_setting=='bi-id' or args.exp_setting=='id' or args.exp_setting=='cross':
                 self.tokenizer = T5Tokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
                 self.model = MiniMT5.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
-        elif args.back_bone=="bart":
+        elif args.back_bone=="bart": #not implemented
             self.tokenizer = BartTokenizer.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
             self.model = MiniBART.from_pretrained(args.model_path if test else args.pretrained_checkpoint)
         vocab = Vocab(self.model, self.tokenizer)
@@ -40,10 +40,9 @@ class Model(object):
         elif args.dataset == 'camrest':
             self.reader = CamRestReader(vocab,args)
             self.evaluator = CamRestEvaluator(self.reader)
-        # elif args.dataset == 'smd':
-            # self.reader = SMDReader(vocab,args)
+        elif args.dataset == 'smd':
+            self.reader = SMDReader(vocab,args)
             # self.evaluator = SMDEvaluator(self.reader)
-        # self.evaluator = MultiWozEvaluator(self.reader) # evaluator class
 
         self.optim = AdamW(self.model.parameters(), lr=args.lr)
         self.args = args
@@ -382,7 +381,18 @@ def main():
         elif args.exp_setting == 'bi-id':
             from config import camrest_config_biid as cfg
     elif args.dataset == 'smd':
-        from config import smd_config as cfg
+        if args.exp_setting == 'en':
+            from config import smd_config_en as cfg
+        elif args.exp_setting == 'id':
+            from config import smd_config_id as cfg
+        elif args.exp_setting == 'cross':
+            from config import smd_config_cross as cfg
+        elif args.exp_setting == 'bi':
+            from config import smd_config_bi as cfg
+        elif args.exp_setting == 'bi-en':
+            from config import smd_config_bien as cfg
+        elif args.exp_setting == 'bi-id':
+            from config import smd_config_biid as cfg
 
     cfg.mode = args.mode
     cfg.exp_setting = args.exp_setting

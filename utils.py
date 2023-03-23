@@ -52,8 +52,8 @@ class Vocab(object):
                     "[value_car]","[value_departure]","[value_time]","[value_people]","[value_stay]","[value_pricerange]","[value_department]", "<None>", "[db_state0]","[db_state1]","[db_state2]","[db_state3]","[db_state4]","[db_state0+bookfail]", "[db_state1+bookfail]","[db_state2+bookfail]","[db_state3+bookfail]","[db_state4+bookfail]", "[db_state0+booksuccess]","[db_state1+booksuccess]","[db_state2+booksuccess]","[db_state3+booksuccess]","[db_state4+booksuccess]"]
         # camrest EOS_M EOS_Z1
         self.special_tokens += ["EOS_M", "EOS_Z1"]
-        # smd EOS_M EOS_Z1
-        self.special_tokens += ["[value_poi]","[value_poi_type]","[value_event]","[value_date]","[value_party]","[value_room]","[value_agenda]","[value_location]","[value_weekly_time]","[value_weather_attribute]","[value_traffic_info]","[value_distance]"]
+        # smd EOS_M EOS_Z1 EOS_U
+        self.special_tokens += ["EOS_U","[value_poi]","[value_poi_type]","[value_event]","[value_date]","[value_party]","[value_room]","[value_agenda]","[value_location]","[value_weekly_time]","[value_weather_attribute]","[value_traffic_info]","[value_distance]"]
 
         self.attr_special_tokens = {'pad_token': '<pad>',
                          'additional_special_tokens': ["pricerange", "<go_r>", "<unk>", "<go_b>", "<go_a>", "<eos_u>", "<eos_r>", "<eos_b>", "<eos_a>", "<go_d>",
@@ -944,6 +944,802 @@ class CamRestReader(_ReaderBase):
                 match_results.append(entry)
         return match_results
     
+    def _split_data(self, encoded_data, split):
+        """
+        split data into train/dev/test
+        :param tokenized_data: list
+        :param split: tuple / list
+        :return:
+        """
+        total = sum(split)
+        dev_thr = len(encoded_data) * split[0] // total
+        test_thr = len(encoded_data) * (split[0] + split[1]) // total
+        train, dev, test = encoded_data[:dev_thr], encoded_data[dev_thr:test_thr], encoded_data[test_thr:]
+        return train, dev, test
+
+
+    def _get_encoded_data(self, fn, dial):
+        encoded_dial = []
+        dial_context = []
+        delete_op = self.vocab.tokenizer.encode("<None>") #delete operation
+        prev_constraint_dict = {}
+
+        for idx, t in enumerate(dial):
+            enc = {}
+            enc['dial_id'] = fn
+            enc['user'] = self.vocab.tokenizer.encode(t['user']) + self.vocab.tokenizer.encode(['<eos_u>'])
+            # dial_context.append( self.vocab.tokenizer.encode(t['user']) + self.vocab.tokenizer.encode('<eos_u>') )
+            # enc['user'] = list(chain(*dial_context[-self.args.context_window:])) # here we use user to represent dialogue history
+            enc['resp'] = self.vocab.tokenizer.encode(t['response'])
+            # enc['resp_nodelex'] = self.vocab.tokenizer.encode(t['resp_nodelex']) + self.vocab.tokenizer.encode('<eos_r>')
+            if len(t['bspan']) == 0: t['bspan'].append("")
+            enc['bspn'] = self.vocab.tokenizer.encode(t['bspan']) + self.vocab.tokenizer.encode('<eos_b>')
+            # constraint_dict = self.bspan_to_constraint_dict(t['constraint'])
+            # update_bspn = self.check_update(prev_constraint_dict, constraint_dict)
+            # enc['update_bspn'] = self.vocab.tokenizer.encode(update_bspn)
+            enc['input_pointer'] = self.vocab.tokenizer.encode(t['pointer'])
+            # if sum(enc['pointer'][:-2])==0:
+            #     enc['input_pointer'] = self.vocab.tokenizer.encode("[db_state0]")
+            # else:
+            #     enc['input_pointer'] = [self.vocab.tokenizer.encode("[db_state0]")[0] + enc['pointer'][:-2].index(1)+1] 
+            # if sum(enc['pointer'][-2:])>0:
+            #     enc['input_pointer'][0] += (enc['pointer'][-2:].index(1)+1) * 5 # 5 means index(db_state0+bookfail)-index(db_state0)=5
+
+                
+            # enc['turn_domain'] = t['turn_domain'].split()
+            enc['turn_num'] = t['turn_num']
+            encoded_dial.append(enc)
+
+            # prev_constraint_dict = constraint_dict
+            # dial_context.append( enc['resp_nodelex'] )
+        return encoded_dial
+
+    def check_update(self, prev_constraint_dict, constraint_dict):
+        update_dict = {}
+        if prev_constraint_dict==constraint_dict:
+            return '<eos_b>'
+        for domain in constraint_dict:
+            if domain in prev_constraint_dict:
+                for slot in constraint_dict[domain]:
+                    if constraint_dict[domain].get(slot) != prev_constraint_dict[domain].get(slot):
+                        if domain not in update_dict:
+                            update_dict[domain] = {}
+                        update_dict[domain][slot] = constraint_dict[domain].get(slot)
+                # if delete is needed
+                # if len(prev_constraint_dict[domain])>len(constraint_dict[domain]):
+                for slot in prev_constraint_dict[domain]:
+                    if constraint_dict[domain].get(slot) is None:
+                        update_dict[domain][slot] = "<None>"
+            else:
+                update_dict[domain] = deepcopy(constraint_dict[domain])
+    
+
+        update_bspn= self.constraint_dict_to_bspan(update_dict)
+        return update_bspn
+
+    def constraint_dict_to_bspan(self, constraint_dict):
+        if not constraint_dict:
+            return "<eos_b>"
+        update_bspn=""
+        for domain in constraint_dict:
+            if len(update_bspn)==0: 
+                update_bspn += f"[{domain}]"
+            else:
+                update_bspn += f" [{domain}]"
+            for slot in constraint_dict[domain]:
+                update_bspn += f" {slot} {constraint_dict[domain][slot]}"
+        update_bspn += f" <eos_b>"
+        return update_bspn
+
+    def bspan_to_constraint_dict(self, bspan, bspn_mode = 'bspn'):
+        # add decoded(str) here
+        bspan = bspan.split() if isinstance(bspan, str) else bspan
+        constraint_dict = {}
+        domain = None
+        conslen = len(bspan)
+        for idx, cons in enumerate(bspan):
+            cons = self.vocab.decode(cons) if type(cons) is not str else cons
+            if cons == "[slot]":
+                continue
+            if cons == '<eos_b>':
+                break
+            if '[' in cons:
+                if cons[1:-1] not in ontology.all_domains:
+                    continue
+                domain = cons[1:-1]
+            elif cons in ontology.get_slot:
+                if domain is None:
+                    continue
+                if cons == 'people':
+                    # handle confusion of value name "people's portraits..." and slot people
+                    try:
+                        ns = bspan[idx+1]
+                        ns = self.vocab.decode(ns) if type(ns) is not str else ns
+                        if ns == "'s":
+                            continue
+                    except:
+                        continue
+                if not constraint_dict.get(domain):
+                    constraint_dict[domain] = {}
+                if bspn_mode == 'bsdx':
+                    constraint_dict[domain][cons] = 1
+                    continue
+                vidx = idx+1
+                if vidx == conslen:
+                    break
+                vt_collect = []
+                vt = bspan[vidx]
+                vt = self.vocab.decode(vt) if type(vt) is not str else vt
+                while vidx < conslen and vt != '<eos_b>' and '[' not in vt and vt not in ontology.get_slot:
+                    vt_collect.append(vt)
+                    vidx += 1
+                    if vidx == conslen:
+                        break
+                    vt = bspan[vidx]
+                    vt = self.vocab.decode(vt) if type(vt) is not str else vt
+                if vt_collect:
+                    constraint_dict[domain][cons] = ' '.join(vt_collect)
+
+        return constraint_dict
+
+    # def bspan_to_DBpointer(self, bspan, turn_domain):
+    #     constraint_dict = self.bspan_to_constraint_dict(bspan)
+    #     # follow damd
+    #     matnums = self.db.get_match_num(constraint_dict)
+    #     match_dom = turn_domain[0] if len(turn_domain) == 1 else turn_domain[1]
+    #     match_dom = match_dom[1:-1] if match_dom.startswith('[') else match_dom
+    #     match = matnums[match_dom]
+    #     vector = self.db.addDBPointer(match_dom, match)
+    #     return vector
+
+
+    def dspan_to_domain(self, dspan):
+        domains = {}
+        dspan = dspan.split() if isinstance(dspan, str) else dspan
+        for d in dspan:
+            dom = self.vocab.decode(d) if type(d) is not str else d
+            if dom != '<eos_d>':
+                domains[dom] = 1
+            else:
+                break
+        return domains
+
+    def convert_batch(self, batch, prev, first_turn=False, dst_start_token = 0):
+        """
+        user: dialogue history ['user']
+        input: previous dialogue state + dialogue history
+        DB state: ['input_pointer']
+        output1: dialogue state update ['update_bspn'] or current dialogue state ['bspn']
+        output2: dialogue response ['resp']
+        """
+        inputs = {}
+        pad_token = self.vocab.tokenizer.encode("<pad>")[0]
+        batch_size = len(batch['user'])
+        # input: previous dialogue state + dialogue history
+        input_ids = []
+        if first_turn:
+            for i in range(batch_size):
+                input_ids.append(self.vocab.tokenizer.encode('<eos_b>') + batch['user'][i])
+        else:
+            for i in range(batch_size):
+                input_ids.append(prev['bspn'][i] + batch['user'][i])
+        input_ids, masks = self.padInput(input_ids, pad_token)
+        inputs["input_ids"] = torch.tensor(input_ids,dtype=torch.long)
+        inputs["masks"] = torch.tensor(masks,dtype=torch.long)
+        # for CamRest
+        if self.args.noupdate_dst or True:
+            # here we use state_update denote the belief span (bspn)...
+            state_update, state_input = self.padOutput(batch['bspn'], pad_token)
+        # else: # error because CamRest doesnt have very complete ontology like multiwoz
+        #     state_update, state_input = self.padOutput(batch['update_bspn'], pad_token)
+        response, response_input = self.padOutput(batch['resp'], pad_token)
+        inputs["state_update"] = torch.tensor(state_update,dtype=torch.long) # batch_size, seq_len
+        inputs["response"] = torch.tensor(response,dtype=torch.long)
+        inputs["state_input"] = torch.tensor(np.concatenate( (np.ones((batch_size,1))*dst_start_token  , state_input[:,:-1]), axis=1 ) ,dtype=torch.long)
+        inputs["response_input"] = torch.tensor( np.concatenate( ( np.array(batch['input_pointer']), response_input[:,:-1]), axis=1 ) ,dtype=torch.long)
+        # inputs["turn_domain"] = batch["turn_domain"]
+        inputs["input_pointer"] = torch.tensor(np.array(batch['input_pointer']),dtype=torch.long)
+
+        # for k in inputs:
+        #     if k=="masks":
+        #         print(k)
+        #         print(inputs[k])
+        #     else:
+        #         print(k)
+        #         print(inputs[k].tolist())
+        #         print(k)
+        #         print(self.vocab.tokenizer.decode(inputs[k].tolist()[0]))
+        
+        return inputs
+
+    def padOutput(self, sequences, pad_token):
+        lengths = [len(s) for s in sequences]
+        num_samples = len(lengths)
+        max_len = max(lengths)
+        output_ids = np.ones((num_samples, max_len)) * (-100) #-100 ignore by cross entropy
+        decoder_inputs = np.ones((num_samples, max_len)) * pad_token
+        for idx, s in enumerate(sequences):
+            trunc = s[:max_len]
+            output_ids[idx, :lengths[idx]] = trunc
+            decoder_inputs[idx, :lengths[idx]] = trunc
+        return output_ids, decoder_inputs
+
+    def padInput(self, sequences, pad_token):
+        lengths = [len(s) for s in sequences]
+        num_samples = len(lengths)
+        max_len = max(lengths)
+        input_ids = np.ones((num_samples, max_len)) * pad_token
+        masks = np.zeros((num_samples, max_len))
+
+        for idx, s in enumerate(sequences):
+            trunc = s[-max_len:]
+            input_ids[idx, :lengths[idx]] = trunc
+            masks[idx, :lengths[idx]] = 1
+        return input_ids, masks
+
+    def update_bspn(self, prev_bspn, bspn_update):
+        constraint_dict_update = self.bspan_to_constraint_dict(self.vocab.tokenizer.decode(bspn_update) )
+        if not constraint_dict_update:
+            return prev_bspn
+        constraint_dict = self.bspan_to_constraint_dict(self.vocab.tokenizer.decode(prev_bspn) )
+        
+        for domain in constraint_dict_update:
+            if domain not in constraint_dict:
+                constraint_dict[domain] = {}
+            for slot, value in constraint_dict_update[domain].items():
+                if value=="<None>": #delete the slot
+                    _ = constraint_dict[domain].pop(slot, None)
+                else:
+                    constraint_dict[domain][slot]=value
+        updated_bspn = self.vocab.tokenizer.encode(self.constraint_dict_to_bspan(constraint_dict))
+        return updated_bspn
+        
+
+    def wrap_result(self, result_dict, cfg, eos_syntax=None):
+        decode_fn = self.vocab.sentence_decode
+        results = []
+        eos_syntax = ontology.eos_tokens if not eos_syntax else eos_syntax
+
+        if cfg.bspn_mode == 'bspn':
+            field = ['dial_id', 'turn_num', 'user', 'bspn_gen','bspn', 'resp_gen', 'resp']
+        elif not cfg.enable_dst:
+            field = ['dial_id', 'turn_num', 'user', 'bsdx_gen','bsdx', 'resp_gen', 'resp', 'aspn_gen', 'aspn',
+                        'dspn_gen', 'dspn', 'bspn', 'pointer']
+        else:
+            field = ['dial_id', 'turn_num', 'user', 'bsdx_gen','bsdx', 'resp_gen', 'resp', 'aspn_gen', 'aspn',
+                        'dspn_gen', 'dspn', 'bspn_gen','bspn', 'pointer']
+        # if self.multi_acts_record is not None:
+        #     field.insert(7, 'multi_act_gen')
+
+        for dial_id, turns in result_dict.items():
+            entry = {'dial_id': dial_id, 'turn_num': len(turns)}
+            for prop in field[2:]:
+                entry[prop] = ''
+            results.append(entry)
+            for turn_no, turn in enumerate(turns):
+                entry = {'dial_id': dial_id}
+                for key in field:
+                    if key in ['dial_id']:
+                        continue
+                    v = turn.get(key, '')
+                    if key == 'turn_domain':
+                        v = ' '.join(v)
+                    entry[key] = decode_fn(v, eos=eos_syntax[key]) if key in eos_syntax and v != '' else v
+                results.append(entry)
+        return results, field
+
+    # def restore(self, resp, domain, constraint_dict, mat_ents):
+    #     restored = resp
+
+    #     restored = restored.replace('[value_reference]', '53022')
+    #     restored = restored.replace('[value_car]', 'BMW')
+
+    #     # restored.replace('[value_phone]', '830-430-6666')
+    #     for d in domain:
+    #         constraint = constraint_dict.get(d,None)
+    #         if constraint:
+    #             if 'stay' in constraint:
+    #                 restored = restored.replace('[value_stay]', constraint['stay'])
+    #             if 'day' in constraint:
+    #                 restored = restored.replace('[value_day]', constraint['day'])
+    #             if 'people' in constraint:
+    #                 restored = restored.replace('[value_people]', constraint['people'])
+    #             if 'time' in constraint:
+    #                 restored = restored.replace('[value_time]', constraint['time'])
+    #             if 'type' in constraint:
+    #                 restored = restored.replace('[value_type]', constraint['type'])
+    #             if d in mat_ents and len(mat_ents[d])==0:
+    #                 for s in constraint:
+    #                     if s == 'pricerange' and d in ['hotel', 'restaurant'] and 'price]' in restored:
+    #                         restored = restored.replace('[value_price]', constraint['pricerange'])
+    #                     if s+']' in restored:
+    #                         restored = restored.replace('[value_%s]'%s, constraint[s])
+
+    #         if '[value_choice' in restored and mat_ents.get(d):
+    #             restored = restored.replace('[value_choice]', str(len(mat_ents[d])))
+    #     if '[value_choice' in restored:
+    #         restored = restored.replace('[value_choice]', '3')
+
+
+    #     # restored.replace('[value_car]', 'BMW')
+
+
+    #     try:
+    #         ent = mat_ents.get(domain[-1], [])
+    #         if ent:
+    #             ent = ent[0]
+
+    #             for t in restored.split():
+    #                 if '[value' in t:
+    #                     slot = t[7:-1]
+    #                     if ent.get(slot):
+    #                         if domain[-1] == 'hotel' and slot == 'price':
+    #                             slot = 'pricerange'
+    #                         restored = restored.replace(t, ent[slot])
+    #                     elif slot == 'price':
+    #                         if ent.get('pricerange'):
+    #                             restored = restored.replace(t, ent['pricerange'])
+    #                         else:
+    #                             print(restored, domain)
+    #     except:
+    #         print(resp)
+    #         print(restored)
+    #         quit()
+
+
+    #     restored = restored.replace('[value_phone]', '62781111')
+    #     restored = restored.replace('[value_postcode]', 'CG9566')
+    #     restored = restored.replace('[value_address]', 'Parkside, Cambridge')
+
+    #     return restored
+
+    # def restore(self, resp, domain, constraint_dict):
+    #     restored = resp
+    #     restored = restored.capitalize()
+    #     restored = restored.replace(' -s', 's')
+    #     restored = restored.replace(' -ly', 'ly')
+    #     restored = restored.replace(' -er', 'er')
+
+    #     mat_ents = self.db.get_match_num(constraint_dict, True)
+    #     self.delex_refs = ["w29zp27k","qjtixk8c","wbjgaot8","wjxw4vrv","sa63gzjd","i4afi8et","u595dz8a","8ttxct27","vcmkko1k","a5litxvz","2gy5ulll","gethuntl","i76goxin","mq7amf1m","isyr3hnc","69srbpnj","pmhz3tjo","5vrjsmse","ie05gdqs","wpa3iy8c","lnk1guuk","bbg39tvv","73mseuiq","6knjsqxy","znl8d0eg","4rz5lydp","r9xjc41b","d77jcgj2","sw8ac8gh",]
+    #     ref =  random.choice(self.delex_refs)
+    #     restored = restored.replace('[value_reference]', ref.upper())
+    #     restored = restored.replace('[value_car]', 'BMW')
+
+    #     # restored.replace('[value_phone]', '830-430-6666')
+    #     for d in domain:
+    #         constraint = constraint_dict.get(d,None)
+    #         if constraint:
+    #             if 'stay' in constraint:
+    #                 restored = restored.replace('[value_stay]', constraint['stay'])
+    #             if 'day' in constraint:
+    #                 restored = restored.replace('[value_day]', constraint['day'])
+    #             if 'people' in constraint:
+    #                 restored = restored.replace('[value_people]', constraint['people'])
+    #             if 'time' in constraint:
+    #                 restored = restored.replace('[value_time]', constraint['time'])
+    #             if 'type' in constraint:
+    #                 restored = restored.replace('[value_type]', constraint['type'])
+    #             if d in mat_ents and len(mat_ents[d])==0:
+    #                 for s in constraint:
+    #                     if s == 'pricerange' and d in ['hotel', 'restaurant'] and 'price]' in restored:
+    #                         restored = restored.replace('[value_price]', constraint['pricerange'])
+    #                     if s+']' in restored:
+    #                         restored = restored.replace('[value_%s]'%s, constraint[s])
+
+    #         if '[value_choice' in restored and mat_ents.get(d):
+    #             restored = restored.replace('[value_choice]', str(len(mat_ents[d])))
+    #     if '[value_choice' in restored:
+    #         restored = restored.replace('[value_choice]', str(random.choice([1,2,3,4,5])))
+
+
+    #     # restored.replace('[value_car]', 'BMW')
+    #     stopwords = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself", "they", "them", "their", "theirs", "themselves", "what", "which", "who", "whom", "this", "that", "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because", "as", "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into", "through", "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out", "on", "off", "over", "under", "again", "further", "then", "once", "here", "there", "when", "where", "why", "how", "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s", "t", "can", "will", "just", "don", "should", "now"]
+
+    #     ent = mat_ents.get(domain[-1], [])
+    #     if ent:
+    #         # handle multiple [value_xxx] tokens first
+    #         restored_split = restored.split()
+    #         token_count = Counter(restored_split)
+    #         for idx, t in enumerate(restored_split):
+    #             if '[value' in t and token_count[t]>1 and token_count[t]<=len(ent):
+    #                 slot = t[7:-1]
+    #                 pattern = r'\['+t[1:-1]+r'\]'
+    #                 for e in ent:
+    #                     if e.get(slot):
+    #                         if domain[-1] == 'hotel' and slot == 'price':
+    #                             slot = 'pricerange'
+    #                         if slot in ['name', 'address']:
+    #                             rep = ' '.join([i.capitalize() if i not in stopwords else i for i in e[slot].split()])
+    #                         elif slot in ['id','postcode']:
+    #                             rep = e[slot].upper()
+    #                         else:
+    #                             rep = e[slot]
+    #                         restored = re.sub(pattern, rep, restored, 1)
+    #                     elif slot == 'price' and  e.get('pricerange'):
+    #                         restored = re.sub(pattern, e['pricerange'], restored, 1)
+
+    #         # handle normal 1 entity case
+    #         ent = ent[0]
+    #         for t in restored.split():
+    #             if '[value' in t:
+    #                 slot = t[7:-1]
+    #                 if ent.get(slot):
+    #                     if domain[-1] == 'hotel' and slot == 'price':
+    #                         slot = 'pricerange'
+    #                     if slot in ['name', 'address']:
+    #                         rep = ' '.join([i.capitalize() if i not in stopwords else i for i in ent[slot].split()])
+    #                     elif slot in ['id','postcode']:
+    #                         rep = ent[slot].upper()
+    #                     else:
+    #                         rep = ent[slot]
+    #                     # rep = ent[slot]
+    #                     restored = restored.replace(t, rep)
+    #                     # restored = restored.replace(t, ent[slot])
+    #                 elif slot == 'price' and  ent.get('pricerange'):
+    #                     restored = restored.replace(t, ent['pricerange'])
+    #                     # else:
+    #                     #     print(restored, domain)
+    #     restored = restored.replace('[value_phone]', '07338019809')#taxi number need to get from api call, which is not available
+    #     for t in restored.split():
+    #         if '[value' in t:
+    #             restored = restored.replace(t, 'UNKNOWN')
+
+    #     restored = restored.split()
+    #     for idx, w in enumerate(restored):
+    #         if idx>0 and restored[idx-1] in ['.', '?', '!']:
+    #             restored[idx]= restored[idx].capitalize()
+    #     restored = ' '.join(restored)
+    #     return restored
+
+
+    def relex(self, result_path, output_path):
+        data = []
+
+        with open(result_path, "r") as f:
+            reader = csv.reader(f, delimiter=',')
+            for i, row in enumerate(reader):
+                if i == 10: # skip statistic ressults
+                    namelist = row
+                elif i > 10:
+                    data.append(row)
+
+        bspn_index = namelist.index("bspn_gen")
+        resp_index = namelist.index("resp_gen")
+        dspn_index = namelist.index("dspn_gen")
+
+        row_list = []
+        row_list.append(namelist)
+
+        for row in data:
+            bspn = row[bspn_index]
+            resp = row[resp_index]
+            dspn = [row[dspn_index].replace("[","").replace("]","")]
+            if bspn == "" or resp == "":
+                row_list.append(row)
+            else:
+                constraint_dict = self.bspan_to_constraint_dict(bspn)
+                new_resp_gen = self.restore(resp, dspn, constraint_dict)
+
+                row[resp_index] = new_resp_gen
+                row_list.append(row)
+
+                
+                print("resp", resp)
+                #print("cons_dict: ", cons_dict)
+                #print("dspn: ", dspn)
+                print("new_resp_gen: ", new_resp_gen)
+
+        with open(output_path, "w") as fw:
+            writer = csv.writer(fw)
+            writer.writerows(row_list)
+
+
+
+class SMDReader(_ReaderBase):
+    def __init__(self, vocab=None, args=None):
+        super().__init__()
+        if args.exp_setting == 'en':
+            from config import smd_config_en as cfg
+        elif args.exp_setting == 'id':
+            from config import smd_config_id as cfg
+        elif args.exp_setting == 'cross':
+            from config import smd_config_cross as cfg
+        elif args.exp_setting == 'bi':
+            from config import smd_config_bi as cfg
+        elif args.exp_setting == 'bi-en':
+            from config import smd_config_bien as cfg
+        elif args.exp_setting == 'bi-id':
+            from config import smd_config_biid as cfg
+        self.nlp = spacy.load('en_core_web_sm')
+        # self.db = json.loads(open(cfg.db).read().lower()) # db is in every dialogue
+        self.args = args
+
+        self.vocab = vocab
+        self.vocab_size = vocab.vocab_size
+        self.entities = []
+        self.entity_dict = {}
+        self.abbr_dict = {}
+        self.db = {}
+
+        self._load_data(cfg=cfg)
+
+    def _load_data(self, cfg, save_temp=False):
+        self.ontology = json.loads(open(cfg.ontology).read().lower())
+        self.get_entities(self.ontology)
+
+        self.train_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.data_path+cfg.data_file, 'r', encoding='utf-8').read().lower()), cfg))
+        self.dev_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.dev_list, 'r', encoding='utf-8').read().lower()), cfg))
+        self.test_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.test_list, 'r', encoding='utf-8').read().lower()), cfg))
+        self.train, self.dev, self.test = [] , [], []
+
+        train_count = 0
+
+        for dial in self.train_data:
+            dial_id = dial[0]['dial_id']
+            self.train.append(self._get_encoded_data(dial_id,dial))
+            train_count += 1
+        for dial in self.dev_data:
+            dial_id = dial[0]['dial_id']
+            self.dev.append(self._get_encoded_data(dial_id,dial))
+        for dial in self.test_data:
+            dial_id = dial[0]['dial_id']
+            self.test.append(self._get_encoded_data(dial_id,dial))
+
+        random.shuffle(self.train)
+        random.shuffle(self.dev)
+        random.shuffle(self.test)
+
+    def get_entities(self, entity_data):
+        entity_dict = {}
+        for k in entity_data:
+            if type(entity_data[k][0]) is str:
+                for entity in entity_data[k]:
+                    entity_dict[entity] = k
+                    if k in ['event', 'poi_type']:
+                        entity_dict[entity.split()[0]] = k
+                        self.abbr_dict[entity.split()[0]] = entity
+            elif type(entity_data[k][0]) is dict:
+                for entity_entry in entity_data[k]:
+                    for entity_type, entity in entity_entry.items():
+                        entity_type = 'poi_type' if entity_type == 'type' else entity_type
+                        entity_dict[entity] = entity_type
+                        if entity_type in ['event', 'poi_type']:
+                            entity_dict[entity.split()[0]] = entity_type
+                            self.abbr_dict[entity.split()[0]] = entity
+        self.entity_dict = entity_dict
+    
+    def _clean_constraint_dict(self, constraint_dict, intent, prefer='short'):
+        """
+        clean the constraint dict so that every key is in "informable" and similar to one in provided entity dict.
+        :param constraint_dict:
+        :return:
+        """
+        informable = {
+            'weather': ['date', 'location', 'weather_attribute'],
+            'navigate': ['poi_type', 'distance'],
+            'schedule': ['event', 'date', 'time', 'agenda', 'party', 'room']
+        }
+
+        del_key = set(constraint_dict.keys()).difference(informable[intent])
+        for key in del_key:
+            constraint_dict.pop(key)
+        invalid_key = []
+        for k in constraint_dict:
+            constraint_dict[k] = constraint_dict[k].strip()
+            v = constraint_dict[k]
+            v = re.sub('(\d+) ([ap]m)', lambda x: x.group(1) + x.group(2), v)
+            v = re.sub('(\d+)\s?(mile)s?', lambda x: x.group(1) + ' ' + x.group(2), v)
+            v = re.sub('(\d+)\s?(km)', lambda x: x.group(1) + ' ' + x.group(2), v)
+            if v in self.entity_dict:
+                if prefer == 'short':
+                    constraint_dict[k] = v
+                elif prefer == 'long':
+                    constraint_dict[k] = self.abbr_dict.get(v, v)
+            elif v.split()[0] in self.entity_dict:
+                if prefer == 'short':
+                    constraint_dict[k] = v.split()[0]
+                elif prefer == 'long':
+                    constraint_dict[k] = self.abbr_dict.get(v.split()[0], v)
+            else:
+                invalid_key.append(k)
+        for key in invalid_key:
+            constraint_dict.pop(key)
+        return constraint_dict
+
+    def _get_encoded_data_sequicity(self, tokenized_data):
+        encoded_data = []
+        for dial in tokenized_data:
+            encoded_dial = []
+            prev_response = ""
+            for turn in dial:
+                user = turn['user']
+                response = turn['response']
+                constraint = turn['constraint']
+                requested = turn['requested']
+                turn_num = turn['turn_num']
+                dial_id = turn['dial_id']
+                pointer = f'[db_state{turn["degree"]}]'
+
+                # final input
+                encoded_dial.append({
+                    'dial_id': dial_id,
+                    'turn_num': turn_num,
+                    'user': user,
+                    'response': response + ' <eos_r>',
+                    'bspan': constraint + ' ' + requested,
+                    'pointer': pointer,
+                })
+                # modified
+                # prev_response = response
+            encoded_data.append(encoded_dial)
+        return encoded_data
+
+    def _get_tokenized_data(self, raw_data, cfg):
+        """
+        Somerrthing to note: We define requestable and informable slots as below in further experiments
+        (including other baselines):
+        informable = {
+            'weather': ['date','location','weather_attribute'],
+            'navigate': ['poi_type','distance'],
+            'schedule': ['event']
+        }
+        requestable = {
+            'weather': ['weather_attribute'],
+            'navigate': ['poi','traffic','address','distance'],
+            'schedule': ['event','date','time','party','agenda','room']
+        }
+        :param raw_data:
+        :return:
+        """
+        tokenized_data = []
+        state_dump = {}
+        for dial_id, raw_dial in enumerate(raw_data):
+            tokenized_dial = []
+            prev_utter = ''
+            single_turn = {}
+            constraint_dict = {}
+            intent = raw_dial['scenario']['task']['intent']
+            if cfg.intent != 'all' and cfg.intent != intent:
+                if intent not in ['navigate', 'weather', 'schedule']:
+                    raise ValueError('what is %s intent bro?' % intent)
+                else:
+                    continue
+            prev_response = []
+            for turn_num, dial_turn in enumerate(raw_dial['dialogue']):
+                state_dump[(dial_id, turn_num)] = {}
+                if dial_turn['turn'] == 'driver':
+                    u = dial_turn['data']['utterance']
+                    # single_turn['user'] = prev_response + u.split() + ['EOS_U']
+                    single_turn['user'] = ' '.join(prev_response + u.split())
+                    prev_utter += u
+                elif dial_turn['turn'] == 'assistant':
+                    s = dial_turn['data']['utterance']
+                    # find entities and replace them
+                    s, reqs = self._replace_entity(s, self.entity_dict, prev_utter, intent)
+                    # single_turn['response'] = s.split() + ['EOS_M']
+                    single_turn['response'] = ' '.join(s.split())
+                    # get constraints
+                    if not constraint_dict:
+                        constraint_dict = dial_turn['data']['slots']
+                    else:
+                        for k, v in dial_turn['data']['slots'].items():
+                            constraint_dict[k] = v
+                    constraint_dict = self._clean_constraint_dict(constraint_dict, intent)
+
+                    raw_constraints = constraint_dict.values()
+
+                    # add separator
+                    constraints = []
+                    for item in raw_constraints:
+                        if constraints:
+                            constraints.append(';')
+                        constraints.extend(item.split())
+                    # get requests
+                    dataset_requested = set(
+                        filter(lambda x: dial_turn['data']['requested'][x], dial_turn['data']['requested'].keys()))
+                    requestable = {
+                        'weather': ['weather_attribute'],
+                        'navigate': ['poi', 'traffic_info', 'address', 'distance'],
+                        'schedule': ['date', 'time', 'party', 'agenda', 'room']
+                    }
+                    requests = sorted(list(dataset_requested.intersection(reqs)))
+
+                    # single_turn['constraint'] = constraints + ['EOS_Z1']
+                    # single_turn['requested'] = requests #+ ['EOS_Z2']
+                    single_turn['constraint'] = ' '.join(constraints + ['EOS_Z1'])
+                    single_turn['requested'] = ' '.join(requests) #+ ['EOS_Z2']
+                    single_turn['turn_num'] = len(tokenized_dial)
+                    single_turn['dial_id'] = dial_id
+                    single_turn['degree'] = self.db_degree(constraints, raw_dial['scenario']['kb']['items'])
+                    self.db[dial_id] = raw_dial['scenario']['kb']['items']
+                    if 'user' in single_turn:
+                        # whats the use of state_dump
+                        state_dump[(dial_id, len(tokenized_dial))]['constraint'] = constraint_dict
+                        state_dump[(dial_id, len(tokenized_dial))]['request'] = requests
+                        tokenized_dial.append(single_turn)
+                    prev_response = single_turn['response'].split() #modified
+                    single_turn = {}
+            # added for handling error whenever only one user dialogue available (there are no response in that dialogue)
+            if tokenized_dial:
+                tokenized_data.append(tokenized_dial)
+        # self._save_tokenized_data(tokenized_data, data_type)
+        return tokenized_data
+    
+    def _replace_entity(self, response, vk_map, prev_user_input, intent):
+        response = re.sub('\d+-?\d*fs?', 'temperature_SLOT', response)
+        response = re.sub('-?\d+-?\d*c', 'temperature_SLOT', response)
+        response = re.sub('\d+\s?miles?', 'distance_SLOT', response)
+        response = re.sub('\d+\s?km', 'distance_SLOT', response)
+        response = re.sub('\d+\s\w+\s(dr)?(ct)?(rd)?(road)?(st)?(ave)?(way)?(pl)?\w*[.]?', 'address_SLOT', response)
+        requestable = {
+            'weather': ['weather_attribute'],
+            'navigate': ['poi', 'traffic_info', 'address', 'distance'],
+            'schedule': ['event', 'date', 'time', 'party', 'agenda', 'room']
+        }
+        reqs = set()
+        for v, k in sorted(vk_map.items(), key=lambda x: -len(x[0])):
+            start_idx = response.find(v)
+            if start_idx == -1 or k not in requestable[intent]:
+                continue
+            end_idx = start_idx + len(v)
+            while end_idx < len(response) and response[end_idx] != ' ':
+                end_idx += 1
+            # test whether they are indeed the same word
+            lm1, lm2 = v.replace('.', '').replace(' ', '').replace("'", ''), \
+                       response[start_idx:end_idx].replace('.', '').replace(' ', '').replace("'", '')
+            if lm1 == lm2 and lm1 not in prev_user_input and v not in prev_user_input:
+                response = clean_replace(response, response[start_idx:end_idx], k + '_SLOT')
+                reqs.add(k)
+        return response, reqs
+
+    def _value_key_map(self, db_data):
+        # requestable_keys = ['address', 'name', 'phone', 'postcode', 'food', 'area', 'pricerange']
+        requestable_keys = ['traffic_info', 'address', 'distance', 'poi', 'poi_type', 'event', 'time', 'date', 'party', 'room', 'agenda', 'location', 'weekly_time', 'temperature', 'weather_attribute']
+        value_key = {}
+        for db_entry in db_data:
+            for k, v in db_entry.items():
+                if k in requestable_keys:
+                    value_key[v] = k
+        return value_key
+
+    def db_degree(self, constraints, items):
+        cnt = 0
+        constraints = ' '.join(constraints).split(' ; ')
+        constraints = [_.strip() for _ in constraints]
+        if items is not None:
+            for item in items:
+                if self.db_match(constraints, item):
+                    cnt += 1
+        # return type:2 if cnt is more than 2
+        return 2 if cnt>=2 else cnt
+    
+    def db_match(self, constraints, item):
+        constraints = set(constraints)
+        week = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'today']
+        week_cons = constraints.intersection(week)
+        if ('monday' in item or 'senin' in item) and week_cons: # weather intent
+            week_cons = list(week_cons)[0]
+            if week_cons == 'today':
+                week_cons = item.get('today','')
+            elif week_cons == 'hari ini':
+                week_cons = item.get('hari ini','')
+            else:
+                week_cons = week_cons
+            constraints = constraints.difference(week).difference(['temperature'])
+            daily_weather = item.get(week_cons, {})
+            item_str = daily_weather + ' '+ item.get('location','')
+            for c in constraints:
+                if c not in item_str:
+                    return False
+            return True
+        else:
+            item_str = ' '.join(item.values())
+            for c in constraints:
+                if c not in item_str:
+                    return False
+            return True
+
     def _split_data(self, encoded_data, split):
         """
         split data into train/dev/test
