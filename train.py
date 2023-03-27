@@ -6,7 +6,7 @@ import torch
 
 from utils import Vocab, MultiWozReader, CamRestReader, SMDReader
 # from damd_multiwoz.eval import MultiWozEvaluator
-from evaluator import CamRestEvaluator
+from evaluator import CamRestEvaluator, SMDEvaluator
 from transformers import (AdamW, T5Tokenizer, BartTokenizer, WEIGHTS_NAME,CONFIG_NAME, get_linear_schedule_with_warmup)
 from T5 import MiniT5
 from MT5 import MiniMT5
@@ -42,7 +42,7 @@ class Model(object):
             self.evaluator = CamRestEvaluator(self.reader)
         elif args.dataset == 'smd':
             self.reader = SMDReader(vocab,args)
-            # self.evaluator = SMDEvaluator(self.reader)
+            self.evaluator = SMDEvaluator(self.reader)
 
         self.optim = AdamW(self.model.parameters(), lr=args.lr)
         self.args = args
@@ -264,7 +264,7 @@ class Model(object):
                     if k!="turn_domain":
                         inputs[k] = inputs[k].to(self.args.device)
                 if self.args.noupdate_dst and (self.args.dataset == 'camrest' or self.args.dataset == 'smd'):
-                    dst_outputs, resp_outputs = self.model.inference_sequicity(tokenizer=self.tokenizer, reader=self.reader, prev=py_prev, input_ids=inputs['input_ids'],attention_mask=inputs["masks"], db=inputs["input_pointer"], dataset_type=self.args.dataset)
+                    dst_outputs, resp_outputs = self.model.inference_sequicity(tokenizer=self.tokenizer, reader=self.reader, prev=py_prev, input_ids=inputs['input_ids'],attention_mask=inputs["masks"], db=inputs["input_pointer"], dataset_type=self.args.dataset, dial_id=inputs["dial_id"])
                 elif self.args.noupdate_dst:
                     dst_outputs, resp_outputs = self.model.inference_sequicity(tokenizer=self.tokenizer, reader=self.reader, prev=py_prev, input_ids=inputs['input_ids'],attention_mask=inputs["masks"], turn_domain=inputs["turn_domain"], db=inputs["input_pointer"])
                 else:

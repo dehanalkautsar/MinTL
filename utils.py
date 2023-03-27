@@ -1727,7 +1727,7 @@ class SMDReader(_ReaderBase):
             else:
                 week_cons = week_cons
             constraints = constraints.difference(week).difference(['temperature'])
-            daily_weather = item.get(week_cons, {})
+            daily_weather = item.get(week_cons, '')
             item_str = daily_weather + ' '+ item.get('location','')
             for c in constraints:
                 if c not in item_str:

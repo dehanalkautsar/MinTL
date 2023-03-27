@@ -1,0 +1,1117 @@
+EVALUATION RESULTS:
+bleu,success,match
+0.18047176823504485,0.7976632982443075,0.7832699619474042
+DECODED RESULTS
+dial_id,turn_num,user,bspn_gen,bspn,resp_gen,resp
+210,5,,,,,
+210,0,find me a gas station .,gas station EOS_Z1,gas station EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,poi_SLOT is distance_SLOT away .
+210,1,poi_SLOT is distance_SLOT away . are there any other locations that will take less time to reach ?,gas station EOS_Z1,gas station EOS_Z1,there is a poi_SLOT distance_SLOT away and there is traffic_info_SLOT on our way,"i'm sorry , poi_SLOT is the only poi_type_SLOT i am able to locate"
+210,2,"i'm sorry , poi_SLOT is the only gas station i am able to locate ok send me the address please .",gas station EOS_Z1,gas station EOS_Z1,poi_SLOT is at address_SLOT,"its address is address_SLOT , i sent it on your screen"
+210,3,"its address is address_SLOT , i sent it on your screen thank you .",gas station EOS_Z1,gas station EOS_Z1,"you're welcome , have a great day .",you're welcome; drive safely .
+210,4,you're welcome; drive safely . great !,gas station EOS_Z1,gas station EOS_Z1,"you're welcome , have a great day .",no problem
+258,5,,,,,
+258,0,take me to a place where i can get some hot tea,hot EOS_Z1,hot EOS_Z1,there is a poi_SLOT distance_SLOT away .,poi_SLOT is distance_SLOT and serves tea .
+258,1,poi_SLOT is distance_SLOT and serves tea . how 's the traffic ?,EOS_Z1 traffic_info,hot EOS_Z1 traffic_info,there is traffic_info_SLOT on the route .,traffic_info_SLOT to poi_SLOT
+258,2,traffic_info_SLOT to poi_SLOT give me the address .,EOS_Z1,hot EOS_Z1,"the address is address_SLOT , i sent it on your screen",poi_SLOT 's address is address_SLOT ave .
+258,3,coupa 's address is address_SLOT ave . is there an alternate route with no traffic ?,EOS_Z1,hot EOS_Z1 traffic_info,there is traffic_info_SLOT on the route .,no but poi_SLOT is just distance_SLOT away and has traffic_info_SLOT so we should be able to get there quicker . how does that sound ?
+258,4,"no but poi_SLOT is just distance_SLOT away and has traffic_info_SLOT so we should be able to get there quicker . how does that sound ? it sounds great ! thank you car , let 's navigate there please !",EOS_Z1,hot EOS_Z1,"you're welcome , i'm here to assist you !","ok , initiating navigation ."
+212,5,,,,,
+212,0,are there any chinese restaurants nearby ?,nearby ; chinese EOS_Z1,nearby ; chinese EOS_Z1,there is poi_SLOT distance_SLOT away and poi_SLOT distance_SLOT away .,we're distance_SLOT away from poi_SLOT and distance_SLOT away from poi_SLOT
+212,1,we're distance_SLOT away from poi_SLOT and distance_SLOT away from poi_SLOT which one has the fastest route ?,nearby ; chinese EOS_Z1,chinese EOS_Z1,there is traffic_info_SLOT on the route .,poi_SLOT is distance_SLOT .
+212,2,poi_SLOT is closer . what is the address ?,nearby ; chinese EOS_Z1,chinese EOS_Z1,poi_SLOT is located at address_SLOT,poi_SLOT is located at address_SLOT
+212,3,poi_SLOT is located at address_SLOT how long will it take to get there ?,nearby ; chinese EOS_Z1,chinese EOS_Z1,"there is a traffic_info_SLOT , it 's distance_SLOT away and there is traffic_info_SLOT on our way",poi_SLOT is distance_SLOT away through traffic_info_SLOT
+212,4,poi_SLOT is distance_SLOT away through traffic_info_SLOT thank you,nearby ; chinese EOS_Z1,chinese EOS_Z1,you're welcome !,you're welcome !
+282,5,,,,,
+282,0,what is a good chinese restaurant ?,chinese restaurant EOS_Z1,chinese restaurant EOS_Z1,"the distance_SLOT poi_type_SLOT is pf changs , distance_SLOT away .",i have a few poi_type_SLOT listed . which one would you like to know about ?
+282,1,i have a few chinese restaurants listed . which one would you like to know about ? the nearby one please,nearby ; chinese restaurant EOS_Z1,chinese restaurant ; nearby EOS_Z1,"the distance_SLOT poi_type_SLOT is pf changs , distance_SLOT away .","p .f .changs is distance_SLOT away but there is currently traffic_info_SLOT on the route . poi_SLOT is farther at distance_SLOT away , but there isn't any traffic"
+282,2,"p .f .changs is distance_SLOT away but there is currently traffic_info_SLOT on the route . poi_SLOT is farther at distance_SLOT away , but there isn't any traffic is that the fastest option ?",nearby ; chinese restaurant EOS_Z1,chinese restaurant EOS_Z1,i'm sorry but there is a traffic_info_SLOT on our way but i sent on your screen the best option,yes poi_SLOT seems to be the fastest .
+282,3,"yes poi_SLOT seems to be the fastest . okay great , please set the navigation to take me there .",nearby ; chinese restaurant EOS_Z1,chinese restaurant EOS_Z1,"you're welcome , happy to help .",all right ! navigating to poi_SLOT at address_SLOT
+282,4,all right ! navigating to poi_SLOT at address_SLOT thank you car !,nearby ; chinese restaurant EOS_Z1,chinese restaurant EOS_Z1,you're welcome !,you're welcome !
+236,5,,,,,
+236,0,show me the nearby hospital,nearby ; hospital EOS_Z1,nearby ; hospital EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,poi_SLOT is distance_SLOT .
+236,1,poi_SLOT is nearby . does stanford express care have heavy traffic nearby ?,nearby ; hospital EOS_Z1,nearby ; hospital EOS_Z1,there is traffic_info_SLOT on the route .,the route to poi_SLOT does have traffic_info_SLOT .
+236,2,the route to stanford express care does have heavy traffic . any other local hospital 's with no heavy traffic ?,nearby ; hospital EOS_Z1,nearby ; hospital EOS_Z1 poi traffic_info,there is no traffic_info_SLOT on the route .,yes poi_SLOT is distance_SLOT away with traffic_info_SLOT do you want the address ?
+236,3,"yes poi_SLOT is distance_SLOT away with traffic_info_SLOT do you want the address ? yes , please give me the address .",nearby ; hospital EOS_Z1,nearby ; hospital EOS_Z1,poi_SLOT is at address_SLOT,"the address is address_SLOT real , i sent it on your screen"
+236,4,"the address is address_SLOT real , i sent it on your screen quickly reboot your system car and then send me the address , thank you !",nearby ; hospital EOS_Z1,nearby ; hospital EOS_Z1,"you're welcome , have a great day .","i'm sorry , i did . . and i sent the address on your screen , drive carefully !"
+99,5,,,,,
+99,0,show me the nearest shopping mall,nearest ; shopping EOS_Z1,nearest ; shopping EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,we're distance_SLOT away from poi_SLOT and there is traffic_info_SLOT on its way
+99,1,"we're distance_SLOT away from poi_SLOT and there is traffic_info_SLOT on its way okay , where is it located ?",nearest ; shopping EOS_Z1,nearest ; shopping EOS_Z1,poi_SLOT is located at address_SLOT,you will find poi_SLOT at address_SLOT
+99,2,you will find poi_SLOT at address_SLOT direction please .,nearest ; shopping EOS_Z1,nearest ; shopping center EOS_Z1,"i sent the info on your screen , drive carefully !",setting navigation now .
+99,3,setting navigation now . thank you .,nearest ; shopping EOS_Z1,nearest ; shopping center EOS_Z1,you're welcome !,you're welcome; drive safely .
+99,4,you're welcome; drive safely . [end conversation],nearest ; shopping EOS_Z1,nearest ; shopping center EOS_Z1,you're welcome,bye !
+163,5,,,,,
+163,0,where can i get tea ?,EOS_Z1,EOS_Z1,there is a poi_SLOT distance_SLOT away .,there is address_SLOT distance_SLOT you; poi_SLOT is distance_SLOT away and poi_SLOT is distance_SLOT away . which one do you want ?
+163,1,"there is address_SLOT distance_SLOT you; poi_SLOT is distance_SLOT away and poi_SLOT is distance_SLOT away . which one do you want ? which one is the quickest , is there any traffic ?",EOS_Z1 traffic_info,quickest EOS_Z1 traffic_info,there is traffic_info_SLOT on the route to poi_SLOT,"poi_SLOT is the fastest journey , because there is traffic_info_SLOT on the way there . poi_SLOT has traffic_info_SLOT should we go to poi_SLOT ?"
+163,2,"poi_SLOT is the fastest journey , because there is traffic_info_SLOT on the way there . poi_SLOT has traffic_info_SLOT should we go to poi_SLOT ? yes teavana please",EOS_Z1,quickest EOS_Z1,"i sent the info on your screen , drive carefully !",i sent on your screen its position and the fastest route to get there
+163,3,i sent on your screen its position and the fastest route to get there ok can you tell me the address please ?,EOS_Z1,quickest EOS_Z1,poi_SLOT is at address_SLOT,poi_SLOT is located at address_SLOT
+163,4,teavana is located at address_SLOT thanks for all the help .,EOS_Z1,quickest EOS_Z1,"you're welcome , happy to help .","you're welcome , glad i could be of assistance ."
+174,5,,,,,
+174,0,what is the rest stop with the quickest route nearby ?,quickest ; rest stop EOS_Z1,rest stop EOS_Z1 traffic_info,the poi_type_SLOT is distance_SLOT away at address_SLOT,poi_SLOT is a poi_type_SLOT located distance_SLOT away . there is a traffic_info_SLOT but should delay you to long .
+174,1,poi_SLOT is a rest stop located distance_SLOT away . there is a traffic_info_SLOT but should delay you to long . what is the address ?,quickest ; rest stop EOS_Z1,rest stop ; quickest EOS_Z1 poi,poi_SLOT is at address_SLOT,"the address for poi_SLOT is address_SLOT , distance_SLOT away with a traffic_info_SLOT"
+174,2,"the address for poi_SLOT is address_SLOT , distance_SLOT away with a traffic_info_SLOT is there a quick route to reach ?",quick route ; rest stop EOS_Z1,rest stop ; quick route EOS_Z1,there is traffic_info_SLOT on our way but i sent on your screen another route to reach there,i sent the distance_SLOT route on your screen
+174,3,i sent the quickest route on your screen thank you car !,quickest ; rest stop EOS_Z1,rest stop ; quick route EOS_Z1,you're welcome !,you're welcome; drive safely .
+174,4,you're welcome; drive safely . have a good day .,quickest ; rest stop EOS_Z1,rest stop ; quick route EOS_Z1,you are welcome,if you drive carefully it will be for sure !
+246,2,,,,,
+246,0,schedule a swimming activity with tom on the 6th of this month at 2pm .,6th ; tom ; swimming activity ; 2pm EOS_Z1,6th ; tom ; swimming activity ; 2pm EOS_Z1,"okay , scheduling a event_SLOT with party_SLOT on date_SLOT of this month at time_SLOT .","okay , i am scheduling a event_SLOT event with party_SLOT on date_SLOT at time_SLOT ."
+246,1,"okay , i am scheduling a swimming event with tom on the 6th at 2pm . thank you .",6th ; tom ; swimming activity ; 2pm EOS_Z1,6th ; tom ; swimming activity ; 2pm EOS_Z1,you're welcome .,not a problem .
+126,2,,,,,
+126,0,where does my friend live ?,EOS_Z1,EOS_Z1,party_SLOT lives at address_SLOT ave .,party_SLOT lives at address_SLOT
+126,1,jack lives at address_SLOT thanks .,EOS_Z1,EOS_Z1,you're welcome .,you're welcome !
+43,2,,,,,
+43,0,what time is my next tennis activity and who will be attending ?,tennis activity EOS_Z1 party time,tennis activity EOS_Z1 party time,your next event_SLOT activity is with party_SLOT at time_SLOT,your next event_SLOT activity is on date_SLOT at time_SLOT with your party_SLOT
+43,1,your next tennis activity is on date_SLOT at time_SLOT with your party_SLOT thanks !,EOS_Z1,tennis activity EOS_Z1,you're welcome .,glad i can help .
+0,2,,,,,
+0,0,remind me to take my pills,EOS_Z1,EOS_Z1,"okay , i will remind you about the pills .",what time do you need to take your pills ?
+0,1,what time do you need to take your pills ? i need to take my pills at 7 pm .,EOS_Z1,7pm EOS_Z1 time,"i have a event_SLOT 's appointment for time_SLOT , and the other is at time_SLOT",ok setting your medicine appointment for time_SLOT
+265,2,,,,,
+265,0,is it going to be windy in san francisco tomorrow ?,windy ; tomorrow ; san francisco EOS_Z1,windy ; tomorrow ; san francisco EOS_Z1 weather_attribute,it will not be weather_attribute_SLOT in location_SLOT party_SLOT .,"it will be weather_attribute_SLOT in location_SLOT party_SLOT , it should not be weather_attribute_SLOT"
+265,1,"it will be weather_attribute_SLOT in san francisco tomorrow , it should not be windy thank you car !",windy ; tomorrow ; san francisco EOS_Z1,windy ; tomorrow ; san francisco EOS_Z1,you're welcome !,no problem
+77,2,,,,,
+77,0,schedule a football activity with ana for today at 11am .,today ; ana ; football activity ; 11am EOS_Z1,today ; ana ; football activity ; 11am EOS_Z1,"okay , scheduling a event_SLOT with party_SLOT for weekly_time_SLOT_time_SLOT at time_SLOT .",scheduled event_SLOT for weekly_time_SLOT_time_SLOT at address_SLOT party_SLOT .
+77,1,scheduled football activity for today at address_SLOT ana . thank you .,today ; ana ; football activity ; 11am EOS_Z1,today ; ana ; football activity ; 11am EOS_Z1,you are welcome .,no problem .
+164,2,,,,,
+164,0,is it gonna be any blizzard on tuesday in alhambra ?,blizzard ; tuesday ; alhambra EOS_Z1 weather_attribute,blizzard ; tuesday ; alhambra EOS_Z1 weather_attribute,"no , it will not be weather_attribute_SLOT in location_SLOT on date_SLOT .",there is not gonna be any weather_attribute_SLOT this weekly_time_SLOT in location_SLOT; on date_SLOT it will weather_attribute_SLOT
+164,1,there is not gonna be any blizzard this week in alhambra; on tuesday it will weather_attribute_SLOT thank you .,blizzard ; tuesday ; alhambra EOS_Z1,blizzard ; tuesday ; alhambra EOS_Z1,you're welcome .,you are very welcome .
+195,2,,,,,
+195,0,schedule a dentist appointment on the 8th at 1 pm . ana will be joining you .,8th ; ana ; dentist appointment ; 1pm EOS_Z1,8th ; ana ; dentist appointment ; 1pm EOS_Z1 time,i am scheduling a event_SLOT on date_SLOT at 1 pm .,"okay , scheduling a event_SLOT with party_SLOT on date_SLOT at time_SLOT"
+195,1,"okay , scheduling a dentist appointment with ana on the 8th at time_SLOT thanks !",8th ; ana ; dentist appointment ; 1pm EOS_Z1,8th ; ana ; dentist appointment ; 1pm EOS_Z1,you're welcome,glad i can assist you .
+159,2,,,,,
+159,0,what time is my doctor 's appointment and who is going with me ?,EOS_Z1 party,EOS_Z1 party,your event_SLOT 's appointment is on date_SLOT at time_SLOT,"your event_SLOT 's appointment at 2 pm , your party_SLOT will be going ."
+159,1,"your doctor 's appointment at 2 pm , your party_SLOT will be going . okay perfect , thank you !",EOS_Z1,EOS_Z1,you are welcome .,happy to help
+63,2,,,,,
+63,0,tell me all the events and meetings scheduled on my calendar for today,meeting EOS_Z1 agenda,EOS_Z1,your event_SLOT is scheduled for weekly_time_SLOT_time_SLOT at time_SLOT,weekly_time_SLOT_time_SLOT you have a time_SLOT event_SLOT with party_SLOT to agenda_SLOT
+63,1,today you have a time_SLOT meeting with party_SLOT to agenda_SLOT thank you .,EOS_Z1,EOS_Z1,you're welcome .,you are welcome .
+49,2,,,,,
+49,0,will it be dry in new york on wednesday ?,dry ; wednesday ; new york EOS_Z1 weather_attribute,dry ; wednesday ; new york EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT on date_SLOT .,it will be weather_attribute_SLOT date_SLOT in location_SLOT .
+49,1,it will be dry wednesday in new york . thank you so much .,dry ; wednesday ; new york EOS_Z1,dry ; wednesday ; new york EOS_Z1,you're welcome !,no problem .
+57,2,,,,,
+57,0,"when is my dentist appointment , the date and time ?",dentist appointment EOS_Z1 date,dentist appointment EOS_Z1 date time,your event_SLOT is on date_SLOT at time_SLOT,"for which one ? i have two , one at time_SLOT date_SLOT and one at time_SLOT date_SLOT"
+57,1,"for which one ? i have two , one at time_SLOT date_SLOT and one at time_SLOT date_SLOT that will do , thanks .",dentist appointment EOS_Z1,dentist appointment EOS_Z1,you are welcome .,you're welcome .
+217,2,,,,,
+217,0,what 's the current weather in san francisco ?,san francisco EOS_Z1,san francisco EOS_Z1 weather_attribute,"it will be weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT",there is currently weather_attribute_SLOT in location_SLOT
+217,1,there is currently weather_attribute_SLOT in san francisco okay thanks,san francisco EOS_Z1,san francisco EOS_Z1,you're welcome .,happy to help
+103,2,,,,,
+103,0,i need to find out the date and time for my lab appointment .,lab appointment EOS_Z1 date time,lab appointment EOS_Z1 date,your event_SLOT appointment is on date_SLOT at time_SLOT,"for which one ? i have two , one on date_SLOT at address_SLOT one on date_SLOT at 11 am ."
+103,1,"for which one ? i have two , one on date_SLOT at address_SLOT one on date_SLOT at 11 am . thanks that will do car .",EOS_Z1,lab appointment EOS_Z1,you're welcome .,you're welcome .
+251,2,,,,,
+251,0,when is the football game,football EOS_Z1 date,football EOS_Z1 date,your event_SLOT game is on date_SLOT at time_SLOT,the event_SLOT game is date_SLOT at 10 am .
+251,1,the football game is date_SLOT at 10 am . thank you .,EOS_Z1,football ; wednesday ; 10am EOS_Z1,you're welcome .,poi_type_SLOT pleasure
+185,2,,,,,
+185,0,what is the weather forecast in cleveland for thursday ?,thursday ; cleveland EOS_Z1 weather_attribute,thursday ; cleveland EOS_Z1 weather_attribute,the weather in location_SLOT will be weather_attribute_SLOT on date_SLOT,the weather in location_SLOT on date_SLOT will have weather_attribute_SLOT and a high of temperature_SLOT .
+185,1,the weather in cleveland on thursday will have weather_attribute_SLOT and a high of temperature_SLOT . thanks,thursday ; cleveland EOS_Z1,thursday ; cleveland EOS_Z1,you're welcome .,anytime !
+92,2,,,,,
+92,0,"i want to find the agenda , location , and time for my meeting .",meeting EOS_Z1 agenda date time,meeting EOS_Z1 agenda event time,you have two event_SLOT scheduled . one on date_SLOT at time_SLOT with party_SLOT and the other on date_SLOT at time_SLOT with party_SLOT,"you have two event_SLOT scheduled , one at time_SLOT in event_SLOT room address_SLOT the company picnic , and one at time_SLOT in address_SLOT to go over agenda_SLOT"
+92,1,"you have two meetings scheduled , one at time_SLOT in event_SLOT room address_SLOT the company picnic , and one at time_SLOT in address_SLOT to go over agenda_SLOT thanks .",EOS_Z1,meeting EOS_Z1,you are welcome .,you're welcome .
+120,2,,,,,
+120,0,is it currently hailing in manhattan ?,hailing ; manhattan EOS_Z1 weather_attribute,manhattan EOS_Z1 weather_attribute,it is currently weather_attribute_SLOT in location_SLOT .,"it is not weather_attribute_SLOT in location_SLOT , the forecast says it is weather_attribute_SLOT weekly_time_SLOT_time_SLOT ."
+120,1,"it is not hailing in manhattan , the forecast says it is weather_attribute_SLOT today . thank you car !",hailing ; manhattan EOS_Z1,manhattan EOS_Z1,you're welcome !,any time .
+273,2,,,,,
+273,0,"set a reminder for a football activity at 10 am , on friday , with tom .",friday ; tom ; football activity ; 10am EOS_Z1,friday ; tom ; football activity ; 10am EOS_Z1 time,"okay , scheduling a event_SLOT with party_SLOT for date_SLOT at 10 am .","okay , scheduling a event_SLOT with party_SLOT for date_SLOT at time_SLOT"
+273,1,"okay , scheduling a football activity with tom for friday at time_SLOT thanks for your help .",friday ; tom ; football activity ; 10am EOS_Z1,friday ; tom ; football activity ; 10am EOS_Z1,you're welcome .,happy to help
+54,2,,,,,
+54,0,will it be humid in fresno during the next week ?,humid ; next week ; fresno EOS_Z1,humid ; next week ; fresno EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .,it will not be weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .
+54,1,it will not be humid in fresno next week . thanks .,humid ; next week ; fresno EOS_Z1,humid ; next week ; fresno EOS_Z1,no problem .,anytime !
+303,2,,,,,
+303,0,schedule a conference with the executive team for the 15th of this month at 9am .,15th ; executive team ; conference ; 9am EOS_Z1,15th ; executive team ; conference ; 9am EOS_Z1,"okay , scheduling a event_SLOT with the party_SLOT for date_SLOT of this month at time_SLOT .","okay , scheduling a event_SLOT with the party_SLOT for date_SLOT at time_SLOT ."
+303,1,"okay , scheduling a conference with the executive team for the 15th at 9am . thanks .",15th ; executive team ; conference ; 9am EOS_Z1,15th ; executive team ; conference ; 9am EOS_Z1,you are welcome .,you're welcome friend .
+41,2,,,,,
+41,0,what will be the highest temperature on friday in mountain view ?,highest temperature ; friday ; mountain view EOS_Z1,highest temperature ; friday ; mountain view EOS_Z1,the weather_attribute_SLOT in location_SLOT will be temperature_SLOT on date_SLOT,"on date_SLOT , the weather_attribute_SLOT in location_SLOT is predicted to be temperature_SLOT"
+41,1,"on friday , the highest temperature in mountain view is predicted to be temperature_SLOT thanks .",highest temperature ; friday ; mountain view EOS_Z1,highest temperature ; friday ; mountain view EOS_Z1,you are welcome .,anytime
+25,2,,,,,
+25,0,schedule conference with sales team on the 11th of this month 9am,11th ; sales team ; conference ; 9am EOS_Z1,11th ; sales team ; conference ; 9am EOS_Z1,"okay , scheduling a event_SLOT with party_SLOT on date_SLOT of this month at time_SLOT .","okay , scheduling a event_SLOT with the party_SLOT at time_SLOT on date_SLOT of this month ."
+25,1,"okay , scheduling a conference with the sales team at 9am on the 11th of this month . thanks .",11th ; sales team ; conference ; 9am EOS_Z1,11th ; sales team ; conference ; 9am EOS_Z1,you are welcome .,you are welcome .
+130,2,,,,,
+130,0,will there be clear skies in fresno on wednesday ?,clear skies ; wednesday ; fresno EOS_Z1 weather_attribute,clear skies ; wednesday ; fresno EOS_Z1 weather_attribute,there will be weather_attribute_SLOT in location_SLOT on date_SLOT .,"the forecast says there will be weather_attribute_SLOT in location_SLOT , there is no mention of weather_attribute_SLOT on date_SLOT ."
+130,1,"the forecast says there will be weather_attribute_SLOT in fresno , there is no mention of clear skies on wednesday . thank you",clear skies ; wednesday ; fresno EOS_Z1,clear skies ; wednesday ; fresno EOS_Z1,no problem .,you are welcome
+245,2,,,,,
+245,0,which one is gonna be the highest temperature in fresno this week ?,highest temperature ; fresno EOS_Z1,highest temperature ; fresno EOS_Z1,"the weather_attribute_SLOT in location_SLOT will be temperature_SLOT on date_SLOT , temperature_SLOT on date_SLOT , temperature_SLOT on date_SLOT , temperature_SLOT on date_SLOT , temperature_SLOT on date_SLOT ,",date_SLOT in location_SLOT will have the weather_attribute_SLOT of temperature_SLOT
+245,1,monday in fresno will have the highest temperature of temperature_SLOT thank you .,highest temperature ; fresno EOS_Z1,highest temperature ; fresno EOS_Z1,you are welcome .,you are welcome .
+17,2,,,,,
+17,0,will it be warm in compton on wednesday ?,warm ; wednesday ; compton EOS_Z1 weather_attribute,warm ; wednesday ; compton EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT on date_SLOT .,it will not be weather_attribute_SLOT in location_SLOT on date_SLOT .
+17,1,it will not be warm in compton on wednesday . thank you .,warm ; wednesday ; compton EOS_Z1,warm ; wednesday ; compton EOS_Z1,you're welcome .,anytime .
+283,2,,,,,
+283,0,what is the date and time of my next meeting and who will be attending it ?,meeting EOS_Z1 date party,meeting EOS_Z1 date party time,your next event_SLOT is on date_SLOT at time_SLOT,your next event_SLOT is with your party_SLOT on date_SLOT at time_SLOT
+283,1,your next meeting is with your party_SLOT on date_SLOT at time_SLOT thank you .,meeting EOS_Z1,meeting EOS_Z1,you're welcome .,you're welcome .
+198,2,,,,,
+198,0,what date is my dentist appointment and who is attending ?,dentist appointment EOS_Z1 date party,dentist appointment EOS_Z1 date party,you have two event_SLOT scheduled . one on date_SLOT with party_SLOT and one on date_SLOT with party_SLOT,"you have two event_SLOT , one with your party_SLOT and one with your party_SLOT , both on date_SLOT"
+198,1,"you have two dentist appointments , one with your party_SLOT and one with your sister , both on date_SLOT thank you , that was helpful .",dentist appointment EOS_Z1,dentist appointment EOS_Z1,you are welcome .,glad i can assist you .
+228,2,,,,,
+228,0,will it be windy in atherton in the next two days ?,windy ; atherton EOS_Z1,windy ; atherton EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,it will not be weather_attribute_SLOT in location_SLOT in the weekly_time_SLOT .
+228,1,it will not be windy in atherton in the next few days . thanks .,windy ; next few days EOS_Z1,windy ; atherton EOS_Z1,no problem .,you're welcome .
+177,2,,,,,
+177,0,this week will it be warm in los angeles ?,warm ; los angeles EOS_Z1,warm ; los angeles EOS_Z1,it will be weather_attribute_SLOT in location_SLOT on date_SLOT .,in location_SLOT it is gonna be weather_attribute_SLOT on date_SLOT
+177,1,in los angeles it is gonna be warm on tuesday thank you car !,warm ; los angeles EOS_Z1,warm ; los angeles EOS_Z1,you're welcome !,anytime !
+142,2,,,,,
+142,0,schedule a dentist appointment at 3 next month on the 12th,12th ; dentist appointment ; 3pm EOS_Z1,12th ; dentist appointment ; 3pm EOS_Z1 time,"okay , scheduling a event_SLOT with your party_SLOT on date_SLOT at time_SLOT","i've scheduled a event_SLOT for time_SLOT on date_SLOT , anything else ?"
+142,1,"i've scheduled a dentist appointment for time_SLOT on the 12th , anything else ? can you confirm you set the dentist appointment for next month on the 12th ?",12th ; dentist appointment ; 3pm EOS_Z1,dentist appointment ; 3pm EOS_Z1,i have scheduled a event_SLOT on date_SLOT at time_SLOT .,i have scheduled the appointment .
+87,2,,,,,
+87,0,will it be foggy on tuesday in redwood city ?,foggy ; tuesday ; redwood city EOS_Z1,foggy ; tuesday ; redwood city EOS_Z1 weather_attribute,it will not be weather_attribute_SLOT in location_SLOT on date_SLOT .,it will be weather_attribute_SLOT but not weather_attribute_SLOT in location_SLOT on date_SLOT .
+87,1,it will be weather_attribute_SLOT but not foggy in redwood city on tuesday . thank you,foggy ; tuesday ; redwood city EOS_Z1,foggy ; tuesday ; redwood city EOS_Z1,you are welcome .,glad i could help out
+56,2,,,,,
+56,0,when 's my tennis match,tennis EOS_Z1 date event,tennis ; 11am EOS_Z1 time,your event_SLOT is on date_SLOT at time_SLOT,your event_SLOT match is date_SLOT at time_SLOT
+56,1,your tennis match is date_SLOT at time_SLOT okay great . thank you .,EOS_Z1,tennis ; 11am ; tuesday EOS_Z1,you're welcome .,you're very welcome .
+132,2,,,,,
+132,0,what time is my next dinner event and who will be attending ?,dinner EOS_Z1 party time,dinner EOS_Z1 party time,your next event_SLOT event is on date_SLOT at time_SLOT,the one at time_SLOT with party_SLOT is on date_SLOT
+132,1,"the one at time_SLOT with party_SLOT is on date_SLOT that will do , thanks .",dinner EOS_Z1,dinner EOS_Z1,you're welcome,glad i can help .
+80,2,,,,,
+80,0,will it be raining this week in redwood city ?,rain ; redwood city EOS_Z1,raining ; redwood city EOS_Z1,it will not weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,there isn't any weather_attribute_SLOT predicted to fall in location_SLOT this weekly_time_SLOT
+80,1,there isn't any rain predicted to fall in redwood city this week thank you .,rain ; redwood city EOS_Z1,raining ; redwood city EOS_Z1,you're welcome .,anytime .
+209,2,,,,,
+209,0,please set a reminder to take medicine at 7pm tuesday with ana .,tuesday ; ana ; 7pm EOS_Z1,ana ; 7pm EOS_Z1,"okay , setting a reminder for your event_SLOT at address_SLOT date_SLOT with party_SLOT .","okay , setting a reminder to take your medicine with party_SLOT at address_SLOT date_SLOT ."
+209,1,"okay , setting a reminder to take your medicine with ana at address_SLOT tuesday . thanks .",tuesday ; ana ; 7pm EOS_Z1,ana ; 7pm EOS_Z1,you are welcome .,you are welcome .
+208,2,,,,,
+208,0,schedule a conference at 6 pm on the tenth with sales team .,sales team ; conference ; 6pm EOS_Z1,10th ; sales team ; conference ; 6pm EOS_Z1,"okay , scheduling a event_SLOT with party_SLOT on the tenth at 6 pm .",i will schedule a event_SLOT at address_SLOT the tenth with party_SLOT .
+208,1,i will schedule a conference at address_SLOT the tenth with sales team . thank you .,sales team ; conference ; 6pm EOS_Z1,10th ; sales team ; conference ; 6pm EOS_Z1,you are welcome .,you are welcome .
+65,2,,,,,
+65,0,will there be drizzle in cleveland tomorrow ?,drizzle ; tomorrow ; cleveland EOS_Z1 weather_attribute,drizzle ; tomorrow ; cleveland EOS_Z1,there will be no weather_attribute_SLOT in location_SLOT party_SLOT .,it will not weather_attribute_SLOT in location_SLOT party_SLOT .
+65,1,it will not drizzle in cleveland tomorrow . thanks .,drizzle ; tomorrow ; cleveland EOS_Z1,drizzle ; tomorrow ; cleveland EOS_Z1,you're welcome .,no problem .
+68,2,,,,,
+68,0,when is my dentist appointment,dentist appointment EOS_Z1 date,dentist appointment EOS_Z1 date,your event_SLOT is on date_SLOT at time_SLOT,you have a event_SLOT on date_SLOT at 7 pm .
+68,1,you have a dentist appointment on date_SLOT at 7 pm . thank you .,dentist appointment EOS_Z1,dentist appointment EOS_Z1,you are welcome .,you're welcome .
+222,2,,,,,
+222,0,how is gonna be the weather forecast in san mateo for the next weekend ?,weekend ; san mateo EOS_Z1,san mateo EOS_Z1 weather_attribute,"it will be weather_attribute_SLOT in location_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT ,","in location_SLOT it will be weather_attribute_SLOT on date_SLOT , and weather_attribute_SLOT on date_SLOT"
+222,1,"in san mateo it will be weather_attribute_SLOT on saturday , and weather_attribute_SLOT on sunday okay , thank you",weekend ; san mateo EOS_Z1,san mateo EOS_Z1,you're welcome !,you're welcome
+165,2,,,,,
+165,0,is it gonna be foggy in exeter on next week ?,foggy ; next week ; exeter EOS_Z1,foggy ; next week ; exeter EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT on weekly_time_SLOT_time_SLOT .,there is no fog in the forecast for location_SLOT weekly_time_SLOT_time_SLOT .
+165,1,there is no fog in the forecast for exeter next week . thanks .,foggy ; next week ; exeter EOS_Z1,foggy ; next week ; exeter EOS_Z1,no problem .,you're welcome !
+218,2,,,,,
+218,0,what time is the doctors appointment and who is attending ?,doctor appointment EOS_Z1 party,doctor appointment EOS_Z1 party,you have two event_SLOT appointments scheduled . one on date_SLOT at time_SLOT with party_SLOT and one on date_SLOT at time_SLOT with party_SLOT,"which one ? i have two , one with your party_SLOT on date_SLOT , and one with party_SLOT on date_SLOT"
+218,1,"which one ? i have two , one with your party_SLOT on the 3rd , and one with party_SLOT on date_SLOT the 9th . thank you .",EOS_Z1,doctor appointment ; the 9th EOS_Z1,you are welcome .,the appointment on date_SLOT is at 3 pm .
+171,2,,,,,
+171,0,can you give me the weather this week for new york city,EOS_Z1,EOS_Z1,what city are you interested in ?,"in location_SLOT , it will be weather_attribute_SLOT date_SLOT and date_SLOT , weather_attribute_SLOT date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , and weather_attribute_SLOT on date_SLOT ."
+171,1,"in new york , it will be weather_attribute_SLOT monday and tuesday , snowing wednesday , weather_attribute_SLOT on thursday , weather_attribute_SLOT on friday , weather_attribute_SLOT on saturday , and weather_attribute_SLOT on sunday . then no clear skies for me , i'm sad . . thank you car !",EOS_Z1,EOS_Z1,you're welcome !,you're welcome . . patience !
+96,2,,,,,
+96,0,i would like to know who is attending my meeting and when it is .,meeting EOS_Z1 date party,meeting EOS_Z1 date party,your event_SLOT is scheduled for date_SLOT at time_SLOT,your party_SLOT will be at the event_SLOT on date_SLOT at 1 pm .
+96,1,your party_SLOT will be at the meeting on date_SLOT at 1 pm . thanks .,meeting EOS_Z1,meeting EOS_Z1,you're welcome,happy to help
+98,2,,,,,
+98,0,i need to schedule a doctor 's appointment,EOS_Z1,EOS_Z1,what time is your event_SLOT 's appointment ?,when ?
+98,1,when ? it 's at 1 pm today .,EOS_Z1,1pm EOS_Z1,"i am sorry , i have added a event_SLOT 's appointment is at 1 pm .",okay . we set up your event_SLOT 's appointment weekly_time_SLOT_time_SLOT at 1 pm .
+55,2,,,,,
+55,0,find out the parties joining me and date for my doctor appointment .,doctor appointment EOS_Z1 date party,doctor appointment EOS_Z1 date party,your event_SLOT is on date_SLOT at address_SLOT party_SLOT,"you have address_SLOT scheduled : party_SLOT on date_SLOT , your party_SLOT on date_SLOT , your party_SLOT on date_SLOT , and party_SLOT on date_SLOT"
+55,1,"you have address_SLOT scheduled : party_SLOT on the 15th , your party_SLOT on wednesday , your party_SLOT on the 20th , and party_SLOT on date_SLOT cool , thanks",EOS_Z1,doctor appointment EOS_Z1,you are welcome .,"poi_type_SLOT pleasure , goodbye ."
+172,2,,,,,
+172,0,i need the quickest route to a pizza restaurant near me .,near ; pizza restaurant EOS_Z1 distance,quickest ; pizza EOS_Z1,poi_SLOT is distance_SLOT away at address_SLOT,there isn't any traffic to poi_SLOT at address_SLOT it will be a distance_SLOT drive .
+172,1,there isn't any traffic to poi_SLOT at address_SLOT it will be a distance_SLOT drive . pick the quickest route and let 's go there please,near ; pizza restaurant EOS_Z1,quickest ; pizza EOS_Z1,"i sent the info on your screen , drive carefully !",distance_SLOT route with traffic_info_SLOT set for poi_SLOT have a great day .
+295,2,,,,,
+295,0,what is the date and time for my yoga activity ?,yoga activity EOS_Z1 date time,yoga activity EOS_Z1 date time,you have two event_SLOT activities scheduled . one on date_SLOT at time_SLOT and one on date_SLOT at time_SLOT,you have two event_SLOT activities scheduled . one on date_SLOT at time_SLOT and another on date_SLOT at time_SLOT
+295,1,you have two yoga activities scheduled . one on date_SLOT at time_SLOT and another on date_SLOT at time_SLOT thank you .,yoga activity EOS_Z1,yoga activity EOS_Z1,you're welcome .,have a great day .
+19,2,,,,,
+19,0,set an appointment for swimming,swimming EOS_Z1,swimming EOS_Z1,what time is your event_SLOT ?,what time would like me to set the appointment ?
+19,1,what time would like me to set the appointment ? at 3pm on saturday please,saturday ; swimming ; 3pm EOS_Z1,swimming ; 3pm ; saturday EOS_Z1,i will schedule a event_SLOT 's appointment for date_SLOT at 3 pm .,okay i set your appointment for time_SLOT on date_SLOT . have a good time !
+152,2,,,,,
+152,0,when am i going swimming ?,swimming EOS_Z1 date event,swimming activity EOS_Z1 date time,you have two event_SLOT activities scheduled . one on date_SLOT at time_SLOT with party_SLOT and another on date_SLOT at time_SLOT with party_SLOT,you have two event_SLOT activities scheduled . one on date_SLOT at time_SLOT and the other on date_SLOT at time_SLOT
+152,1,you have two swimming activities scheduled . one on date_SLOT at time_SLOT and the other on date_SLOT at time_SLOT thank you kindly .,swimming EOS_Z1,swimming activity EOS_Z1,you are welcome .,no problem .
+147,2,,,,,
+147,0,will it snow in fresno during this week ?,snow ; fresno EOS_Z1,snow ; fresno EOS_Z1,it will not weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,date_SLOT it will weather_attribute_SLOT in location_SLOT
+147,1,saturday it will snow in fresno thank you very much !,snow ; saturday EOS_Z1,snow ; fresno EOS_Z1,you're welcome !,glad to help
+67,2,,,,,
+67,0,schedule a conference with the vice president on the 5th at 11am .,5th ; vice president ; conference ; 11am EOS_Z1,5th ; vice president ; conference ; 11am EOS_Z1,"okay , scheduling a event_SLOT with the party_SLOT on date_SLOT at time_SLOT .",event_SLOT scheduled for date_SLOT at time_SLOT with the party_SLOT .
+67,1,conference scheduled for the 5th at 11am with the vice president . perfect .,5th ; vice president ; conference ; 11am EOS_Z1,5th ; vice president ; conference ; 11am EOS_Z1,you are welcome .,have a good day .
+232,2,,,,,
+232,0,"i need to find out some info for my optometrist appointment , the date and time please .",optometrist appointment EOS_Z1 date,optometrist appointment EOS_Z1 date time,you have two event_SLOT scheduled . one on date_SLOT at time_SLOT with party_SLOT and the other on date_SLOT at time_SLOT with party_SLOT,"okay , which one ? i have one for date_SLOT at time_SLOT , and one for date_SLOT at time_SLOT"
+232,1,"okay , which one ? i have one for date_SLOT at 9am , and one for date_SLOT at time_SLOT that will do , thanks .",optometrist appointment EOS_Z1,optometrist appointment EOS_Z1,you are welcome .,you're welcome .
+188,2,,,,,
+188,0,schedule a swimming activity with my brother for the 7th at 11am .,7th ; brother ; swimming activity ; 11am EOS_Z1,7th ; brother ; swimming activity ; 11am EOS_Z1,"okay , scheduling a event_SLOT with your party_SLOT for date_SLOT at time_SLOT .","okay , scheduling a event_SLOT with your party_SLOT for date_SLOT at time_SLOT ."
+188,1,"okay , scheduling a swimming activity with your brother for the 7th at 11am . great , thank you .",7th ; brother ; swimming activity ; 11am EOS_Z1,7th ; brother ; swimming activity ; 11am EOS_Z1,you're welcome,glad to help
+111,2,,,,,
+111,0,which temperature there will be in alhambra on thursday ?,thursday ; alhambra EOS_Z1,thursday ; alhambra EOS_Z1,in location_SLOT the temperature will be low of temperature_SLOT and high of temperature_SLOT,"on date_SLOT the temperature in location_SLOT will be low of temperature_SLOT , and high of temperature_SLOT"
+111,1,"on thursday the temperature in alhambra will be low of temperature_SLOT , and high of temperature_SLOT thanks !",thursday ; alhambra EOS_Z1,thursday ; alhambra EOS_Z1,you're welcome !,happy to help
+12,2,,,,,
+12,0,what are the directions to the closest parking garage,parking garage EOS_Z1,parking garage EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,"the distance_SLOT poi_type_SLOT is civic center poi_type_SLOT , located distance_SLOT away at address_SLOT"
+12,1,"the closest parking garage is civic center garage , located distance_SLOT away at address_SLOT thank you",EOS_Z1,parking garage EOS_Z1,"you're welcome , happy to help .",you're welcome .
+213,2,,,,,
+213,0,where is the nearest hospital that we can get to quick ?,nearest ; hospital EOS_Z1,nearest ; hospital EOS_Z1 traffic_info,the distance_SLOT poi_type_SLOT is poi_SLOT,"poi_SLOT is distance_SLOT away , though there is a traffic_info_SLOT would you like directions there ?"
+213,1,"poi_SLOT is distance_SLOT away , though there is a traffic_info_SLOT would you like directions there ? yes sounds great .",nearest ; hospital EOS_Z1,nearest ; hospital EOS_Z1,"i sent the info on your screen , drive carefully !","okay , heading to address_SLOT real"
+136,2,,,,,
+136,0,will there be clear skies in san francisco on friday ?,clear skies ; friday ; san francisco EOS_Z1 weather_attribute,friday ; san francisco EOS_Z1 weather_attribute,there will be weather_attribute_SLOT in location_SLOT on date_SLOT .,on date_SLOT on location_SLOT the weather will be weather_attribute_SLOT with a high of temperature_SLOT .
+136,1,on friday on san francisco the weather will be weather_attribute_SLOT with a high of temperature_SLOT . thanks .,clear skies ; friday ; san francisco EOS_Z1,friday ; san francisco EOS_Z1,you're welcome .,anytime .
+107,2,,,,,
+107,0,where does my friend live ?,EOS_Z1,EOS_Z1,party_SLOT lives at address_SLOT ave .,party_SLOT lives at address_SLOT ave .
+107,1,tom lives at address_SLOT ave . ok set the gps . thanks .,EOS_Z1,EOS_Z1,"you're welcome , have a great day .","i did , you're welcome !"
+4,2,,,,,
+4,0,what will the weather in fresno be in the next 48 hours ?,fresno EOS_Z1,fresno EOS_Z1 weather_attribute,"in location_SLOT the weather will be weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_",the weather in location_SLOT over the next address_SLOT be weather_attribute_SLOT with weather_attribute_SLOT
+4,1,the weather in fresno over the next address_SLOT be weather_attribute_SLOT with weather_attribute_SLOT thanks,fresno EOS_Z1,fresno EOS_Z1,you're welcome .,you are welcome
+154,2,,,,,
+154,0,schedule a swimming activity with marie on sunday at 6pm .,sunday ; marie ; swimming activity ; 6pm EOS_Z1,sunday ; marie ; swimming activity ; 6pm EOS_Z1,"okay , scheduling a event_SLOT with party_SLOT on date_SLOT at time_SLOT .","okay , i will set a schedule for a event_SLOT with party_SLOT on date_SLOT at time_SLOT ."
+154,1,"okay , i will set a schedule for a swimming activity with marie on sunday at 6pm . thank you .",sunday ; marie ; swimming activity ; 6pm EOS_Z1,sunday ; marie ; swimming activity ; 6pm EOS_Z1,you are welcome .,you are welcome .
+94,2,,,,,
+94,0,take me to the parking garage closest to my destination,parking garage EOS_Z1,parking garage EOS_Z1 distance,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,"the distance_SLOT poi_type_SLOT is palo alto poi_type_SLOT r , it 's distance_SLOT away . navigate you there ?"
+94,1,"the distance_SLOT parking garage is palo alto garage r , it 's distance_SLOT away . navigate you there ? sure , thank you , just pick the quickest route and send me the address on screen",quickest ; parking garage EOS_Z1,parking garage ; quickest EOS_Z1,"the address is address_SLOT , i sent it on your screen","i sent the info and the distance_SLOT info on your screen , you're welcome !"
+275,2,,,,,
+275,0,set reminder for doctor 's appointment for the tenth,the tenth EOS_Z1,10th EOS_Z1,"okay , setting a reminder for your event_SLOT 's appointment for the tenth at time_SLOT","okay setting reminder for event_SLOT 's appointment on the tenth , would you like me to include a time ?"
+275,1,"okay setting reminder for doctor 's appointment on the tenth , would you like me to include a time ? yes , please . . .1 pm .",the tenth ; doctor appointment EOS_Z1,10th ; 1pm EOS_Z1 date time,i've scheduled the address_SLOT for you .,"great , i've set your event_SLOT 's appointment for date_SLOT at time_SLOT"
+9,2,,,,,
+9,0,what is the highest temperature in brentwood over the next two days ?,highest temperature ; brentwood EOS_Z1,highest temperature ; brentwood EOS_Z1,"the weather_attribute_SLOT in location_SLOT is temperature_SLOT on date_SLOT , the weather_attribute_SLOT is temperature_SLOT on date_SLOT , the high is temperature_SLOT on date_SLOT , and the high is temperature_S",it will be temperature_SLOT on date_SLOT in location_SLOT .
+9,1,it will be temperature_SLOT on tuesday in brentwood . thank you very much car !,highest temperature ; brentwood EOS_Z1,highest temperature ; brentwood EOS_Z1,you're welcome !,you're very welcome !
+112,1,,,,,
+112,0,what day and time is my dental appointment set for ?,dentist appointment EOS_Z1 date,dentist appointment EOS_Z1 date time,your dental appointment is on date_SLOT at time_SLOT,"date_SLOT at time_SLOT with party_SLOT , date_SLOT at time_SLOT with party_SLOT , date_SLOT at time_SLOT with your party_SLOT , date_SLOT at time_SLOT with party_SLOT , and date_SLOT at time_SLOT with your party_SLOT"
+181,1,,,,,
+181,0,set a reminder for my dentist appointment with dad on the first at 2pm .,father ; dentist appointment ; 2pm EOS_Z1,1st ; dentist ; 2pm EOS_Z1 date,"okay , setting a reminder for your event_SLOT with your party_SLOT on the first at time_SLOT .","ok , event_SLOT with your dad on date_SLOT at time_SLOT is set"
+74,1,,,,,
+74,0,set reminder for doctors appointment on the 12th at 4 :50,12th ; doctor appointment EOS_Z1,12th EOS_Z1,reminder set for event_SLOT 's appointment on date_SLOT at time_SLOT,ok i've set a reminder for your event_SLOT 's appointment on date_SLOT at 4 :50
+271,1,,,,,
+271,0,can you tell me the next day that i have an appointment with the eye doctor,EOS_Z1,EOS_Z1 date event,your eye event_SLOT 's appointment is scheduled for date_SLOT at time_SLOT,your next appointment with your event_SLOT is date_SLOT at time_SLOT
+260,1,,,,,
+260,0,schedule an appointment for yoga,yoga EOS_Z1,EOS_Z1,what time is your appointment ?,okay scheduling an appointment for event_SLOT .
+78,1,,,,,
+78,0,make a note that at 5 pm on the 12th i have yoga,12th ; yoga ; 5pm EOS_Z1,the 12th ; yoga ; 5pm EOS_Z1 time,"okay , setting a reminder for your event_SLOT class on date_SLOT at 5 pm .",making a note for event_SLOT at time_SLOT on date_SLOT .
+115,1,,,,,
+115,0,schedule taking medicine at 6 pm on the 13th of next month with my brother .,13th ; brother ; taking medicine ; 6pm EOS_Z1,13th ; brother ; taking medicine ; 6pm EOS_Z1 time,"okay , scheduling a reminder for your event_SLOT 's event_SLOT at address_SLOT date_SLOT of next month with your party_SLOT .",event_SLOT with your party_SLOT at time_SLOT on date_SLOT has been scheduled .
+197,1,,,,,
+197,0,when am i playing tennis,tennis EOS_Z1 date event,EOS_Z1,your event_SLOT is on date_SLOT at time_SLOT,you are playing event_SLOT on address_SLOT
+129,1,,,,,
+129,0,which day is my appointment on,EOS_Z1 date,EOS_Z1,your appointment is on date_SLOT at time_SLOT,which appointment would you like the date for ?
+224,1,,,,,
+224,0,find out when my next conferences,conference EOS_Z1 date,EOS_Z1 date time,your next event_SLOT is on date_SLOT at time_SLOT,date_SLOT at time_SLOT
+11,1,,,,,
+11,0,what time is dinner tonight,dinner EOS_Z1,dinner EOS_Z1 time,event_SLOT is at address_SLOT party_SLOT,your event_SLOT is time_SLOT tonight .
+240,1,,,,,
+240,0,what is the date and time of my next meeting,meeting EOS_Z1 date time,EOS_Z1,your next event_SLOT is on date_SLOT at time_SLOT,your next event_SLOT is date_SLOT at 3 pm .
+83,1,,,,,
+83,0,what time is my doctor 's appointment,EOS_Z1,EOS_Z1,your event_SLOT 's appointment is on date_SLOT at time_SLOT,your event_SLOT 's appointment is scheduled for date_SLOT at 11 am .
+133,1,,,,,
+133,0,schedule swimming time,swimming EOS_Z1,swimming EOS_Z1,what time is your event_SLOT time ?,what time do you want to go event_SLOT
+287,1,,,,,
+287,0,schedule a meeting at 6 pm on the 5th of this month with boss to go over quarterly report .,5th ; boss ; meeting ; 6pm EOS_Z1,5th ; boss ; meeting ; go over quarterly report ; 6pm EOS_Z1 time,"okay , scheduling a event_SLOT with party_SLOT to go over agenda_SLOT on date_SLOT of this month at 6 pm .","okay , scheduling a event_SLOT with your party_SLOT to agenda_SLOT on date_SLOT at time_SLOT"
+148,1,,,,,
+148,0,what day is the football game,football EOS_Z1 date,football EOS_Z1,your event_SLOT game is on date_SLOT at time_SLOT,the event_SLOT game is on date_SLOT
+247,1,,,,,
+247,0,i have an eye doctors appointment on the 12th at 5 pm,12th ; eye doctor appointment ; 5pm EOS_Z1,12th ; 5pm EOS_Z1 event time,"okay , i have that eye event_SLOT 's appointment on date_SLOT at 5 pm .",i will note down your eye event_SLOT at time_SLOT date_SLOT
+109,1,,,,,
+109,0,check doctor 's appointment date,EOS_Z1 date,EOS_Z1 date event,your event_SLOT 's appointment is on date_SLOT at time_SLOT,your event_SLOT is on date_SLOT at 2 pm .
+162,1,,,,,
+162,0,what is the agenda of my meeting today,meeting EOS_Z1 agenda,meeting EOS_Z1 agenda,your event_SLOT is in event_SLOT room address_SLOT,your agenda for your event_SLOT weekly_time_SLOT_time_SLOT is agenda_SLOT
+194,1,,,,,
+194,0,what time is my lab appointment for,lab appointment EOS_Z1,lab appointment EOS_Z1,your event_SLOT appointment is on date_SLOT at time_SLOT,your next event_SLOT appointment is next date_SLOT at 2 pm .
+269,1,,,,,
+269,0,schedule a lab appointment at 6 pm on august 3 . alex is coming along,alex ; lab appointment ; 6pm EOS_Z1,alex ; lab appointment ; 6pm EOS_Z1,"okay , scheduling a event_SLOT appointment with party_SLOT for august 3 pm .",reminder set for event_SLOT appointment at address_SLOT august address_SLOT
+191,1,,,,,
+191,0,what time do i take my medicine and who is attending ?,EOS_Z1 party,taking medicine EOS_Z1 event party time,you have two medicine events scheduled . one on date_SLOT at time_SLOT with party_SLOT and one on date_SLOT at time_SLOT with party_SLOT,currently you are event_SLOT on two occasions . one is on date_SLOT at time_SLOT with your party_SLOT the other is on date_SLOT at address_SLOT party_SLOT
+192,1,,,,,
+192,0,who will be at the meeting friday,friday ; meeting EOS_Z1 party,friday ; meeting EOS_Z1 party,your event_SLOT is at time_SLOT,party_SLOT will be at the date_SLOT event_SLOT .
+179,1,,,,,
+179,0,what time is my dinner reservation,dinner EOS_Z1,dinner ; dinner EOS_Z1,your event_SLOT is at address_SLOT,your event_SLOT reservation is at 5 pm .
+93,1,,,,,
+93,0,tell me when is my next meeting and who are invited in the meeting and what are the agenda of the next meeting,meeting EOS_Z1 agenda date party,monday ; infrastructure team ; meeting ; go over budget ; 7pm EOS_Z1 agenda date party,your next event_SLOT is in event_SLOT room address_SLOT agenda_SLOT,your next event_SLOT is on date_SLOT at address_SLOT the party_SLOT to agenda_SLOT
+149,1,,,,,
+149,0,what is on my schedule today,today EOS_Z1,EOS_Z1,what city do you want the weather for ?,you have an event_SLOT weekly_time_SLOT_time_SLOT at time_SLOT
+211,1,,,,,
+211,0,schedule a reminder to take medicine with martha for saturday at 2pm .,saturday ; martha ; 2pm EOS_Z1,saturday ; martha ; 2pm EOS_Z1,"okay , scheduling a reminder to take medicine with party_SLOT for date_SLOT at time_SLOT .",your reminder has been set for date_SLOT at time_SLOT to take medicine with party_SLOT .
+90,1,,,,,
+90,0,check the date and time of my doctor 's appointment,EOS_Z1 date time,EOS_Z1 date,your event_SLOT 's appointment is on date_SLOT at time_SLOT,your appointment is for date_SLOT at 11 am .
+226,2,,,,,
+226,0,schedule a conference with the boss for this month on the 5th at 1pm .,5th ; boss ; conference ; 1pm EOS_Z1,boss ; conference ; 1pm EOS_Z1,"okay , scheduling a event_SLOT with the party_SLOT for date_SLOT at time_SLOT .","okay , i am scheduling a event_SLOT with your party_SLOT for date_SLOT of this month at time_SLOT ."
+226,1,"okay , i am scheduling a conference with your boss for the 5th of this month at 1pm . great , thanks .",5th ; boss ; conference ; 1pm EOS_Z1,boss ; conference ; 1pm EOS_Z1,you are welcome .,no problem !
+46,2,,,,,
+46,0,will there be clear skies in danville on thursday ?,clear skies ; thursday ; danville EOS_Z1 weather_attribute,clear skies ; thursday ; danville EOS_Z1 weather_attribute,there will be weather_attribute_SLOT in location_SLOT on date_SLOT .,weather_attribute_SLOT is predicted in location_SLOT on date_SLOT
+46,1,weather_attribute_SLOT is predicted in danville on thursday thank you !,clear skies ; thursday ; danville EOS_Z1,clear skies ; thursday ; danville EOS_Z1,you're welcome !,anytime !
+102,2,,,,,
+102,0,look up san francisco 's two day weather info to see if it will be warm,warm ; san francisco EOS_Z1,warm ; two day ; san francisco EOS_Z1 weather_attribute,it will not be weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,it will be weather_attribute_SLOT and weather_attribute_SLOT in location_SLOT in the next weekly_time_SLOT .
+102,1,it will be weather_attribute_SLOT and hailing in san francisco in the next two days . thank you .,warm ; san francisco EOS_Z1,warm ; two day ; san francisco EOS_Z1,you're welcome .,no problem .
+89,2,,,,,
+89,0,what time do i go to yoga and who is going with me ?,yoga EOS_Z1 party time,yoga EOS_Z1 party,you have two event_SLOT activities scheduled . one on date_SLOT at time_SLOT with your party_SLOT and one on date_SLOT at time_SLOT with your party_SLOT,event_SLOT is with party_SLOT at 11 am .
+89,1,yoga is with party_SLOT at 11 am . thanks .,EOS_Z1,yoga EOS_Z1,you're welcome .,you are welcome .
+292,2,,,,,
+292,0,"please give me the address and directions to home within 5 miles of here , avoiding all heavy traffic .",home EOS_Z1 traffic_info,home EOS_Z1,poi_type_SLOT is distance_SLOT away at address_SLOT with traffic_info_SLOT,i'm sorry the only route poi_type_SLOT has traffic_info_SLOT . it will be a distance_SLOT drive to address_SLOT
+292,1,i'm sorry the only route home has heavy traffic . it will be a distance_SLOT drive to address_SLOT ok that will do . thank you .,EOS_Z1,home EOS_Z1,you're welcome !,you're very welcome !
+47,2,,,,,
+47,0,is it gonna snow in durham during the week ?,snow ; week ; durham EOS_Z1,snow ; week ; durham EOS_Z1,it will not weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,location_SLOT does not have any weather_attribute_SLOT predicted this weekly_time_SLOT .
+47,1,durham does not have any snow predicted this week . thank you .,week ; durham EOS_Z1,snow ; week ; durham EOS_Z1,you are welcome .,you are welcome .
+169,2,,,,,
+169,0,find out the date and parties attending for my optometrist appointment .,optometrist appointment EOS_Z1 date party,optometrist appointment EOS_Z1 date party,you have two event_SLOT scheduled . one on date_SLOT at time_SLOT with party_SLOT and another on date_SLOT at time_SLOT with party_SLOT,"you have address_SLOT scheduled , one with party_SLOT on date_SLOT , party_SLOT on date_SLOT , and your party_SLOT on date_SLOT"
+169,1,"you have address_SLOT scheduled , one with party_SLOT on the 2nd , party_SLOT on saturday , and your party_SLOT on date_SLOT thanks for the info .",optometrist appointment EOS_Z1,optometrist appointment EOS_Z1,you're welcome .,you're welcome
+227,2,,,,,
+227,0,schedule a tennis activity with martha for friday at 4pm .,friday ; martha ; tennis activity ; 4pm EOS_Z1,friday ; martha ; tennis activity ; 4pm EOS_Z1,"okay , scheduling a event_SLOT activity with party_SLOT for date_SLOT at time_SLOT .","okay , scheduling a event_SLOT activity with party_SLOT for date_SLOT at time_SLOT ."
+227,1,"okay , scheduling a tennis activity with martha for friday at 4pm . thanks .",friday ; martha ; tennis activity ; 4pm EOS_Z1,friday ; martha ; tennis activity ; 4pm EOS_Z1,you are welcome .,you are welcome .
+193,2,,,,,
+193,0,will it be windy in los angeles on sunday ?,windy ; sunday ; los angeles EOS_Z1,windy ; sunday ; los angeles EOS_Z1 weather_attribute,it will not be weather_attribute_SLOT in location_SLOT on date_SLOT .,the weather forecast predicts that it will be weather_attribute_SLOT in location_SLOT on date_SLOT
+193,1,the weather forecast predicts that it will be weather_attribute_SLOT in los angeles on sunday thanks .,windy ; sunday ; los angeles EOS_Z1,windy ; sunday ; los angeles EOS_Z1,you are welcome .,no problem .
+14,2,,,,,
+14,0,find the address to a hospital or clinic .,hospital EOS_Z1,hospital EOS_Z1,poi_SLOT is distance_SLOT away .,poi_SLOT is at address_SLOT real .
+14,1,poi_SLOT is at address_SLOT real . thank you .,EOS_Z1,hospital EOS_Z1,you're welcome .,good day
+167,2,,,,,
+167,0,what 's the highest temperature going to be in cleveland this week ?,highest temperature ; cleveland EOS_Z1,highest temperature ; cleveland EOS_Z1,"the weather_attribute_SLOT in location_SLOT this weekly_time_SLOT will be temperature_SLOT on date_SLOT , temperature_SLOT on date_SLOT , temperature_SLOT on date_SLOT , temperature_SLOT on date_SLOT , temperature_SLOT on",this weekly_time_SLOT the weather_attribute_SLOT in location_SLOT will be temperature_SLOT on date_SLOT
+167,1,this week the highest temperature in cleveland will be temperature_SLOT on saturday thank you .,highest temperature ; cleveland EOS_Z1,highest temperature ; cleveland EOS_Z1,you're welcome .,you're welcome !
+116,2,,,,,
+116,0,is it cloudy in cleveland today ?,cloudy ; today ; cleveland EOS_Z1,cloudy ; today ; cleveland EOS_Z1,it is not weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .,it is weather_attribute_SLOT right now in location_SLOT .
+116,1,it is cloudy right now in cleveland . thanks .,cloudy ; today ; cleveland EOS_Z1,cloudy ; today ; cleveland EOS_Z1,you're welcome .,you're welcome .
+62,2,,,,,
+62,0,what will be the temperature in manhattan on wednesday ?,wednesday ; manhattan EOS_Z1,wednesday ; manhattan EOS_Z1,the temperature in location_SLOT on date_SLOT will be low of temperature_SLOT and high of temperature_SLOT,it appears as if there will be a low of temperature_SLOT and a high of temperature_SLOT .
+62,1,it appears as if there will be a low of temperature_SLOT and a high of temperature_SLOT . thank you car !,wednesday ; manhattan EOS_Z1,wednesday ; manhattan EOS_Z1,you're welcome !,you're welcome !
+101,2,,,,,
+101,0,can you find out for me the date and parties attending my dinner ?,dinner EOS_Z1 date party,dinner EOS_Z1 date party,your event_SLOT is on date_SLOT at time_SLOT,your event_SLOT is on date_SLOT with your party_SLOT
+101,1,your dinner is on date_SLOT with your party_SLOT thanks .,dinner EOS_Z1,dinner EOS_Z1,you're welcome,you're welcome
+281,2,,,,,
+281,0,what time is my lab appointment and who will be attending ?,lab appointment EOS_Z1 party time,lab appointment EOS_Z1 party,your event_SLOT appointment is on date_SLOT at time_SLOT with party_SLOT,your event_SLOT appointment is at address_SLOT party_SLOT and another one at address_SLOT party_SLOT
+281,1,your lab appointment is at address_SLOT party_SLOT and another one at address_SLOT party_SLOT thanks !,lab appointment EOS_Z1,lab appointment EOS_Z1,you are welcome .,poi_type_SLOT pleasure .
+118,2,,,,,
+118,0,info about football please .,football EOS_Z1 date event,football EOS_Z1 date party,your event_SLOT event is on date_SLOT at time_SLOT,your event_SLOT is on date_SLOT at address_SLOT your party_SLOT
+118,1,"your football activity is on date_SLOT at address_SLOT your party_SLOT thanks , that 's all .",EOS_Z1,football EOS_Z1,you're welcome,happy to help
+124,2,,,,,
+124,0,set a reminder for me to take my medicine at 9am on sunday with by brother frank .,sunday ; brother frank ; 9am EOS_Z1,sunday ; brother ; 9am EOS_Z1,"okay , setting a reminder for your medicine at time_SLOT on date_SLOT with your party_SLOT .","okay , setting a reminder to take medicine with your party_SLOT frank at address_SLOT date_SLOT ."
+124,1,"okay , setting a reminder to take medicine with your brother frank at address_SLOT sunday . thank you",sunday ; brother ; 9am EOS_Z1,sunday ; 9am EOS_Z1,you are welcome,no problem !
+151,2,,,,,
+151,0,will it be cloudy in inglewood next week ?,cloudy ; next week ; inglewood EOS_Z1,cloudy ; next week ; inglewood EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .,there aren't any weather_attribute_SLOT days in the forecast for location_SLOT .
+151,1,"there aren't any cloudy days in the forecast for inglewood . okay , thanks",cloudy ; next week ; inglewood EOS_Z1,cloudy ; next week ; inglewood EOS_Z1,you are welcome .,you're welcome !
+214,2,,,,,
+214,0,give me the location for the nearest starbucks,nearest EOS_Z1 distance,nearest EOS_Z1 distance,there is no poi_SLOT distance_SLOT,there are no poi_SLOT distance_SLOT here but we're distance_SLOT away from poi_SLOT : is it okay to go there ?
+214,1,"there are no starbucks distance_SLOT here but we're distance_SLOT away from cafe venetia : is it okay to go there ? sure , just pick the fastest route for me , thanks !",EOS_Z1,EOS_Z1,"i sent the info on your screen , you're welcome !","i sent the address with the fastest route on screen , drive carefully !"
+285,2,,,,,
+285,0,i need to find out the date and time for my swimming activity !,swimming activity EOS_Z1 date time,swimming activity EOS_Z1 date time,you have two event_SLOT activities scheduled . one on date_SLOT at time_SLOT and one on date_SLOT at time_SLOT,"i have two , which one ? i have one for date_SLOT at time_SLOT and one for date_SLOT at time_SLOT"
+285,1,"i have two , which one ? i have one for date_SLOT at time_SLOT and one for date_SLOT at time_SLOT thanks !",EOS_Z1,swimming activity EOS_Z1,you are welcome .,anytime !
+45,2,,,,,
+45,0,schedule a swimming activity on monday the 1st with my father at 4pm .,monday ; father ; swimming activity ; 4pm EOS_Z1,monday ; father ; swimming activity ; 4pm EOS_Z1,"okay , scheduling a event_SLOT with your party_SLOT for date_SLOT date_SLOT at time_SLOT .",i will promptly schedule a event_SLOT on date_SLOT date_SLOT with your party_SLOT at time_SLOT .
+45,1,i will promptly schedule a swimming activity on monday the 1st with your father at 4pm . thanks .,monday ; father ; swimming activity ; 4pm EOS_Z1,monday ; father ; swimming activity ; 4pm EOS_Z1,you're welcome .,you're welcome .
+37,2,,,,,
+37,0,will there be drizzle in redwood city this weekend ?,drizzle ; weekend ; redwood city EOS_Z1,drizzle ; redwood city EOS_Z1,there will not be weather_attribute_SLOT in location_SLOT this weekly_time_SLOT_time_SLOT .,there will be no weather_attribute_SLOT in location_SLOT this weekly_time_SLOT_time_SLOT .
+37,1,there will be no drizzle in redwood city this weekend . thanks .,drizzle ; weekend ; redwood city EOS_Z1,drizzle ; redwood city EOS_Z1,no problem .,no problem !
+10,2,,,,,
+10,0,set reminder for dinner at 11am with mom on friday,friday ; mom ; dinner ; 11am EOS_Z1,friday ; dinner ; 11am EOS_Z1,"okay , setting a reminder for event_SLOT at time_SLOT on date_SLOT with your mom .","okay , scheduling date_SLOT event_SLOT with mom at 11 am ."
+10,1,"okay , scheduling friday dinner with mom at 11 am . thank you , we are done for now .",friday ; mom ; dinner ; 11am EOS_Z1,friday ; dinner ; 11am EOS_Z1,you are welcome .,you are welcome .
+200,2,,,,,
+200,0,schedule taking medicine with martha at 5pm next wednesday .,wednesday ; martha ; taking medicine ; 5pm EOS_Z1,martha ; taking medicine ; 5pm EOS_Z1,"okay , scheduling a reminder for your event_SLOT with party_SLOT for date_SLOT at time_SLOT .",okay scheduling event_SLOT with party_SLOT at time_SLOT next date_SLOT .
+200,1,okay scheduling taking medicine with martha at 5pm next wednesday . thank you !,wednesday ; martha ; taking medicine ; 5pm EOS_Z1,martha ; taking medicine ; 5pm EOS_Z1,you're welcome !,event_SLOT scheduled for next date_SLOT at 5 pm
+280,2,,,,,
+280,0,what day is the swimming party and who will be attending ?,swimming activity EOS_Z1 date party,swimming EOS_Z1 event party,your event_SLOT is scheduled for date_SLOT at time_SLOT,"your event_SLOT is on date_SLOT , with your party_SLOT"
+280,1,"your event_SLOT is on the 5th , with your party_SLOT thanks !",EOS_Z1,swimming EOS_Z1,you're welcome .,happy to help
+18,2,,,,,
+18,0,"set me a reminder for football activity at 1pm , this month on the 11th , with marie .",11th ; marie ; football activity ; 1pm EOS_Z1,11th ; marie ; football ; 1pm EOS_Z1,"okay , setting a reminder for event_SLOT with party_SLOT on date_SLOT at time_SLOT .",reminder for event_SLOT on date_SLOT of this month at time_SLOT with party_SLOT is set .
+18,1,reminder for football on the 11th of this month at 1pm with marie is set . thanks buddy .,11th ; marie ; football activity ; 1pm EOS_Z1,11th ; marie ; football ; 1pm EOS_Z1,you are welcome .,anytime .
+267,2,,,,,
+267,0,please give me information about my conference .,conference EOS_Z1 date party,conference EOS_Z1 date party time,your event_SLOT is on date_SLOT at address_SLOT party_SLOT,you have a event_SLOT on date_SLOT at time_SLOT with party_SLOT
+267,1,you have a conference on date_SLOT at time_SLOT with party_SLOT thanks,conference EOS_Z1,conference EOS_Z1,you are welcome,happy to help
+272,2,,,,,
+272,0,when 's the football activity and who 's attending ?,football activity EOS_Z1 date party,football activity EOS_Z1 date party time,you have two event_SLOT activities scheduled . one on date_SLOT with party_SLOT and one on date_SLOT with party_SLOT,"you have four event_SLOT activities scheduled , one on date_SLOT at time_SLOT with party_SLOT , one on date_SLOT at time_SLOT with party_SLOT , one on date_SLOT at time_SLOT with party_SLOT , and one on date_SLOT at time_SLOT with party_SLOT"
+272,1,"you have four football activities scheduled , one on date_SLOT at time_SLOT with alex , one on date_SLOT at time_SLOT with alex , one on date_SLOT at time_SLOT with jeff , and one on date_SLOT at time_SLOT with party_SLOT thanks .",EOS_Z1,football activity EOS_Z1,you are welcome .,you're welcome
+178,2,,,,,
+178,0,find location and address to home that is nearest me .,nearest ; home EOS_Z1,home EOS_Z1,poi_type_SLOT is distance_SLOT away at address_SLOT,your poi_type_SLOT is at address_SLOT
+178,1,"your home is at address_SLOT thanks , set the gps for there .",nearest ; home EOS_Z1,home EOS_Z1,"you're welcome , have a great day .",no problem
+36,2,,,,,
+36,0,where is a nearby parking garage ?,nearby ; parking garage EOS_Z1,nearby ; parking garage EOS_Z1 distance,poi_SLOT is distance_SLOT away .,"the distance_SLOT one is palo alto poi_type_SLOT r , it 's just distance_SLOT away"
+36,1,"the distance_SLOT one is palo alto garage r , it 's just distance_SLOT away oh great job . thanks .",nearby ; parking garage EOS_Z1,nearby ; parking garage EOS_Z1,you're welcome .,you're welcome !
+199,2,,,,,
+199,0,what is the date of my yoga activity and who will be attending it ?,yoga activity EOS_Z1 date party,yoga activity EOS_Z1 date party,you have two event_SLOT activities scheduled; one on date_SLOT with party_SLOT and one on date_SLOT with party_SLOT,"you have four event_SLOT activities scheduled; one on date_SLOT with party_SLOT , two on date_SLOT with party_SLOT and one with party_SLOT , and one on date_SLOT with party_SLOT"
+199,1,"you have four yoga activities scheduled; one on date_SLOT with alex , two on date_SLOT with party_SLOT and one with marie , and one on date_SLOT with party_SLOT thank you .",EOS_Z1,yoga activity EOS_Z1,you are welcome .,you are welcome !
+180,2,,,,,
+180,0,please give me the address and directions via a route that avoids all heavy traffic to a hospital around me .,hospital EOS_Z1,around ; hospital EOS_Z1 traffic_info,poi_SLOT is distance_SLOT away at address_SLOT with traffic_info_SLOT noted .,poi_SLOT at address_SLOT is distance_SLOT away but there is traffic_info_SLOT on the way . setting navigation now .
+180,1,poi_SLOT at address_SLOT is distance_SLOT away but there is traffic_info_SLOT on the way . setting navigation now . thank you very much car !,EOS_Z1,around ; hospital EOS_Z1,you're welcome !,you are welcome
+95,2,,,,,
+95,0,schedule a swimming activity with jon for december 10th at 3pm .,jon ; swimming activity ; 3pm EOS_Z1,jon ; swimming activity ; 3pm EOS_Z1,"okay , scheduling a event_SLOT with party_SLOT for december date_SLOT at time_SLOT .",your event_SLOT with party_SLOT has been scheduled for dec date_SLOT at time_SLOT .
+95,1,your swimming activity with jon has been scheduled for dec 10th at 3pm . thank you .,jon ; swimming activity ; 3pm EOS_Z1,jon ; swimming activity ; 3pm EOS_Z1,you're welcome .,it is poi_type_SLOT job and pleasure .
+160,2,,,,,
+160,0,"assistant schedule an appointment at the dentist , 9am of the 12th of current month . bring martha with me",12th ; martha ; dentist appointment ; 9am EOS_Z1,12th ; martha ; dentist ; 9am EOS_Z1,"okay , scheduling a event_SLOT with party_SLOT for date_SLOT of this month at time_SLOT .",i am setting an appointment at the event_SLOT on date_SLOT of current month at address_SLOT party_SLOT .
+160,1,i am setting an appointment at the dentist on the 12th of current month at address_SLOT martha . thank you !,12th ; martha ; dentist appointment ; 9am EOS_Z1,12th ; martha ; dentist ; 9am EOS_Z1,you are welcome,you are welcome .
+230,2,,,,,
+230,0,hi car i would like to schedule a reminder for my tennis activity at 5pm on the tenth with jon,tenth ; jon ; tennis activity ; 5pm EOS_Z1,10th ; jon ; tennis ; 5pm EOS_Z1 date,"okay , scheduling a event_SLOT activity with party_SLOT for the tenth at time_SLOT .","okay , scheduling a reminder for your event_SLOT activity at time_SLOT on date_SLOT with party_SLOT"
+230,1,"okay , scheduling a reminder for your tennis activity at 5pm on date_SLOT with jon perfect , thank you !",tenth ; jon ; tennis activity ; 5pm EOS_Z1,10th ; jon ; tennis ; 5pm EOS_Z1,you are welcome .,you are welcome
+176,2,,,,,
+176,0,please give me the address and directions via a route with no traffic to the nearest pizza restaurant .,nearest ; pizza restaurant EOS_Z1 traffic_info,nearest ; pizza restaurant EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,the distance_SLOT poi_type_SLOT with traffic_info_SLOT is distance_SLOT away at address_SLOT do you want to go to the poi_SLOT ?
+176,1,"the nearest pizza restaurant with no traffic is distance_SLOT away at address_SLOT do you want to go to the round table ? yes , let 's go , thank you !",nearest ; pizza restaurant EOS_Z1,nearest ; pizza restaurant EOS_Z1,"you're welcome , i'm here to assist you !",you're welcome
+220,2,,,,,
+220,0,"car , find out the time and parties attending for my tennis activity .",tennis activity EOS_Z1 party,tennis activity EOS_Z1 party,your event_SLOT is on date_SLOT at time_SLOT,your event_SLOT activity is set for address_SLOT party_SLOT in attendance .
+220,1,your tennis activity is set for address_SLOT party_SLOT in attendance . thanks,EOS_Z1,tennis activity EOS_Z1,you are welcome .,happy to help
+42,2,,,,,
+42,0,"remind me about my yoga activity with mother on the 15th of this month , it is at 3 pm .",15th ; mother ; yoga activity ; 3pm EOS_Z1,15th ; mother ; yoga activity ; 3pm EOS_Z1,"okay , setting a reminder for your event_SLOT activity with your party_SLOT on date_SLOT of this month at 3 pm .","okay , i will remind you of your event_SLOT activity with your party_SLOT scheduled on date_SLOT of this month ."
+42,1,"okay , i will remind you of your yoga activity with your mother scheduled on the 15th of this month . schedule it for 3 pm .",15th ; mother ; yoga activity ; 3pm EOS_Z1,15th ; mother ; yoga activity ; 3pm EOS_Z1 time,you are welcome .,setting reminder for event_SLOT activity with your party_SLOT on date_SLOT at time_SLOT
+13,2,,,,,
+13,0,give me directions to the nearest shopping center,nearest ; shopping center EOS_Z1,nearest ; shopping center EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,"i've set the gps to stanford poi_type_SLOT , address_SLOT , it 's distance_SLOT away"
+13,1,"i've set the gps to stanford shopping center , address_SLOT , it 's distance_SLOT away thanks",nearest ; shopping center EOS_Z1,nearest ; shopping center EOS_Z1,you're welcome !,you're welcome
+31,2,,,,,
+31,0,"car , find the date and time for my tennis activity .",tennis activity EOS_Z1 date time,tennis activity EOS_Z1 date,your event_SLOT activity is on date_SLOT at time_SLOT,your event_SLOT activity is on date_SLOT at address_SLOT your party_SLOT will be attending .
+31,1,your tennis activity is on date_SLOT at address_SLOT your party_SLOT will be attending . thanks,tennis activity EOS_Z1,tennis activity EOS_Z1,you're welcome,you're welcome
+201,3,,,,,
+201,0,is the weather cloudy right now,cloudy ; today EOS_Z1,cloudy EOS_Z1,what city are you interested in ?,what city do you want the weather for ?
+201,1,what city do you want the weather for ? fresno,cloudy ; today ; fresno EOS_Z1,cloudy ; fresno EOS_Z1,it is not predicted to be weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .,there are no clouds in location_SLOT right now .
+201,2,there are no clouds in fresno right now . thanks .,cloudy ; today ; fresno EOS_Z1,cloudy ; fresno EOS_Z1,you are welcome .,anytime .
+253,3,,,,,
+253,0,where do i live ?,home EOS_Z1,EOS_Z1,your poi_type_SLOT is at address_SLOT,poi_type_SLOT is listed as address_SLOT
+253,1,"home is listed as address_SLOT it should be nearby , please pick a quick route to get there",EOS_Z1,EOS_Z1 distance,"i sent the info on your screen , drive carefully !",setting distance_SLOT route poi_type_SLOT now .
+253,2,setting distance_SLOT route home now . thanks !,EOS_Z1,EOS_Z1,you're welcome,anytime !
+262,3,,,,,
+262,0,what 's the weather forecast for tomorrow,tomorrow EOS_Z1,tomorrow EOS_Z1,what city are you interested in ?,what city are you asking about ?
+262,1,what city are you asking about ? will it be hot in atherton tomorrow ?,tomorrow ; hot ; atherton EOS_Z1,tomorrow ; hot ; atherton EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT party_SLOT .,"party_SLOT will not be weather_attribute_SLOT in location_SLOT , it will be weather_attribute_SLOT , low of temperature_SLOT , high of temperature_SLOT"
+262,2,"tomorrow will not be hot in atherton , it will be dry , low of temperature_SLOT , high of temperature_SLOT thank you !",tomorrow ; hot ; atherton EOS_Z1,tomorrow ; hot ; atherton EOS_Z1,you're welcome !,no problem !
+161,3,,,,,
+161,0,set a reminder for my swimming plans,swimming EOS_Z1,swimming EOS_Z1,what time is your event_SLOT ?,event_SLOT plans
+161,1,swimming plans at 11 am on friday,friday ; swimming ; 11am EOS_Z1,swimming ; 11am EOS_Z1,event_SLOT with party_SLOT is at 11 am .,event_SLOT plans on date_SLOT at address_SLOT been added to the calendar .
+161,2,swimming plans on friday at address_SLOT been added to the calendar . perfect . nothing else for now .,friday ; swimming ; 11am EOS_Z1,swimming ; 11am EOS_Z1,no problem,ok
+104,3,,,,,
+104,0,is it going to rain in the next 7 days,rain ; next 7 days EOS_Z1,rain EOS_Z1,what city are you interested in ?,where are you wanting to know if it 's going to weather_attribute_SLOT or not ?
+104,1,where are you wanting to know if it 's going to rain or not ? in san francisco,rain ; next 7 days ; san francisco EOS_Z1,rain ; san francisco EOS_Z1,it will not weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,it is not going to weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .
+104,2,it is not going to rain in san francisco this week . thanks .,rain ; next 7 days ; san francisco EOS_Z1,rain ; san francisco EOS_Z1,you're welcome .,no problem .
+150,3,,,,,
+150,0,check my agenda for my meetings,meeting EOS_Z1 agenda,meeting EOS_Z1,your event_SLOT is set for date_SLOT at time_SLOT,the agenda for your event_SLOT is to agenda_SLOT
+150,1,"the agenda for your meeting is to agenda_SLOT okay , i want to find out what time my meeting is and where and what day please .",meeting EOS_Z1 date,meeting EOS_Z1 date room time,your event_SLOT is scheduled for date_SLOT at time_SLOT,your event_SLOT is on date_SLOT at time_SLOT in room_SLOT
+150,2,"your meeting is on date_SLOT at time_SLOT in room_SLOT perfect , thank you .",meeting EOS_Z1,meeting EOS_Z1,you're welcome,you're welcome
+158,3,,,,,
+158,0,where is there a parking garage ?,parking garage EOS_Z1,parking garage EOS_Z1,poi_SLOT is distance_SLOT away .,i have located a poi_type_SLOT distance_SLOT away at address_SLOT called poi_SLOT
+158,1,i have located a parking garage distance_SLOT away at address_SLOT called poi_SLOT what is the quickest route there ?,parking garage EOS_Z1,parking garage EOS_Z1,poi_SLOT is the only poi_type_SLOT i can find . it is distance_SLOT away with traffic_info_SLOT on our way,"it is located distance_SLOT away , with traffic_info_SLOT en route ."
+158,2,"it is located distance_SLOT away , with traffic_info_SLOT en route . okay perfect , thanks !",EOS_Z1,parking garage EOS_Z1,"you're welcome , have a great day .",no problem
+187,3,,,,,
+187,0,is it going to be hot this weekend in boston ?,hot ; boston EOS_Z1,hot ; boston EOS_Z1 weather_attribute,it will not be weather_attribute_SLOT in party_SLOT this weekly_time_SLOT_time_SLOT .,"the temperatures in location_SLOT will be high this weekly_time_SLOT and the weather_attribute_SLOT days will be date_SLOT and date_SLOT with temperature_SLOT (but pay attention , it 's gonna weather_attribute_SLOT too)"
+187,1,"the temperatures in seattle will be high this week and the hottest days will be monday and tuesday with temperature_SLOT (but pay attention , it 's gonna weather_attribute_SLOT too) i was asking about boston not seattle , do you have information for boston , too ?",hot ; monday ; seattle EOS_Z1,hot ; boston EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,the highs for party_SLOT this weekly_time_SLOT_time_SLOT are in the 90s while the lows are supposed to be 70s .
+187,2,the highs for boston this weekend are in the 90s while the lows are supposed to be 70s . thank you so much for the information .,hot ; monday ; seattle EOS_Z1,hot ; boston EOS_Z1,you're welcome . have a great day .,"you're welcome , glad i could help ."
+66,3,,,,,
+66,0,tell me the weather report in durham for this week,durham EOS_Z1,durham EOS_Z1,"it will be weather_attribute_SLOT in location_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute",what days are you interested in ?
+66,1,what days are you interested in ? the entire week .,durham EOS_Z1,durham EOS_Z1,"the forecast for location_SLOT is weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_","it will be weather_attribute_SLOT on date_SLOT , the weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , the weather_attribute_SLOT temperatures on date_SLOT and date_SLOT , weather_attribute_SLOT on date_SLOT , and weather_attribute_SLOT on date_SLOT in location_SLOT ."
+66,2,"it will be weather_attribute_SLOT on monday , the weather_attribute_SLOT on tuesday , weather_attribute_SLOT on wednesday , the weather_attribute_SLOT temperatures on thursday and friday , weather_attribute_SLOT on saturday , and weather_attribute_SLOT on sunday in durham . perfect .",EOS_Z1,durham EOS_Z1,you are welcome .,you are welcome .
+40,3,,,,,
+40,0,what is the temperature for the next 7 days weather forecast,next 7 days EOS_Z1,next 7 days EOS_Z1,what city are you interested in ?,what city are you interested in ?
+40,1,what city are you interested in ? compton .,compton EOS_Z1,next 7 days ; compton EOS_Z1,"the weather in location_SLOT will be weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_",the temperature in location_SLOT will be between temperature_SLOT and temperature_SLOT on date_SLOT and date_SLOT . during the other days of the weekly_time_SLOT it will remain between temperature_SLOT and temperature_SLOT
+40,2,the temperature in compton will be between temperature_SLOT and temperature_SLOT on monday and friday . during the other days of the week it will remain between temperature_SLOT and temperature_SLOT thank you very much car !,compton EOS_Z1,next 7 days ; compton EOS_Z1,you're welcome !,you're very welcome .
+263,3,,,,,
+263,0,are there clear skies in the forecast today,clear skies ; today EOS_Z1,clear skies ; today EOS_Z1,what city are you inquiring about ?,what location would you like the weather information for ?
+263,1,what location would you like the weather information for ? i would like to know about san jose .,clear skies ; today ; san jose EOS_Z1,clear skies ; today ; san jose EOS_Z1,it will not be clear in location_SLOT weekly_time_SLOT_time_SLOT .,"weekly_time_SLOT_time_SLOT in location_SLOT there will be an weather_attribute_SLOT , co weather_attribute_SLOT ."
+263,2,"today in san jose there will be an overcast , co clear skies . thanks .",clear skies ; today ; san jose EOS_Z1,clear skies ; today ; san jose EOS_Z1,no problem .,no problem .
+294,3,,,,,
+294,0,take me to the mall to buy some clothes,EOS_Z1,EOS_Z1,there is a poi_SLOT distance_SLOT away : would you like to go there ?,would you prefer poi_SLOT which is distance_SLOT away with traffic_info_SLOT or poi_SLOT which is distance_SLOT away with traffic_info_SLOT distance_SLOT ?
+294,1,would you prefer poi_SLOT which is distance_SLOT away with traffic_info_SLOT or poi_SLOT which is distance_SLOT away with traffic_info_SLOT nearby ? i am guessing ravenswood would be faster . let 's go there .,EOS_Z1,shopping center EOS_Z1,"i sent the info on your screen , drive carefully !",setting directions to address_SLOT now .
+294,2,setting directions to address_SLOT now . thank you very much car !,EOS_Z1,shopping center EOS_Z1,you're welcome !,you are welcome .
+24,3,,,,,
+24,0,get me directions to a local cafe,EOS_Z1,EOS_Z1,there is a poi_SLOT distance_SLOT away : would you like directions there ?,we're distance_SLOT away from poi_SLOT : would you like to go there ?
+24,1,we're distance_SLOT away from starbucks : would you like to go there ? yes .,EOS_Z1,EOS_Z1 poi,"i have a listing for the address_SLOT , it 's distance_SLOT away and there is traffic_info_SLOT on our way",navigating you to poi_SLOT
+24,2,navigating you to poi_SLOT thanks can you provide the address and is this the fastest route ?,EOS_Z1,EOS_Z1,poi_SLOT is at address_SLOT,"the address is address_SLOT , i sent the info on your screen , drive carefully !"
+135,3,,,,,
+135,0,what is the current temperature,EOS_Z1,EOS_Z1,what city do you want the weather for ?,which location do you want to know the current temperature of ?
+135,1,which location do you want to know the current temperature of ? alameda,alameda EOS_Z1,alameda EOS_Z1,the current temperature in location_SLOT is a low of temperature_SLOT and a high of temperature_SLOT .,"the temperature in location_SLOT now is low temperature_SLOT , and high temperature_SLOT"
+135,2,"the temperature in alameda now is low temperature_SLOT , and high temperature_SLOT okay , thank you",alameda EOS_Z1,alameda EOS_Z1,"you're welcome , have a great day .",you are welcome
+244,3,,,,,
+244,0,is it gonna be dry in redwood city in next few days ?,dry ; next few days ; redwood city EOS_Z1,next few days ; dry ; redwood city EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT weekly_time_SLOT .,what day would you like the forcast for ?
+244,1,what day would you like the forcast for ? the next few days please,dry ; next few days ; redwood city EOS_Z1,next few days ; dry ; redwood city EOS_Z1,it will be weather_attribute_SLOT on date_SLOT in location_SLOT .,it will not be weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .
+244,2,it will not be dry in redwood city next week . thanks .,dry ; next few days ; redwood city EOS_Z1,next few days ; dry ; redwood city EOS_Z1,you are welcome .,you are welcome .
+6,3,,,,,
+6,0,where is the closest grocery store,grocery store EOS_Z1,grocery store EOS_Z1,the distance_SLOT poi_type_SLOT is distance_SLOT away .,we are distance_SLOT away from poi_SLOT and from poi_SLOT : which one do you prefer ?
+6,1,we are distance_SLOT away from poi_SLOT and from safeway : which one do you prefer ? safeway .,grocery store EOS_Z1,grocery store EOS_Z1,there is a poi_SLOT distance_SLOT away and poi_SLOT distance_SLOT away .,poi_SLOT is located at address_SLOT
+6,2,safeway is located at address_SLOT pick the quickest route to go there and send the info on my screen please,grocery store ; quickest EOS_Z1,grocery store ; quickest EOS_Z1,"i sent the info on your screen , drive carefully !","you're all set , drive carefully !"
+106,3,,,,,
+106,0,show me the weather for the next 7 days,next 7 days EOS_Z1,next 7 days EOS_Z1,what city are you interested in ?,what city would you like the address_SLOT for ?
+106,1,what city would you like the address_SLOT for ? will it be humid in compton ?,humid ; compton EOS_Z1,next 7 days ; humid ; compton EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,it should not be weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .
+106,2,it should not be humid in compton next week . thanks .,humid ; compton EOS_Z1,next 7 days ; humid ; compton EOS_Z1,no problem .,anytime !
+183,3,,,,,
+183,0,"i need to find out the parties attending and the date for my lab appointment , thanks .",lab appointment EOS_Z1 date party,lab appointment EOS_Z1 date party,your event_SLOT appointment is on date_SLOT at time_SLOT,your event_SLOT appointment is on date_SLOT and your party_SLOT will be attending .
+183,1,"your lab appointment is on date_SLOT and your party_SLOT will be attending . great , thank you so much !",lab appointment EOS_Z1,lab appointment EOS_Z1,you're welcome,the event_SLOT appointment is schedule for address_SLOT date_SLOT and your party_SLOT will be attending .
+183,2,the lab appointment is schedule for address_SLOT date_SLOT and your party_SLOT will be attending . thank you .,lab appointment EOS_Z1,lab appointment EOS_Z1,you are welcome .,you're welcome
+128,3,,,,,
+128,0,where can i find a parking garage ?,parking garage EOS_Z1,parking garage EOS_Z1,poi_SLOT is distance_SLOT away .,palo alto poi_type_SLOT r is at address_SLOT
+128,1,palo alto garage r is at address_SLOT is that the quickest route ?,quickest ; parking garage EOS_Z1,parking garage ; quickest EOS_Z1,the distance_SLOT route is distance_SLOT away .,"i will send on your screen the distance_SLOT route , sure , there is traffic_info_SLOT now and we will have to make the route slightly longer"
+128,2,"i will send on your screen the quickest route , sure , there is traffic_info_SLOT now and we will have to make the route slightly longer ok thanks for the notification .",quickest ; parking garage EOS_Z1,parking garage ; quickest EOS_Z1,"you're welcome , have a great day .","you're welcome , we should arrive shortly ."
+190,3,,,,,
+190,0,what is the date and location for my conference and who is attending ?,conference EOS_Z1 date party,conference EOS_Z1,you have two event_SLOT scheduled . one on date_SLOT at address_SLOT party_SLOT and one on date_SLOT at address_SLOT party_SLOT,"for which one ? i have two , one at time_SLOT and one at time_SLOT"
+190,1,"for which one ? i have two , one at time_SLOT and one at time_SLOT the one at 6 pm please .",conference ; 6pm EOS_Z1,conference ; 6pm EOS_Z1 date time,the event_SLOT at 6 pm is at address_SLOT party_SLOT,the event is on date_SLOT at time_SLOT in event_SLOT room address_SLOT will be attending .
+190,2,the event is on date_SLOT at time_SLOT in conference room address_SLOT will be attending . thanks !,conference ; 6pm EOS_Z1,conference ; 6pm EOS_Z1,you're welcome,"no problem , goodbye ."
+234,3,,,,,
+234,0,is there a grocery store within 3 miles of me ?,grocery store EOS_Z1,grocery store EOS_Z1,poi_SLOT is distance_SLOT away .,poi_SLOT is distance_SLOT away at address_SLOT there is currently traffic_info_SLOT on the route
+234,1,"poi_SLOT is distance_SLOT away at address_SLOT there is currently traffic_info_SLOT on the route ok , please give me directions via the route with least traffic .",grocery store EOS_Z1,grocery store EOS_Z1 traffic_info,"i sent the info on your screen , drive carefully !","setting navigation now . there is traffic_info_SLOT on the way , so drive carefully ."
+234,2,"setting navigation now . there is traffic_info_SLOT on the way , so drive carefully . thank you .",grocery store EOS_Z1,grocery store EOS_Z1,you're welcome !,you're welcome; drive safely .
+255,3,,,,,
+255,0,find the nearest shopping mall on the map,nearest ; shopping EOS_Z1,nearest ; shopping EOS_Z1 distance,the distance_SLOT poi_type_SLOT mall is poi_SLOT located at address_SLOT,the distance_SLOT one is poi_SLOT but there is traffic_info_SLOT distance_SLOT there is also poi_SLOT distance_SLOT farther but with traffic_info_SLOT on its direction
+255,1,the nearest one is poi_SLOT but there is traffic_info_SLOT distance_SLOT there is also poi_SLOT distance_SLOT farther but with traffic_info_SLOT on its direction let 's go to ravenswood then .,nearest ; shopping EOS_Z1,nearest ; shopping center EOS_Z1,"i sent the info on your screen , drive carefully !",setting directions to address_SLOT
+255,2,"setting directions to address_SLOT okay , thanks",nearest ; shopping EOS_Z1,nearest ; shopping center EOS_Z1,"you're welcome , have a great day .","you're welcome , always happy to help ."
+250,3,,,,,
+250,0,find me a tea house,EOS_Z1,EOS_Z1 poi,there is a poi_SLOT distance_SLOT away .,there is poi_SLOT that 's distance_SLOT away at address_SLOT
+250,1,"there is poi_SLOT that 's distance_SLOT away at address_SLOT is there an alternate route , and is this the quickest way there ?",EOS_Z1,EOS_Z1 traffic_info,poi_SLOT is the only option i can find . it is distance_SLOT away with traffic_info_SLOT on our way,"there is traffic_info_SLOT on our route , i've set the navigation there"
+250,2,"there is traffic_info_SLOT on our route , i've set the navigation there thank you .",EOS_Z1,EOS_Z1,you're welcome .,you're welcome !
+249,3,,,,,
+249,0,i need the address to my friend 's house please .,friends house EOS_Z1,friends house EOS_Z1,your friend 's house is at address_SLOT ave .,poi_SLOT is located at address_SLOT ave .
+249,1,poi_SLOT is located at address_SLOT ave . could you please send on my screen the fastest route to get there ?,friends house EOS_Z1,friends house EOS_Z1,poi_SLOT is the only one i can find . it is distance_SLOT away with traffic_info_SLOT on our way,"poi_type_SLOT . setting navigation details now . there 's a traffic_info_SLOT , so take care on the roads ."
+249,2,"certainly . setting navigation details now . there 's a car collision nearby , so take care on the roads . will do , thank you .",friends house EOS_Z1,friends house EOS_Z1,"you're welcome , have a great day .",you're welcome !
+85,3,,,,,
+85,0,is there a parking garage within 2 miles ?,parking garage EOS_Z1,parking garage EOS_Z1,poi_SLOT is distance_SLOT away .,"yes , i have one listed that is distance_SLOT away ."
+85,1,"yes , i have one listed that is distance_SLOT away . that 's great ! please pick the quickest route and send me the address on screen , thank you !",quickest ; parking garage EOS_Z1,parking garage ; quickest EOS_Z1,"the address is address_SLOT , i sent it on your screen","then let 's go at palo alto poi_type_SLOT r , i sent the info on your screen !"
+85,2,"then let 's go at palo alto garage r , i sent the info on your screen ! fantastic . thanks , car !",quickest ; parking garage EOS_Z1,parking garage ; quickest EOS_Z1,you're welcome !,you are welcome
+30,3,,,,,
+30,0,give me the forecast for the next 7 days,next 7 days EOS_Z1,next 7 days EOS_Z1,what city are you interested in ?,for what city ?
+30,1,for what city ? downtown chicago,next 7 days ; downtown chicago EOS_Z1,next 7 days ; downtown chicago EOS_Z1,what city are you interested in ?,"in location_SLOT it will be weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on tueday , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT and date_SLOT"
+30,2,"in downtown chicago it will be weather_attribute_SLOT on monday , weather_attribute_SLOT on tueday , weather_attribute_SLOT on wednesday , weather_attribute_SLOT on thursday , weather_attribute_SLOT on friday , weather_attribute_SLOT on saturday and sunday okay , thank you car !",next 7 days ; downtown chicago EOS_Z1,next 7 days ; downtown chicago EOS_Z1,you're welcome !,you are welcome !
+114,3,,,,,
+114,0,what 's the weather like in new york,new york EOS_Z1 weather_attribute,new york EOS_Z1,what days are you interested in ?,is there a specific day you would like to know the weather for in location_SLOT ?
+114,1,is there a specific day you would like to know the weather for in new york ? i need to know about friday please .,friday EOS_Z1,new york ; friday EOS_Z1,what city are you interested in ?,it will be weather_attribute_SLOT and between temperature_SLOT date_SLOT in location_SLOT .
+114,2,it will be weather_attribute_SLOT and between temperature_SLOT friday in new york . thanks .,friday EOS_Z1,new york ; friday EOS_Z1,you are welcome .,no problem .
+243,3,,,,,
+243,0,get me directions to the nearest starbucks,nearest EOS_Z1 distance,nearest EOS_Z1 poi,there is no poi_SLOT distance_SLOT but i sent on your screen the best available poi_SLOT .,i am unable to locate poi_SLOT . there is a poi_type_SLOT called poi_SLOT mile away .
+243,1,i am unable to locate starbucks . there is a coffee or tea place called poi_SLOT mile away . then let 's go there car ! please send me its address on screen and pick the fastest route for me,EOS_Z1,EOS_Z1,poi_SLOT is at address_SLOT,poi_SLOT is distance_SLOT away with traffic_info_SLOT it shouldn't take us long . it 's located at address_SLOT avenue .
+243,2,poi_SLOT is distance_SLOT away with traffic_info_SLOT it shouldn't take us long . it 's located at address_SLOT avenue . thanks so much for the information .,EOS_Z1,EOS_Z1,"you're welcome , have a great day .",you're welcome !
+278,3,,,,,
+278,0,where can i get coffee ?,coffee EOS_Z1,coffee EOS_Z1,there is a poi_SLOT distance_SLOT away .,poi_SLOT is distance_SLOT away .
+278,1,poi_SLOT is distance_SLOT away . is that the shortest route available ?,shortest EOS_Z1,coffee ; shortest EOS_Z1,poi_SLOT is the only option i can find . it is distance_SLOT away with traffic_info_SLOT,"i will pick the distance_SLOT route available for you , don't worry , do you want to get the info on your screen ?"
+278,2,"i will pick the shortest route available for you , don't worry , do you want to get the info on your screen ? yes please . thanks .",shortest EOS_Z1,coffee ; shortest EOS_Z1,"you're welcome , have a great day .","i sent the route on your screen , you're welcome !"
+134,3,,,,,
+134,0,is there a chance of snow in this weeks weather forecast,EOS_Z1,EOS_Z1,what city are you inquiring about ?,what city would you like to hear this weather information for ?
+134,1,"what city would you like to hear this weather information for ? san mateo , please",san mateo EOS_Z1,snow ; san mateo EOS_Z1,it is supposed to be weather_attribute_SLOT in location_SLOT on date_SLOT .,it will not weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .
+134,2,it will not snow in san mateo this week . thank you !,san mateo EOS_Z1,snow ; san mateo EOS_Z1,you're welcome !,you're welcome !
+141,3,,,,,
+141,0,remind me to watch football on sunday,sunday ; football EOS_Z1,football ; sunday EOS_Z1,what time should i set the weekly_time_SLOT reminder for event_SLOT on date_SLOT ?,what time would like the reminder ?
+141,1,what time would like the reminder ? 2 pm,sunday ; football EOS_Z1,football ; sunday ; 2pm EOS_Z1,i have set a reminder for date_SLOT ; event_SLOT with your party_SLOT on date_SLOT at 2 pm .,i have set a reminder for date_SLOT at 2 pm
+141,2,i have set a reminder for sunday at 2 pm thank you,sunday ; football EOS_Z1,football ; sunday ; 2pm EOS_Z1,you are welcome .,you are welcome .
+73,3,,,,,
+73,0,is it going to be overcast or cloudy at all any day this week,overcast EOS_Z1,overcast EOS_Z1,what city are you interested in ?,what city do you want the weather for ?
+73,1,what city do you want the weather for ? i need this forecast information for the city of carson .,overcast ; carson EOS_Z1,overcast ; carson EOS_Z1,the weather forecast does not show that it will be weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,it won't be weather_attribute_SLOT or weather_attribute_SLOT at all this weekly_time_SLOT in location_SLOT
+73,2,it won't be overcast or cloudy at all this week in carson thanks .,overcast ; carson EOS_Z1,overcast ; carson EOS_Z1,you're welcome .,you are welcome .
+38,4,,,,,
+38,0,car please send me the fastest route to go back home,EOS_Z1 traffic_info,home EOS_Z1,there is traffic_info_SLOT on the route to poi_type_SLOT .,event_SLOT you poi_type_SLOT .
+38,1,taking you home . what is the address ?,home EOS_Z1,home EOS_Z1,your poi_type_SLOT is at address_SLOT,poi_type_SLOT is address_SLOT anything else i can help you with ?
+38,2,"home is address_SLOT anything else i can help you with ? please send me the fastest route on screen and let 's go there , thank you !",EOS_Z1,home EOS_Z1,"i sent the info on your screen , drive carefully !","got it , will do !"
+38,3,"got it , will do ! thanks for all your help .",EOS_Z1,home EOS_Z1,"you're welcome , happy to help .",you're welcome . i am always happy to help .
+7,4,,,,,
+7,0,give me directions to the closest grocery store,grocery store EOS_Z1,grocery store EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,we're distance_SLOT away from poi_SLOT but there is a traffic_info_SLOT
+7,1,we're distance_SLOT away from poi_SLOT but there is a traffic_info_SLOT what is the next closest location ?,grocery store EOS_Z1,grocery store EOS_Z1 distance,poi_SLOT is the distance_SLOT .,i'm sorry but there are no other options distance_SLOT
+7,2,"i'm sorry but there are no other options distance_SLOT ok , well make a route to the willows market then , try to avoid the car accident .",grocery store EOS_Z1,grocery store EOS_Z1,"i sent the info on your screen , drive carefully !","ok driver , making a route to poi_SLOT and avoiding the car accident ."
+7,3,"ok driver , making a route to willows market and avoiding the car accident . that 's great ! thank you car !",grocery store EOS_Z1,grocery store EOS_Z1,you're welcome !,you are welcome driver !
+71,4,,,,,
+71,0,"car i need to go back home , it 's in the area , please pick a route with no traffic",home EOS_Z1 traffic_info,home EOS_Z1,there is traffic_info_SLOT on our way but you should be able to reach in few minutes,event_SLOT you poi_type_SLOT .
+71,1,taking you home . what is my address ?,home EOS_Z1,home EOS_Z1,your poi_type_SLOT is at address_SLOT,"your address is address_SLOT , we're distance_SLOT away from poi_type_SLOT now"
+71,2,"your address is address_SLOT , we're distance_SLOT away from home now set gps for a route home with zero to no traffic .",home EOS_Z1,home EOS_Z1,there is traffic_info_SLOT on our way but you should be able to reach in less than 2 minutes,your gps has been set for poi_type_SLOT .
+71,3,your gps has been set for home . thank you,EOS_Z1,home EOS_Z1,"you're welcome , have a great day .","you're welcome , happy to help ."
+206,4,,,,,
+206,0,"i'm desiring to eat at some chinese restaurant , is there anything in this local area ?",chinese restaurant EOS_Z1,chinese restaurant EOS_Z1,there is a poi_SLOT distance_SLOT away .,we're distance_SLOT away from p .f . changs : do you want to go there ?
+206,1,"we're distance_SLOT away from p .f . changs : do you want to go there ? yes , please , and pick a route to avoid all heavy traffic",chinese restaurant EOS_Z1 traffic_info,chinese restaurant EOS_Z1,"i sent the route on your screen , drive carefully !",event_SLOT you to pf changs .
+206,2,taking you to pf changs . what is the address ?,chinese restaurant EOS_Z1,chinese restaurant EOS_Z1,poi_SLOT is located at address_SLOT,the addres of p .f .changs is address_SLOT real
+206,3,"the addres of p .f .changs is address_SLOT real sounds good , set the navigation there please .",chinese restaurant EOS_Z1,chinese restaurant EOS_Z1,"i sent the info on your screen , drive carefully !","navigation set , we should arrive shortly ."
+276,4,,,,,
+276,0,give me directions to the closest shopping mall,shopping EOS_Z1,EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,we are distance_SLOT away from town and county poi_type_SLOT . does it sound good to you ?
+276,1,we are distance_SLOT away from town and county shopping center . does it sound good to you ? is the route to town and county shopping center the fastest ?,shopping EOS_Z1,EOS_Z1,poi_SLOT is distance_SLOT away .,yes it is .
+276,2,yes it is . give me the address .,EOS_Z1,EOS_Z1,"your address is address_SLOT , i sent it on your screen",poi_SLOT is located at address_SLOT
+276,3,poi_SLOT is located at address_SLOT thanks .,EOS_Z1,EOS_Z1,you're welcome .,have a good day .
+231,4,,,,,
+231,0,what is the address of my friend 's house ?,friends house EOS_Z1,EOS_Z1,your friend 's house is at address_SLOT ave .,poi_SLOT is at address_SLOT
+231,1,poi_SLOT is at address_SLOT get me the address to my friends house nearest my current location .,nearest ; friends house EOS_Z1,nearest ; friends house EOS_Z1,"the address is address_SLOT , i sent it on your screen",event_SLOT you to party_SLOT 's house .
+231,2,taking you to jack 's house . set the gps for the quickest route possible .,quickest ; friends house EOS_Z1,quickest ; friends house EOS_Z1,gps set for distance_SLOT route to party_SLOT 's house .,"i sent all the info on your screen , drive carefully !"
+231,3,"i sent all the info on your screen , drive carefully ! thanks !",quickest ; friends house EOS_Z1,quickest ; friends house EOS_Z1,you're welcome !,anytime !
+155,4,,,,,
+155,0,find the nearest hotel,nearest EOS_Z1,nearest EOS_Z1,the distance_SLOT weather_attribute_SLOT is poi_SLOT located at address_SLOT,"the distance_SLOT weather_attribute_SLOT is weather_attribute_SLOT keen , it 's distance_SLOT away . do you want its address ?"
+155,1,"the nearest hotel is hotel keen , it 's distance_SLOT away . do you want its address ? yes sounds great .",nearest EOS_Z1,nearest EOS_Z1,poi_SLOT is at address_SLOT,"address_SLOT , there is traffic_info_SLOT and you should arrive in a couple minutes"
+155,2,"address_SLOT , there is traffic_info_SLOT and you should arrive in a couple minutes set my gps for the quickest route possible please .",quickest EOS_Z1,quickest EOS_Z1,"i sent the info on your screen , drive carefully !","i picked the best route for you , drive carefully !"
+155,3,"i picked the best route for you , drive carefully ! thank you car !",quickest EOS_Z1,quickest EOS_Z1,you're welcome !,you're welcome !
+51,4,,,,,
+51,0,find me a chinese restaurant with a no traffic route .,chinese restaurant EOS_Z1 traffic_info,chinese restaurant EOS_Z1 traffic_info,there is traffic_info_SLOT on the route .,poi_SLOT is the only poi_type_SLOT but here is traffic_info_SLOT
+51,1,poi_SLOT is the only chinese restaurant but here is traffic_info_SLOT send me the address anyway .,chinese restaurant EOS_Z1,chinese restaurant EOS_Z1,poi_SLOT is located at address_SLOT,poi_SLOT is at address_SLOT
+51,2,"poi_SLOT is at address_SLOT please pick a route with no traffic to get there , thanks !",chinese restaurant EOS_Z1,chinese restaurant EOS_Z1 traffic_info,"there is traffic_info_SLOT on our way , i sent the info on your screen , you're welcome !",there will be traffic_info_SLOT sorry .
+51,3,"there will be traffic_info_SLOT sorry . that is ok , thank you .",chinese restaurant EOS_Z1,chinese restaurant EOS_Z1,you're welcome !,you're welcome !
+168,4,,,,,
+168,0,i need a route to the shopping center with no traffic .,shopping center EOS_Z1 traffic_info,shopping center EOS_Z1,poi_SLOT is distance_SLOT away .,poi_SLOT is the only distance_SLOT poi_type_SLOT .
+168,1,poi_SLOT is the only distance_SLOT shopping center . what does the traffic look like ?,shopping center EOS_Z1 traffic_info,shopping center EOS_Z1 traffic_info,poi_SLOT is located at address_SLOT,there is a traffic_info_SLOT poi_SLOT
+168,2,"there is a traffic_info_SLOT poi_SLOT ouch , patience , please pick the route with least traffic and let 's go there , thank you !",EOS_Z1,shopping center EOS_Z1,"i sent the info on your screen , you're welcome !",the route to address_SLOT set to the distance_SLOT possible .
+168,3,the route to address_SLOT set to the distance_SLOT possible . thank you car !,EOS_Z1,shopping center EOS_Z1,you're welcome !,you're welcome !
+20,4,,,,,
+20,0,i need gas .,gas station EOS_Z1,gas EOS_Z1,there is a poi_SLOT distance_SLOT away .,poi_SLOT is distance_SLOT away .
+20,1,poi_SLOT is distance_SLOT away . what is the address ?,gas station EOS_Z1,gas EOS_Z1,poi_SLOT is at address_SLOT,poi_SLOT is at address_SLOT
+20,2,poi_SLOT is at address_SLOT can i have some route details ? i would like to avoid any heavy traffic there,gas station EOS_Z1,gas EOS_Z1,"there is a traffic_info_SLOT , but i could find another route for you .","i sent the best possible route on screen but there will be traffic_info_SLOT anyway , i'm sorry"
+20,3,"i sent the best possible route on screen but there will be heavy traffic anyway , i'm sorry it 's okay , thank you car !",gas station EOS_Z1,gas EOS_Z1,"you're welcome , happy to help .",you're welcome !
+239,4,,,,,
+239,0,where can i buy groceries ?,grocery store EOS_Z1,EOS_Z1,poi_SLOT is distance_SLOT away .,there is a poi_SLOT distance_SLOT away .
+239,1,there is a poi_SLOT distance_SLOT away . what is the address ?,grocery store EOS_Z1,EOS_Z1,poi_SLOT is at address_SLOT,poi_SLOT is located at address_SLOT with traffic_info_SLOT distance_SLOT
+239,2,"poi_SLOT is located at address_SLOT with traffic_info_SLOT distance_SLOT ouch , this sounds awful . . but patience , please set the gps to go there",grocery store EOS_Z1,EOS_Z1,"i sent the info on your screen , drive carefully !","i sent the fastest route on your gps , drive carefully !"
+239,3,"i sent the fastest route on your gps , drive carefully ! thank you car !",grocery store EOS_Z1,EOS_Z1,you're welcome !,you're welcome !
+86,4,,,,,
+86,0,find starbucks,EOS_Z1,EOS_Z1,there are no poi_SLOT distance_SLOT,the distance_SLOT poi_SLOT is distance_SLOT away . there is traffic_info_SLOT on its way so i already sent on your screen another route to reach faster
+86,1,the distance_SLOT starbucks is distance_SLOT away . there is traffic_info_SLOT on its way so i already sent on your screen another route to reach faster is is the quickest one available ? i really need my morning coffee !,EOS_Z1,quickest EOS_Z1,i have a listing for the distance_SLOT one available .,"yes , it is , hope you can have your poi_type_SLOT soon !"
+86,2,"yes , it is , hope you can have your coffee soon ! where is the starbucks ?",EOS_Z1,coffee or tea place EOS_Z1,there is no poi_SLOT distance_SLOT,the poi_SLOT is located at address_SLOT setting navigation now .
+86,3,the starbucks is located at address_SLOT setting navigation now . thank you .,EOS_Z1,coffee or tea place EOS_Z1,you're welcome .,"you're welcome; drive safely , and enjoy ."
+2,4,,,,,
+2,0,what 's the temperature going to be like on friday,friday EOS_Z1,friday EOS_Z1,what city are you inquiring about ?,what city should i find date_SLOT 's temperature for ?
+2,1,what city should i find friday 's temperature for ? alhambra,friday ; alhambra EOS_Z1,friday ; alhambra EOS_Z1,in location_SLOT the temperature will be low of temperature_SLOT and high of temperature_SLOT on date_SLOT .,on date_SLOT there will be weather_attribute_SLOT in location_SLOT
+2,2,on friday there will be weather_attribute_SLOT in alhambra and the temperature ?,friday ; alhambra EOS_Z1,friday ; alhambra EOS_Z1,the temperature in location_SLOT on date_SLOT will be low of temperature_SLOT and high of temperature_SLOT on date_SLOT .,it will be between temperature_SLOT in location_SLOT on date_SLOT .
+2,3,it will be between temperature_SLOT in alhambra on friday . thank you .,friday ; alhambra EOS_Z1,friday ; alhambra EOS_Z1,you're welcome .,you're welcome .
+248,4,,,,,
+248,0,take me to the mall to buy some clothes,EOS_Z1,shopping center EOS_Z1,there is a poi_SLOT distance_SLOT away : would you like to go there ?,poi_SLOT is the distance_SLOT poi_type_SLOT to you . would you like the address ?
+248,1,poi_SLOT is the closest shopping center to you . would you like the address ? yes .,EOS_Z1 poi,shopping center EOS_Z1,poi_SLOT is at address_SLOT,"we're going to address_SLOT , there is traffic_info_SLOT but it 's just distance_SLOT away"
+248,2,"we're going to address_SLOT , there is traffic_info_SLOT but it 's just distance_SLOT away i wish to find a route with no traffic but it 's okay , please send the info on the gps , thanks !",EOS_Z1,shopping center EOS_Z1,"i sent the info on your screen , you're welcome !",sending the address for the poi_SLOT at address_SLOT to your gps .
+248,3,sending the address for the poi_SLOT at address_SLOT to your gps . thank you car !,EOS_Z1,shopping center EOS_Z1,you're welcome !,you're welcome !
+173,4,,,,,
+173,0,where are there chinese restaurants around ?,chinese EOS_Z1,chinese EOS_Z1,there are two poi_type_SLOT distance_SLOT distance_SLOT . which one do you prefer ?,there is a poi_SLOT and a poi_SLOT
+173,1,there is a poi_SLOT and a poi_SLOT whichever is the fastest to get to .,chinese EOS_Z1,chinese EOS_Z1,the distance_SLOT route is poi_SLOT and is distance_SLOT away .,that would be poi_SLOT
+173,2,that would be poi_SLOT what is the address ?,chinese EOS_Z1,chinese EOS_Z1,"the address is address_SLOT , i sent it on your screen",poi_SLOT is at address_SLOT
+173,3,poi_SLOT is at address_SLOT thank you,chinese EOS_Z1,chinese EOS_Z1,you're welcome !,you're welcome .
+5,4,,,,,
+5,0,where is home,home EOS_Z1,home EOS_Z1,poi_type_SLOT is distance_SLOT away .,"poi_type_SLOT is where is your heart is , at address_SLOT"
+5,1,"home is where is your heart is , at address_SLOT okay , how far away am i and send me the quickest route",EOS_Z1,home ; quickest EOS_Z1,poi_type_SLOT is distance_SLOT away at address_SLOT,you are distance_SLOT away from poi_type_SLOT with traffic_info_SLOT noted .
+5,2,you are distance_SLOT away from home with traffic_info_SLOT noted . thank you very much car !,EOS_Z1,home ; quickest EOS_Z1,you're welcome !,you are welcome driver !
+5,3,you are welcome driver ! no response needed,EOS_Z1,home ; quickest EOS_Z1,you are welcome,glad to help
+70,4,,,,,
+70,0,pull up directions to 5672 barringer street,EOS_Z1,EOS_Z1,"i have address_SLOT , distance_SLOT away . would you like directions there ?",here are directions to address_SLOT
+70,1,"here are directions to address_SLOT pick a route with no traffic and let 's go there , thank you !",EOS_Z1,EOS_Z1,"i sent the info on your screen , you're welcome !","the only route has traffic_info_SLOT , is that alright ?"
+70,2,"the only route has heavy traffic , is that alright ? yes , patience , i need to get there anyway . . thank you car , send the info on my screen please !",EOS_Z1,certain address EOS_Z1,"you're welcome , have a great day .",directing to address_SLOT now .
+70,3,directing to address_SLOT now . thanks .,EOS_Z1,certain address EOS_Z1,you're welcome .,you're welcome and have a great day .
+88,4,,,,,
+88,0,directions to the mall,EOS_Z1,EOS_Z1,the mall is distance_SLOT away at address_SLOT,navigating you to poi_SLOT
+88,1,"navigating you to poi_SLOT thank you car , please pick the fastest route",EOS_Z1,EOS_Z1 traffic_info,"you're welcome , have a great day .",setting gps for fastest route with traffic_info_SLOT
+88,2,setting gps for fastest route with traffic_info_SLOT sounds great and can you tell me the address ?,EOS_Z1,EOS_Z1,poi_SLOT is at address_SLOT,"the address is address_SLOT , i sent it on your screen"
+88,3,"the address is address_SLOT , i sent it on your screen awesome , goodbye .",EOS_Z1,EOS_Z1,no problem,you're welcome and we should be there soon .
+288,4,,,,,
+288,0,what 's the weather like in grand rapids,grand rapids EOS_Z1,grand rapids EOS_Z1,what day are you interested in ?,is there a specific day you would like me to check the weather in location_SLOT for ?
+288,1,is there a specific day you would like me to check the weather in grand rapids for ? i would like to know the weather for friday .,friday ; grand rapids EOS_Z1,grand rapids ; friday EOS_Z1 weather_attribute,"the weather in location_SLOT will be weather_attribute_SLOT on date_SLOT , with a low of temperature_SLOT and a high of temperature_SLOT .",location_SLOT on date_SLOT will be weather_attribute_SLOT between temperature_SLOT .
+288,2,grand rapids on friday will be weather_attribute_SLOT between temperature_SLOT . thank you .,friday ; grand rapids EOS_Z1,grand rapids ; friday EOS_Z1,you're welcome .,you are welcome .
+288,3,you are welcome . thanks again !,friday ; grand rapids EOS_Z1,grand rapids ; friday EOS_Z1,you're welcome,you're welcome .
+1,4,,,,,
+1,0,what gas stations are here ?,gas station EOS_Z1,gas EOS_Z1,poi_SLOT is distance_SLOT away .,there is a poi_SLOT
+1,1,there is a poi_SLOT that 's good ! please pick the quickest route to get there and avoid all heavy traffic !,gas station EOS_Z1,gas ; quickest EOS_Z1,"i sent the info on your screen , drive carefully !",event_SLOT you to poi_SLOT
+1,2,taking you to poi_SLOT what is the address ?,gas station EOS_Z1,gas ; quickest EOS_Z1,poi_SLOT is at address_SLOT,address_SLOT is the address for poi_SLOT poi_type_SLOT
+1,3,address_SLOT is the address for poi_SLOT gas station perfect . thank you,gas station EOS_Z1,gas ; quickest EOS_Z1,"you're welcome , have a great day .","you're welcome , happy to help ."
+143,4,,,,,
+143,0,where is the closest tea house ?,coffee or tea place EOS_Z1,EOS_Z1,the distance_SLOT tea house is distance_SLOT away .,poi_SLOT also serves tea . they are distance_SLOT away at address_SLOT
+143,1,poi_SLOT also serves tea . they are distance_SLOT away at address_SLOT how 's the traffic ?,coffee or tea place EOS_Z1 traffic_info,EOS_Z1 traffic_info,there is traffic_info_SLOT on the route .,traffic_info_SLOT is listed to poi_SLOT
+143,2,"traffic_info_SLOT is listed to poi_SLOT sounds good , let 's get going .",coffee or tea place EOS_Z1,EOS_Z1,"i sent the info on your screen , drive carefully !",displaying directions now .
+143,3,displaying directions now . thanks for the help .,coffee or tea place EOS_Z1,EOS_Z1,"you're welcome , happy to help .","you're welcome; drive safely , and enjoy ."
+81,4,,,,,
+81,0,what is the weather going to be like tomorrow show me the 7 day forecast,EOS_Z1,tomorrow EOS_Z1,what city would you like the weather for ?,what city are you interested in ?
+81,1,what city are you interested in ? fresno : there will be hail tomorrow ?,hail ; tomorrow ; fresno EOS_Z1,tomorrow ; hail ; fresno EOS_Z1 weather_attribute,there will be no weather_attribute_SLOT in the forecast for location_SLOT party_SLOT .,party_SLOT in location_SLOT it will weather_attribute_SLOT
+81,2,tomorrow in fresno it will weather_attribute_SLOT so no hail tomorrow in fresno ?,hail ; tomorrow ; fresno EOS_Z1,tomorrow ; hail ; fresno EOS_Z1 weather_attribute,there is no weather_attribute_SLOT in the forecast for location_SLOT party_SLOT .,"no weather_attribute_SLOT in location_SLOT , party_SLOT there will be weather_attribute_SLOT"
+81,3,"no hail in fresno , tomorrow there will be weather_attribute_SLOT thanks .",hail ; tomorrow ; fresno EOS_Z1,tomorrow ; hail ; fresno EOS_Z1,no problem .,until next time !
+274,4,,,,,
+274,0,please give the directions to a nearby hospital .,nearby ; hospital EOS_Z1,nearby ; hospital EOS_Z1,poi_SLOT is distance_SLOT away .,the only distance_SLOT poi_type_SLOT is poi_SLOT which is distance_SLOT away .
+274,1,the only nearby hospital is poi_SLOT which is distance_SLOT away . and how is the traffic ?,nearby ; hospital EOS_Z1 traffic_info,nearby ; hospital EOS_Z1 poi traffic_info,there is traffic_info_SLOT on the route .,there is currently traffic_info_SLOT distance_SLOT on the distance_SLOT route to poi_SLOT
+274,2,there is currently traffic_info_SLOT nearby on the distance_SLOT route to poi_SLOT could you give me the address and directions via a quick route ?,hospital EOS_Z1,hospital EOS_Z1 distance,poi_SLOT is at address_SLOT,the only route to stanford is reporting traffic_info_SLOT but i am finding you the distance_SLOT route to address_SLOT real .
+274,3,the only route to stanford is reporting traffic_info_SLOT but i am finding you the distance_SLOT route to address_SLOT real . okay thank you,EOS_Z1,hospital EOS_Z1,you're welcome !,"you're welcome; drive safely , and take care ."
+203,4,,,,,
+203,0,find directions to the nearest starbucks,nearest EOS_Z1 distance,nearest EOS_Z1 distance poi,there is no poi_SLOT distance_SLOT but there is traffic_info_SLOT on our way,there is no poi_SLOT distance_SLOT but there is two others; one is poi_SLOT that is distance_SLOT away and the other is poi_SLOT which is distance_SLOT away . which one do you want ?
+203,1,"there is no starbucks distance_SLOT but there is two others; one is poi_SLOT that is distance_SLOT away and the other is poi_SLOT which is distance_SLOT away . which one do you want ? let 's go at cafe venetia please , send the address on my screen and pich the quickest route",quickest ; coffee or tea place EOS_Z1,quickest EOS_Z1,"the address is address_SLOT , i sent it on your screen",poi_SLOT is located at address_SLOT with traffic_info_SLOT is that going to be okay ?
+203,2,cafe venetia is located at address_SLOT with traffic_info_SLOT is that going to be okay ? yes . set gps for the quickest route now .,coffee or tea place ; quickest EOS_Z1,quickest EOS_Z1,gps set for distance_SLOT route to poi_SLOT .,"i sent the info on your screen , drive carefully !"
+203,3,"i sent the info on your screen , drive carefully ! thanks",coffee or tea place ; quickest EOS_Z1,quickest EOS_Z1,you're welcome !,you're welcome !
+202,4,,,,,
+202,0,give me the location for the nearest starbucks,nearest EOS_Z1 distance,EOS_Z1,there is no poi_SLOT distance_SLOT,there is no poi_SLOT listed locally but i have another poi_type_SLOT shop listed would you like the address to it ?
+202,1,there is no starbucks listed locally but i have another coffee shop listed would you like the address to it ? yes please .,nearest ; coffee EOS_Z1,EOS_Z1,"the address is address_SLOT , i sent it on your screen","then let 's go at poi_SLOT , address_SLOT"
+202,2,"then let 's go at cafe venetia , address_SLOT okay thank you .",nearest ; coffee EOS_Z1,nearest ; coffee EOS_Z1,you're welcome !,the destination is distance_SLOT away in traffic_info_SLOT
+202,3,"the destination is distance_SLOT away in traffic_info_SLOT please set the gps to avoid all heavy traffic and let 's go there , thank you !",EOS_Z1,nearest ; coffee EOS_Z1,"i sent the info on your screen , you're welcome !",you are welcome !
+238,4,,,,,
+238,0,find me a hotel that is near my location .,near EOS_Z1,near EOS_Z1,the poi_SLOT is distance_SLOT away .,poi_SLOT is distance_SLOT away .
+238,1,poi_SLOT is distance_SLOT away . please pick a quick route to go there,EOS_Z1,EOS_Z1,"i sent the info on your screen , drive carefully !",navigating to poi_SLOT
+238,2,navigating to poi_SLOT thanks ! what is the address ?,EOS_Z1,EOS_Z1,poi_SLOT is at address_SLOT,the address is address_SLOT real
+238,3,the address is address_SLOT real ok set the gps please . thanks for the help .,EOS_Z1,EOS_Z1,"you're welcome , happy to help .","you're welcome , happy to be of assistance ."
+264,4,,,,,
+264,0,closest coffee,coffee EOS_Z1,coffee or tea place EOS_Z1,there is a poi_SLOT distance_SLOT away .,"the distance_SLOT poi_type_SLOT place is poi_SLOT but there is traffic_info_SLOT , would you like a different location ?"
+264,1,"the closest coffee place is poi_SLOT but there is heavy traffic , would you like a different location ? is there any available ?",EOS_Z1,coffee or tea place EOS_Z1,poi_SLOT is distance_SLOT away at address_SLOT,poi_SLOT at address_SLOT is distance_SLOT away with traffic_info_SLOT
+264,2,poi_SLOT at address_SLOT is distance_SLOT away with traffic_info_SLOT please direct me there via the shortest distance .,shortest EOS_Z1,coffee or tea place ; shortest EOS_Z1,"i sent the info on your screen , drive carefully !",sending you direction now .
+264,3,sending you direction now . thank you car !,shortest EOS_Z1,coffee or tea place ; shortest EOS_Z1,you're welcome !,you're welcome
+196,4,,,,,
+196,0,i need a rest stop within a 2 mile radius .,rest stop EOS_Z1,rest stop EOS_Z1,the poi_type_SLOT is distance_SLOT away .,there is a poi_SLOT one mile away .
+196,1,there is a poi_SLOT one mile away . what is the address ?,rest stop EOS_Z1,rest stop EOS_Z1,"the address is address_SLOT , i sent it on your screen",poi_SLOT address_SLOT
+196,2,poi_SLOT address_SLOT set gps for shortest route .,shortest ; rest stop EOS_Z1,rest stop ; shortest EOS_Z1,"i sent the info on your screen , drive carefully !",gps set for distance_SLOT route .
+196,3,gps set for shortest route . thanks !,shortest ; rest stop EOS_Z1,rest stop ; shortest EOS_Z1,you're welcome !,have a good day .
+127,4,,,,,
+127,0,get me directions to the nearest starbucks,nearest EOS_Z1 distance,EOS_Z1,there is no poi_SLOT distance_SLOT but i sent on your screen the best available poi_SLOT .,there is no poi_SLOT locally .
+127,1,there is no starbucks locally . any coffee shops locally ?,nearest ; coffee EOS_Z1,coffee EOS_Z1,there is no poi_type_SLOT shops locally .,poi_SLOT is distance_SLOT away at address_SLOT with traffic_info_SLOT
+127,2,"poi_SLOT is distance_SLOT away at address_SLOT with traffic_info_SLOT ok , please give me the directions via the fastest route .",nearest ; coffee EOS_Z1,coffee EOS_Z1,"i sent the info on your screen , drive carefully !",the current route is the fastest one i can find
+127,3,"the current route is the fastest one i can find great , thank you",nearest ; coffee EOS_Z1,coffee EOS_Z1,"you're welcome , happy to help .",you're welcome !
+184,4,,,,,
+184,0,find me the nearest gas station .,nearest ; gas station EOS_Z1,nearest ; gas station EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,the distance_SLOT poi_type_SLOT is located distance_SLOT away . need more info ?
+184,1,"the nearest gas station is located distance_SLOT away . need more info ? please pick the quickest route to get there , thank you !",quickest ; gas station EOS_Z1,nearest ; gas station EOS_Z1,"i sent the info on your screen , you're welcome !",setting gps for distance_SLOT route to poi_SLOT poi_type_SLOT now .
+184,2,setting gps for quickest route to poi_SLOT gas station now . display address on screen please .,quickest ; gas station EOS_Z1,nearest ; gas station EOS_Z1,poi_SLOT is at address_SLOT,poi_SLOT is located at address_SLOT
+184,3,poi_SLOT is located at address_SLOT thanks for the information .,gas station EOS_Z1,nearest ; gas station EOS_Z1,"you're welcome , have a great day .","you're welcome , glad i could help ."
+113,4,,,,,
+113,0,what is the weather like in the city,EOS_Z1,EOS_Z1,what city are you inquiring about ?,what city are you inquiring about ?
+113,1,what city are you inquiring about ? i am in durham .,durham EOS_Z1,durham EOS_Z1,"it will be weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT",what would you like to know about the weather in location_SLOT ?
+113,2,what would you like to know about the weather in durham ? will there be a blizzard ?,blizzard ; durham EOS_Z1,durham ; blizzard EOS_Z1,there will be no weather_attribute_SLOT in the forecast for location_SLOT this weekly_time_SLOT .,the weekly_time_SLOT forecast does not show that there will be a weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .
+113,3,the weekly forecast does not show that there will be a blizzard in durham this week . thanks .,blizzard ; durham EOS_Z1,durham ; blizzard EOS_Z1,no problem .,not a problem .
+233,4,,,,,
+233,0,get me directions to the mall,EOS_Z1,EOS_Z1,the mall is distance_SLOT away at address_SLOT,there are the poi_SLOT and the poi_SLOT both distance_SLOT away : do you want me to flip a coin between them or will you pick where to go ?
+233,1,there are the poi_SLOT and the poi_SLOT both distance_SLOT away : do you want me to flip a coin between them or will you pick where to go ? let 's go at ravenswood shopping center and pick a route with no traffic please !,EOS_Z1,EOS_Z1,there is traffic_info_SLOT on our way but you should be able to reach in few minutes,navigating you to ravenswood poi_type_SLOT .
+233,2,navigating you to ravenswood shopping center . what 's the address ?,EOS_Z1,EOS_Z1,"the address is address_SLOT , i sent it on your screen",the address to ravenswood poi_type_SLOT is address_SLOT
+233,3,the address to ravenswood shopping center is address_SLOT thanks so much for all your help .,EOS_Z1,EOS_Z1,"you're welcome , happy to help .",good day !
+8,4,,,,,
+8,0,where does my friend live ?,EOS_Z1,EOS_Z1,party_SLOT lives at address_SLOT ave .,party_SLOT 's house is located distance_SLOT away at address_SLOT avenue .
+8,1,jill 's house is located distance_SLOT away at address_SLOT avenue . -,EOS_Z1,EOS_Z1,"i've picked the route for you , drive carefully !",sorry i didn't get that .
+8,2,"sorry i didn't get that . i was thinking about something that happened to jill yesterday , long story . . please pick a quick route to get there , thank you !",EOS_Z1,quickest EOS_Z1 distance,"i sent the info on your screen , you're welcome !",the distance_SLOT route is address_SLOT ave . at distance_SLOT . we will be there shortly .
+8,3,the distance_SLOT route is address_SLOT ave . at distance_SLOT . we will be there shortly . thank you !,shortly EOS_Z1,quickest EOS_Z1,you're welcome !,you're welcome !
+219,4,,,,,
+219,0,set a reminder for the conference .,conference EOS_Z1,conference EOS_Z1,what time should i set the reminder for ?,what day and time is the event_SLOT
+219,1,what day and time is the conference it is on august 14th at 4pm,conference ; 4pm EOS_Z1,conference ; 4pm EOS_Z1,i have set a reminder for the event_SLOT on august date_SLOT at time_SLOT .,i have that event_SLOT set up for you to be reminded of . is there anything else you need ?
+219,2,i have that conference set up for you to be reminded of . is there anything else you need ? make sure you add the executive team to that reminder .,conference ; 4pm EOS_Z1,conference ; 4pm ; executive team EOS_Z1,i've set the appointment for you,your reminder for the event_SLOT with the party_SLOT on august date_SLOT at time_SLOT is all set .
+219,3,your reminder for the conference with the executive team on august date_SLOT at 4pm is all set . thanks .,conference ; 4pm EOS_Z1,conference ; 4pm ; executive team EOS_Z1,you are welcome .,you are welcome
+91,4,,,,,
+91,0,"car i need to get to a gas station , please show me the nearest one",gas station EOS_Z1,nearest ; gas station EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,there is poi_SLOT distance_SLOT away with traffic_info_SLOT on our way
+91,1,"there is poi_SLOT distance_SLOT away with traffic_info_SLOT on our way alright , where is it located ?",gas station EOS_Z1,nearest ; gas station EOS_Z1,poi_SLOT is at address_SLOT,poi_SLOT is at address_SLOT
+91,2,poi_SLOT is at address_SLOT please pick the fastest route to get there,gas station EOS_Z1,gas station EOS_Z1,the fastest route to poi_SLOT is distance_SLOT away .,"there is traffic_info_SLOT on our way , i sent the route on your screen"
+91,3,"there is traffic_info_SLOT on our way , i sent the route on your screen thank you car !",gas station EOS_Z1,gas station EOS_Z1,you're welcome !,you're welcome !
+125,4,,,,,
+125,0,"i need to know my conference agenda , date and who is attending .",conference EOS_Z1 date party,conference EOS_Z1 agenda date party,your event_SLOT is on date_SLOT at address_SLOT party_SLOT,your event_SLOT is set for date_SLOT with your party_SLOT to agenda_SLOT
+125,1,"your conference is set for date_SLOT with your party_SLOT to agenda_SLOT great , and who all will be there ?",conference EOS_Z1 party,conference EOS_Z1 party,the event_SLOT is on date_SLOT at address_SLOT party_SLOT,the event_SLOT is with your party_SLOT
+125,2,the conference is with your party_SLOT thanks .,conference EOS_Z1,conference EOS_Z1,you are welcome .,you're welcome . don't forget it 's held in room_SLOT
+125,3,you're welcome . don't forget it 's held in room_SLOT thank you .,conference EOS_Z1,conference EOS_Z1,you are welcome .,no problem
+297,4,,,,,
+297,0,i'm in the mood for some tea can you show me directions to the nearest cafe,nearest EOS_Z1,nearest EOS_Z1,the distance_SLOT cafe is poi_SLOT at address_SLOT,here are directions to poi_SLOT
+297,1,here are directions to poi_SLOT hope it doesn't have any traffic .,nearest EOS_Z1,nearest EOS_Z1 traffic_info,there is traffic_info_SLOT on our way but you should be able to reach in few minutes,"unfortunately there is traffic_info_SLOT but it 's just distance_SLOT away , you should be able to reach it quickly anyway"
+297,2,"unfortunately there is traffic_info_SLOT but it 's just distance_SLOT away , you should be able to reach it quickly anyway what is the address ?",nearest EOS_Z1,nearest EOS_Z1,"the address is address_SLOT , i sent it on your screen",address_SLOT is the location of poi_SLOT
+297,3,address_SLOT is the location of poi_SLOT thank you very much car !,nearest EOS_Z1,nearest EOS_Z1,you're welcome !,you're welcome !
+146,3,,,,,
+146,0,what 's the forecast report,EOS_Z1,EOS_Z1,what city do you want the weather for ?,what city do you want to hear the forecast report from ?
+146,1,"what city do you want to hear the forecast report from ? camarillo , please . tell me if it will be foggy on friday",foggy ; friday ; camarillo EOS_Z1,foggy ; friday ; camarillo EOS_Z1 weather_attribute,it will not be weather_attribute_SLOT in location_SLOT on date_SLOT .,it will be weather_attribute_SLOT in location_SLOT on date_SLOT .
+146,2,it will be weather_attribute_SLOT in camarillon on friday . thank you .,foggy ; friday ; camarillo EOS_Z1,foggy ; friday ; camarillo EOS_Z1,you're welcome .,you're welcome .
+122,3,,,,,
+122,0,check weather for new york city,EOS_Z1,EOS_Z1,what city are you interested in ?,for which time period did you want weather information ?
+122,1,"for which time period did you want weather information ? i need current weather data about new york , specifically information about the temperature .",EOS_Z1,new york EOS_Z1,the temperature in location_SLOT is a low of temperature_SLOT and a high of temperature_SLOT .,it is between temperature_SLOT in location_SLOT right now .
+122,2,it is between temperature_SLOT in new york right now . awesome .,EOS_Z1,new york EOS_Z1,no problem,no problem .
+58,3,,,,,
+58,0,will it rain next week,rain ; next week EOS_Z1,rain ; next week EOS_Z1,what city do you want the weather for ?,what location do you want me to check if it will be weather_attribute_SLOT ?
+58,1,"what location do you want me to check if it will be rainy ? los angeles , please",rain ; next week ; los angeles EOS_Z1,rain ; next week ; los angeles EOS_Z1,it will not weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .,weekly_time_SLOT_time_SLOT it will weather_attribute_SLOT on date_SLOT in location_SLOT
+58,2,next week it will rain on saturday in los angeles thank you .,rain ; next week ; los angeles EOS_Z1,rain ; next week ; los angeles EOS_Z1,you are welcome .,anytime .
+121,3,,,,,
+121,0,is it going to be cloudy this week,cloudy EOS_Z1,cloudy EOS_Z1,what city are you inquiring about ?,could you please let me know what place i am looking up the data for ?
+121,1,could you please let me know what place i am looking up the data for ? boston,cloudy ; boston EOS_Z1,cloudy ; boston EOS_Z1,it is supposed to be weather_attribute_SLOT on date_SLOT in party_SLOT .,this weekly_time_SLOT party_SLOT does not have any weather predictions of it being weather_attribute_SLOT
+121,2,"this week boston does not have any weather predictions of it being cloudy thanks car , that works .",cloudy ; boston EOS_Z1,cloudy ; boston EOS_Z1,you are welcome .,no problem poi_type_SLOT driver !
+221,3,,,,,
+221,0,what 's the temperature going to be this week,EOS_Z1,EOS_Z1,what city are you inquiring about ?,what city would you like weather information about ?
+221,1,what city would you like weather information about ? san jose please .,san jose EOS_Z1,san jose EOS_Z1,"it will be weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_","in location_SLOT , it is expected to be between temperature_SLOT date_SLOT and date_SLOT , temperature_SLOT date_SLOT , temperature_SLOT date_SLOT , temperature_SLOT date_SLOT , temperature_SLOT date_SLOT , and temperature_SLOT on date_SLOT ."
+221,2,"in san jose , it is expected to be between temperature_SLOT monday and tuesday , temperature_SLOT wednesday , temperature_SLOT thursday , temperature_SLOT friday , temperature_SLOT saturday , and temperature_SLOT on sunday . thanks !",san jose EOS_Z1,san jose EOS_Z1,you are welcome .,you are welcome .
+216,3,,,,,
+216,0,"please tell me the location , time and parties that are attending my meeting",meeting EOS_Z1 party,meeting EOS_Z1 party room,your event_SLOT is scheduled for date_SLOT at time_SLOT,your next event_SLOT is with your party_SLOT at address_SLOT room_SLOT
+216,1,"your next meeting is with your party_SLOT at address_SLOT room_SLOT great , thank you so much !",meeting EOS_Z1,meeting EOS_Z1,you're welcome,you're welcome ! did you also want to know the agenda for the event_SLOT ?
+216,2,"you're welcome ! did you also want to know the agenda for the meeting ? that is all , thanks !",meeting EOS_Z1,meeting EOS_Z1,you are welcome,you are welcome
+259,3,,,,,
+259,0,directions to nearest barista,nearest EOS_Z1,nearest EOS_Z1,the distance_SLOT barista is poi_SLOT at address_SLOT,"the distance_SLOT cafe is poi_SLOT , it 's distance_SLOT away and there is a traffic_info_SLOT"
+259,1,"the nearer cafe is cafe venetia , it 's distance_SLOT away and there is a traffic_info_SLOT is there another coffee shop that situated on a route with no traffic ?",nearest ; coffee EOS_Z1,nearest ; coffee EOS_Z1,there is traffic_info_SLOT on the route to poi_SLOT,i'm afraid that poi_SLOT is the best option in this moment . i sent on your screen the directions to reach there through another route
+259,2,i'm afraid that poi_SLOT is the best option in this moment . i sent on your screen the directions to reach there through another route ok thank you .,nearest ; coffee EOS_Z1,nearest ; coffee EOS_Z1,"you're welcome , have a great day .",you're welcome; drive safely .
+189,3,,,,,
+189,0,where is the nearby shopping center ?,nearby ; shopping center EOS_Z1,nearby ; shopping center EOS_Z1,poi_SLOT is distance_SLOT away .,poi_SLOT is distance_SLOT away .
+189,1,"poi_SLOT is distance_SLOT away . please pick the quickest route to go there and send me the info on screen , thanks !",quickest ; shopping center EOS_Z1,nearby ; shopping center EOS_Z1,"i sent the info on your screen , you're welcome !","ok , you will headed toward poi_SLOT at address_SLOT , located distance_SLOT away ."
+189,2,"ok , you will headed toward poi_SLOT at address_SLOT , located distance_SLOT away . thanks !",quickest ; shopping center EOS_Z1,nearby ; shopping center EOS_Z1,you're welcome !,you are welcome .
+257,3,,,,,
+257,0,i want tea .,coffee or tea place EOS_Z1,EOS_Z1,there is a poi_SLOT distance_SLOT away .,we're distance_SLOT away from poi_SLOT : do you like their tea ?
+257,1,"we're distance_SLOT away from starbucks : do you like their tea ? yes , what is the address ?",coffee or tea place EOS_Z1,EOS_Z1 poi,poi_SLOT is at address_SLOT,you will find poi_SLOT at address_SLOT
+257,2,you will find poi_SLOT at address_SLOT thanks !,coffee or tea place EOS_Z1,EOS_Z1,"you're welcome , have a great day .",you're welcome !
+205,3,,,,,
+205,0,give me directions to a place to sleep,EOS_Z1,rest stop EOS_Z1,i have a listing for poi_SLOT and poi_SLOT distance_SLOT away .,the poi_SLOT is distance_SLOT to you at distance_SLOT away in traffic_info_SLOT would you like directions there ?
+205,1,"the poi_SLOT is closest to you at distance_SLOT away in traffic_info_SLOT would you like directions there ? yes , please , pick a quick route !",EOS_Z1,rest stop EOS_Z1,"i sent the info on your screen , drive carefully !",i'm setting the gps for address_SLOT
+205,2,i'm setting the gps for address_SLOT thanks .,EOS_Z1,rest stop EOS_Z1,you're welcome .,you are welcome
+140,3,,,,,
+140,0,will it snow this week,snow EOS_Z1,snow EOS_Z1,what city are you wanting to know if it 's going to weather_attribute_SLOT ?,what city can i check for weather_attribute_SLOT for you ?
+140,1,what city can i check for snow for you ? alameda,alameda EOS_Z1,snow ; alameda EOS_Z1,it will be weather_attribute_SLOT on date_SLOT in location_SLOT .,weather_attribute_SLOT is predicted to fall on date_SLOT in location_SLOT
+140,2,snow is predicted to fall on saturday in alameda thank you car !,rain ; saturday EOS_Z1,snow ; alameda EOS_Z1,you're welcome !,you're welcome !
+44,3,,,,,
+44,0,"car i need a hospital , please send me a quick route to the one near me in the direction we're driving",hospital EOS_Z1,near ; hospital EOS_Z1,poi_SLOT is distance_SLOT away at address_SLOT,poi_SLOT is on the way .
+44,1,"poi_SLOT is on the way . please pick a quick route and let 's go there , thank you !",hospital ; quick route EOS_Z1,near ; hospital EOS_Z1 poi,"i sent the info on your screen , you're welcome !","navigating to poi_SLOT at address_SLOT real . there is traffic_info_SLOT on the way there , however ."
+44,2,"navigating to poi_SLOT at address_SLOT real . there is traffic_info_SLOT on the way there , however . ok , thanks car !",hospital ; quick route EOS_Z1,near ; hospital EOS_Z1,you're welcome !,you're very welcome .
+207,3,,,,,
+207,0,which days are rain forecasted,rain EOS_Z1,rain EOS_Z1,what city are you inquiring about ?,what city would you like weather information about ?
+207,1,what city would you like weather information about ? tell me if it is raining in oakland right now .,rain ; oakland EOS_Z1,rain ; oakland EOS_Z1,it is not weather_attribute_SLOT in location_SLOT right now .,the weather forecast for location_SLOT does not show weather_attribute_SLOT right now .
+207,2,the weather forecast for oakland does not show rain right now . thanks .,rain ; oakland EOS_Z1,rain ; oakland EOS_Z1,you are welcome .,you are welcome .
+26,3,,,,,
+26,0,what time is my doctor apartment and who is it with ?,doctor EOS_Z1 party time,doctor appointment EOS_Z1 event,your event_SLOT 's appointment is at address_SLOT party_SLOT,are you talking about the event_SLOT on date_SLOT or the one on date_SLOT ?
+26,1,are you talking about the event_SLOT on date_SLOT or the one on the 5th ? the one on wednesday .,5th ; doctor appointment EOS_Z1,doctor appointment ; wednesday EOS_Z1 event party time,the address_SLOT is address_SLOT date_SLOT .,your event_SLOT on date_SLOT is at time_SLOT with your party_SLOT
+26,2,your event_SLOT on wednesday is at time_SLOT with your party_SLOT and how about the one on the 5th ?,5th ; doctor appointment ; 5th EOS_Z1,doctor appointment ; 5th EOS_Z1 party time,the event_SLOT on date_SLOT is at time_SLOT with your party_SLOT,your event_SLOT appointment on date_SLOT is at time_SLOT with party_SLOT
+299,3,,,,,
+299,0,please give me the address and directions via the shortest distance to the nearest pizza place .,shortest ; pizza restaurant EOS_Z1,shortest ; pizza restaurant EOS_Z1,"the address is address_SLOT , distance_SLOT away with traffic_info_SLOT would you like directions there ?","the distance_SLOT is poi_type_SLOT chicago , distance_SLOT away at address_SLOT would you like directions there ?"
+299,1,"the closest is pizza chicago , distance_SLOT away at address_SLOT would you like directions there ? yes , please show me the route with the shortest distance , thank you !",shortest ; pizza restaurant EOS_Z1,shortest ; pizza restaurant EOS_Z1 poi,"i sent the info on your screen , you're welcome !",here is the distance_SLOT route to poi_SLOT
+299,2,here is the shortest route to poi_SLOT thank you car !,shortest ; pizza restaurant EOS_Z1,shortest ; pizza restaurant EOS_Z1,you're welcome !,you're welcome !
+76,3,,,,,
+76,0,what 's the weather forecast,EOS_Z1,EOS_Z1,what city are you inquiring about ?,what city would you like the forecast for ?
+76,1,what city would you like the forecast for ? grand rapids .,grand rapids EOS_Z1,grand rapids EOS_Z1,"the weather in location_SLOT is going to be weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on","it will be weather_attribute_SLOT weekly_time_SLOT_time_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT and weather_attribute_SLOT on date_SLOT in location_SLOT ."
+76,2,"it will be weather_attribute_SLOT today , snowy on tuesday , weather_attribute_SLOT on wednesday , weather_attribute_SLOT on thursday , weather_attribute_SLOT on friday , snow on saturday and weather_attribute_SLOT on sunday in grand rapids . thank you very much car !",EOS_Z1,grand rapids EOS_Z1,you're welcome !,you're welcome !
+289,3,,,,,
+289,0,what is the weather like in new york city,EOS_Z1,EOS_Z1,what city are you interested in ?,did you want the current weather ?
+289,1,"did you want the current weather ? yes , today 's weather report please .",EOS_Z1,today EOS_Z1,what city are you inquiring about ?,"weekly_time_SLOT_time_SLOT 's weather forecast is weather_attribute_SLOT , the low temperature of temperature_SLOT and high of temperature_SLOT ."
+289,2,"today 's weather forecast is foggy , the low temperature of temperature_SLOT and high of temperature_SLOT . thank you .",EOS_Z1,today EOS_Z1,you are welcome .,not a problem .
+108,3,,,,,
+108,0,remind me to watch the football game on the 1st,1st ; football EOS_Z1,1st ; football EOS_Z1,"okay , setting a reminder for your event_SLOT game on date_SLOT",what time on date_SLOT should i set a reminder to watch the event_SLOT game ?
+108,1,what time on the 1st should i set a reminder to watch the football game ? at 2 pm please .,1st ; football ; 2pm EOS_Z1,1st ; football ; 2pm EOS_Z1,"okay , setting a reminder for your event_SLOT game at address_SLOT date_SLOT with your party_SLOT",i have set a reminder for the event_SLOT game at address_SLOT date_SLOT
+108,2,i have set a reminder for the football game at address_SLOT the 1st thanks .,1st ; football ; 2pm EOS_Z1,1st ; football ; 2pm EOS_Z1,you are welcome .,you are welcome
+290,3,,,,,
+290,0,is it raining today,raining ; today EOS_Z1,rain ; today EOS_Z1,what city are you inquiring about ?,what city would you like weather information about ?
+290,1,what city would you like weather information about ? i need it for new york .,raining ; today ; new york EOS_Z1,rain ; today ; new york EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .,yes the forecast calls for weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .
+290,2,yes the forecast calls for rain in new york today . thank you .,raining ; today ; new york EOS_Z1,rain ; today ; new york EOS_Z1,you are welcome .,no problem .
+302,3,,,,,
+302,0,show me directions to the nearest grocery store,nearest ; grocery store EOS_Z1,nearest EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT which is distance_SLOT away .,the distance_SLOT poi_type_SLOT is located distance_SLOT away at address_SLOT
+302,1,"the nearest grocery store is located distance_SLOT away at address_SLOT pick the fastest route and with least traffic , then send the address on my screen please",grocery store EOS_Z1,nearest EOS_Z1,"the address is address_SLOT , i sent it on your screen",poi_SLOT is located at address_SLOT and navigation is set .
+302,2,"poi_SLOT is located at address_SLOT and navigation is set . hope you picked the fastest route or no more gasoline for you , car . . just kidding , thank you !",grocery store EOS_Z1,EOS_Z1,"you're welcome , have a great day .","i did , i did ! you're welcome !"
+29,3,,,,,
+29,0,find me the quickest route to the grocery store .,quickest ; grocery store EOS_Z1,grocery store EOS_Z1,there is traffic_info_SLOT distance_SLOT but i sent on your screen the distance_SLOT route to poi_SLOT,poi_SLOT is the distance_SLOT poi_type_SLOT distance_SLOT away
+29,1,"poi_SLOT is the closest grocery store distance_SLOT away ok , please give me the address and directions via the quickest route .",quickest ; grocery store EOS_Z1,grocery store EOS_Z1 traffic_info,"the address is address_SLOT , i sent it on your screen","setting navigation to address_SLOT now . there is traffic_info_SLOT distance_SLOT , so drive carefully ."
+29,2,"setting navigation to address_SLOT now . there is traffic_info_SLOT nearby , so drive carefully . thank you .",grocery store EOS_Z1,grocery store EOS_Z1,you're welcome !,no problem
+21,3,,,,,
+21,0,take me to my friend 's house,EOS_Z1,EOS_Z1,party_SLOT lives at address_SLOT ave .,"your poi_type_SLOT is on address_SLOT street , there is traffic_info_SLOT on our way but we're just distance_SLOT away"
+21,1,"your friends house is on address_SLOT street , there is traffic_info_SLOT on our way but we're just distance_SLOT away what about the address of my home .",friends house EOS_Z1,home EOS_Z1,your poi_type_SLOT is at address_SLOT,"it must have been a hard day for you if you don't remember the address of your poi_type_SLOT . . address_SLOT , i was kidding , don't crash me , please"
+21,2,"it must have been a hard day for you if you don't remember the address of your home . . address_SLOT , i was kidding , don't crash me , please thanks for the help .",friends house EOS_Z1,home EOS_Z1,"you're welcome , happy to help .",you're welcome !
+23,3,,,,,
+23,0,does the forecast call for snow today,snow ; today EOS_Z1,snow ; today EOS_Z1,what city are you inquiring about ?,tell me what city you would like to know about weather_attribute_SLOT weekly_time_SLOT_time_SLOT ?
+23,1,tell me what city you would like to know about snow today ? cleveland .,snow ; today ; cleveland EOS_Z1,snow ; today ; cleveland EOS_Z1,there is no weather_attribute_SLOT scheduled weekly_time_SLOT_time_SLOT in location_SLOT .,it will not weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .
+23,2,it will not snow in cleveland today . thanks .,snow ; today ; cleveland EOS_Z1,snow ; today ; cleveland EOS_Z1,you're welcome .,you are welcome .
+53,3,,,,,
+53,0,what is the weather forecast for the weekend,weekend EOS_Z1,weekend EOS_Z1,what city are you interested in ?,for what city would you like to know that ?
+53,1,"for what city would you like to know that ? compton , what is the forecast for this week ?",weekend ; compton EOS_Z1,weekend EOS_Z1,"it will be weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_",it will be weather_attribute_SLOT the first half of the weekly_time_SLOT and then weather_attribute_SLOT the second and weather_attribute_SLOT over the weekly_time_SLOT_time_SLOT in location_SLOT .
+53,2,it will be rainy the first half of the week and then weather_attribute_SLOT the second and weather_attribute_SLOT over the weekend in compton . thanks .,weekend ; compton EOS_Z1,weekend EOS_Z1,you are welcome .,you're welcome .
+286,3,,,,,
+286,0,search today 's forecast,today EOS_Z1,today EOS_Z1,what city are you interested in ?,what city can i give you the weather forecast for ?
+286,1,what city can i give you the weather forecast for ? will it be humid in oakland today ?,humid ; today ; oakland EOS_Z1,today ; humid ; oakland EOS_Z1 weather_attribute,it will not be weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .,weekly_time_SLOT_time_SLOT is gonna be weather_attribute_SLOT on location_SLOT
+286,2,today is gonna be weather_attribute_SLOT on oakland thank you .,humid ; today ; oakland EOS_Z1,today ; humid ; oakland EOS_Z1,you are welcome .,you're welcome !
+28,3,,,,,
+28,0,give me directions to the nearest shopping mall,nearest ; shopping EOS_Z1,nearest ; shopping EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,there is the poi_SLOT distance_SLOT away and traffic_info_SLOT on the route : set this destination on your gps ?
+28,1,there is the poi_SLOT distance_SLOT away and traffic_info_SLOT on the route : set this destination on your gps ? yes please that sounds perfect .,nearest ; shopping EOS_Z1,nearest ; shopping EOS_Z1 poi,"i sent the info on your screen , drive carefully !",setting gps to poi_SLOT anything else ?
+28,2,"setting gps to poi_SLOT anything else ? that will be all , thanks .",nearest ; shopping EOS_Z1,nearest ; shopping EOS_Z1,happy to help,no problem !
+72,3,,,,,
+72,0,where can i get tea ?,EOS_Z1,EOS_Z1 poi,there is a poi_SLOT distance_SLOT away .,poi_SLOT is distance_SLOT away and serves poi_type_SLOT and tea . do you want the address ?
+72,1,poi_SLOT is distance_SLOT away and serves coffee and tea . do you want the address ? yes .,EOS_Z1,EOS_Z1,poi_SLOT is at address_SLOT,palo alto is located at address_SLOT
+72,2,palo alto is located at address_SLOT sounds great . thank you .,EOS_Z1,EOS_Z1,you're welcome .,you're welcome !
+215,3,,,,,
+215,0,remind me to go swimming at 4 :50,swimming EOS_Z1,swimming EOS_Z1,what time should i check for event_SLOT ?,am or pm ?
+215,1,am or pm ? at 4 :50 pm the 12th of this month .,12th ; swimming EOS_Z1,swimming ; 12th EOS_Z1,"i am sorry , i have already set the gps for date_SLOT of this month at 4 :50 pm .",event_SLOT reminder has been set for date_SLOT at 4 :50pm .
+215,2,swimming reminder has been set for the 12th at 4 :50pm . thanks,12th ; swimming EOS_Z1,swimming ; 12th EOS_Z1,you're welcome,you're welcome .
+22,3,,,,,
+22,0,where can i go shopping ?,shopping EOS_Z1,shopping EOS_Z1,poi_SLOT is distance_SLOT away .,we're distance_SLOT away from poi_SLOT and there is traffic_info_SLOT on our way
+22,1,we're distance_SLOT away from poi_SLOT and there is traffic_info_SLOT on our way sounds amazing . set the gps to go there .,EOS_Z1,shopping EOS_Z1,gps set and we should arrive shortly .,"you got it , gps set ."
+22,2,"you got it , gps set . thanks !",EOS_Z1,shopping EOS_Z1,you're welcome .,no problem !
+117,3,,,,,
+117,0,i need the closest hospital .,hospital EOS_Z1,hospital EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,the poi_SLOT is distance_SLOT away at address_SLOT would you like directions there ?
+117,1,"the poi_SLOT is distance_SLOT away at address_SLOT would you like directions there ? yes , please give me directions via the route with no traffic .",hospital EOS_Z1,hospital EOS_Z1 traffic_info,"i sent the info on your screen , drive carefully !","there is traffic_info_SLOT on our way and you should be able to reach there fast . i sent all the info on your screen , drive carefully !"
+117,2,"there is traffic_info_SLOT on our way and you should be able to reach there fast . i sent all the info on your screen , drive carefully ! thank you car !",EOS_Z1,hospital EOS_Z1,you're welcome !,you're welcome .
+256,3,,,,,
+256,0,where can i get groceries ?,EOS_Z1,EOS_Z1,there are poi_SLOT distance_SLOT away and poi_SLOT distance_SLOT away .,poi_SLOT is distance_SLOT away .
+256,1,"poi_SLOT is distance_SLOT away . okay , tell me the quickest route there .",quickest EOS_Z1,EOS_Z1,"i sent the info on your screen , drive carefully !",the distance_SLOT route to poi_SLOT at address_SLOT does not have any traffic .
+256,2,"the quickest route to poi_SLOT at address_SLOT does not have any traffic . sounds great , set the navigation for there .",quickest EOS_Z1,EOS_Z1,"i sent the info on your screen , drive carefully !",gps set and have a great day .
+16,3,,,,,
+16,0,i need a reminder for dinner .,dinner EOS_Z1,dinner EOS_Z1,what time should i set the reminder for event_SLOT ?,what time shall i set a event_SLOT reminder ?
+16,1,"what time shall i set a dinner reminder ? set my reminder for dinner at 7 pm , for the 6th of this month with my beloved marie .",6th ; marie ; dinner ; 7pm EOS_Z1,dinner ; 6th ; marie ; 7pm EOS_Z1,i have set a reminder for event_SLOT at address_SLOT date_SLOT of this month with your party_SLOT .,"i will set a reminder for event_SLOT at 7 pm , for date_SLOT of this month with party_SLOT ."
+16,2,"i will set a reminder for dinner at 7 pm , for the 6th of this month with marie . thanks",6th ; marie ; dinner ; 7pm EOS_Z1,dinner ; 6th ; marie ; 7pm EOS_Z1,you're welcome,you are welcome
+279,3,,,,,
+279,0,is it going to snow today,snow ; today EOS_Z1,snow ; today EOS_Z1,what city are you inquiring about ?,what city do you wanna know if it will weather_attribute_SLOT weekly_time_SLOT_time_SLOT ?
+279,1,what city do you wanna know if it will snow today ? please check for oakland .,snow ; today ; oakland EOS_Z1,snow ; today ; oakland EOS_Z1,it will not weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .,weekly_time_SLOT_time_SLOT is gonna be weather_attribute_SLOT in location_SLOT
+279,2,today is gonna be weather_attribute_SLOT in oakland thank you car !,snow ; today ; oakland EOS_Z1,snow ; today ; oakland EOS_Z1,you're welcome !,no problem !
+97,3,,,,,
+97,0,is it going to snow this week,snow EOS_Z1,snow EOS_Z1,what city are you inquiring about ?,what location do you want to know if it will weather_attribute_SLOT ?
+97,1,"what location do you want to know if it will snow ? mountain view , please !",snow ; mountain view EOS_Z1,snow ; mountain view EOS_Z1,it will weather_attribute_SLOT on date_SLOT in location_SLOT .,it will weather_attribute_SLOT on date_SLOT in location_SLOT .
+97,2,it will snow on tuesday in mountain view . thanks .,snow ; tuesday EOS_Z1,snow ; mountain view EOS_Z1,you're welcome .,no problem .
+59,3,,,,,
+59,0,will it be warm in grand rapids on saturday ?,warm ; saturday ; grand rapids EOS_Z1 weather_attribute,warm ; saturday ; grand rapids EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT on date_SLOT .,it will not be weather_attribute_SLOT in location_SLOT on date_SLOT .
+59,1,it will not be warm in grand rapids on saturday . thank you .,warm ; saturday ; grand rapids EOS_Z1,warm ; saturday ; grand rapids EOS_Z1,you're welcome .,you are welcome .
+59,2,you are welcome . bye .,warm ; saturday ; grand rapids EOS_Z1,warm ; saturday ; grand rapids EOS_Z1,bye,no problem .
+39,3,,,,,
+39,0,make an appointment for the doctor on the 12th,12th ; doctor appointment EOS_Z1,12th ; doctor EOS_Z1,"okay , i am scheduling a event_SLOT 's appointment for date_SLOT at time_SLOT",at what time should i set the appointment ?
+39,1,at what time should i set the appointment ? set it at 7 pm please .,12th ; doctor appointment ; 7pm EOS_Z1,12th ; doctor ; 7pm EOS_Z1,i've set the appointment for you at address_SLOT date_SLOT .,i have made an appointment for the event_SLOT on date_SLOT at 7 pm .
+39,2,i have made an appointment for the doctor on the 12th at 7 pm . thank you .,12th ; doctor appointment ; 7pm EOS_Z1,12th ; doctor ; 7pm EOS_Z1,you are welcome .,you are welcome
+261,3,,,,,
+261,0,when is the next cloudy day,cloudy EOS_Z1,cloudy EOS_Z1,what city are you interested in ?,what city are you asking about ?
+261,1,"what city are you asking about ? manhattan , please . will it be cloudy on monday ?",cloudy ; monday ; manhattan EOS_Z1,cloudy ; monday ; manhattan EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT on date_SLOT .,"date_SLOT will be weather_attribute_SLOT , with low 's of temperature_SLOT and high 's of temperature_SLOT . similar heh ."
+261,2,"monday will be foggy , with low 's of temperature_SLOT and high 's of temperature_SLOT . similar heh . thank you .",cloudy ; monday ; manhattan EOS_Z1,cloudy ; monday ; manhattan EOS_Z1,you're welcome .,no problem !
+229,3,,,,,
+229,0,where is a nearby rest stop ?,nearby ; rest stop EOS_Z1,nearby ; rest stop EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,the poi_SLOT is located distance_SLOT away at address_SLOT would you like directions there ?
+229,1,"the poi_SLOT is located distance_SLOT away at address_SLOT would you like directions there ? yes , please give me directions via the fastest route .",nearby ; rest stop EOS_Z1,nearby ; rest stop EOS_Z1,"i sent the info on your screen , drive carefully !","ok , i am setting gps for address_SLOT"
+229,2,"ok , i am setting gps for address_SLOT thank you .",nearby ; rest stop EOS_Z1,nearby ; rest stop EOS_Z1,you're welcome .,"you're welcome , have a great day ."
+157,3,,,,,
+157,0,will the weather be cloudy next week,cloudy ; next week EOS_Z1,cloudy ; next week EOS_Z1,what city do you want the weather for ?,"okay , what city should i look in ?"
+157,1,"okay , what city should i look in ? grand rapids",cloudy ; next week ; grand rapids EOS_Z1,cloudy ; next week ; grand rapids EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .,during the weekly_time_SLOT it will be weather_attribute_SLOT in location_SLOT only weekly_time_SLOT_time_SLOT
+157,2,during the week it will be cloudy in grand rapids only today thanks .,cloudy ; next week ; grand rapids EOS_Z1,cloudy ; next week ; grand rapids EOS_Z1,you're welcome .,glad i could help out
+291,3,,,,,
+291,0,remind me about my lab appointment,lab appointment EOS_Z1,lab appointment EOS_Z1,what time is your event_SLOT appointment ?,what date is your appointment ?
+291,1,what date is your appointment ? my doctor 's appointment is at 7pm on monday the 1st .,monday ; lab appointment ; 7pm EOS_Z1,7pm ; monday EOS_Z1,i've scheduled your event_SLOT 's appointment on date_SLOT date_SLOT at time_SLOT .,a reminder has been set for your event_SLOT 's appointment at time_SLOT on date_SLOT .
+291,2,"a reminder has been set for your doctor 's appointment at 7pm on monday . ok , thanks",monday ; lab appointment ; 7pm EOS_Z1,7pm ; monday EOS_Z1,you are welcome .,no problem
+266,3,,,,,
+266,0,please let me know the weather forecast for tomorrow,tomorrow EOS_Z1,tomorrow EOS_Z1,what city would you like the forecast for ?,what city are you interested in the forecast for ?
+266,1,what city are you interested in the forecast for ? los angeles .,tomorrow ; los angeles EOS_Z1,tomorrow ; los angeles EOS_Z1,"it will be weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_","it will weather_attribute_SLOT in location_SLOT party_SLOT , with a low of temperature_SLOT and a high of temperature_SLOT ."
+266,2,"it will weather_attribute_SLOT in los angeles tomorrow , with a low of temperature_SLOT and a high of temperature_SLOT . thank you .",tomorrow ; los angeles EOS_Z1,tomorrow ; los angeles EOS_Z1,you are welcome .,no problem .
+223,3,,,,,
+223,0,what 's the temperature going to be like this week,EOS_Z1,EOS_Z1,what city are you inquiring about ?,what city are you interested in
+223,1,what city are you interested in los angeles,los angeles EOS_Z1,los angeles EOS_Z1,"the weather in location_SLOT is weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_",the temperature in location_SLOT this weekly_time_SLOT reaches a low of temperature_SLOT and the highest will be temperature_SLOT
+223,2,the temperature in los angeles this week reaches a low of temperature_SLOT and the highest will be temperature_SLOT thanks !,los angeles EOS_Z1,los angeles EOS_Z1,you're welcome !,you're welcome . hope you have a great day .
+33,3,,,,,
+33,0,what is the weather going to be today and tomorrow,today EOS_Z1,today EOS_Z1,what city are you inquiring about ?,what city would you like to know the weather about ?
+33,1,what city would you like to know the weather about ? i want to know if it will drizzle in durham,drizzle ; today ; durham EOS_Z1,today ; drizzle ; durham EOS_Z1,it will not weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .,it is not predicted to weather_attribute_SLOT any weekly_time_SLOT_time_SLOT or party_SLOT in location_SLOT .
+33,2,it is not predicted to drizzle any today or tomorrow in durham . thank you,drizzle ; today ; durham EOS_Z1,today ; drizzle ; durham EOS_Z1,you're welcome !,anytime
+296,3,,,,,
+296,0,navigate home,home EOS_Z1,home EOS_Z1,navigating you poi_type_SLOT .,there is traffic_info_SLOT on the distance_SLOT route poi_type_SLOT to address_SLOT
+296,1,"there is traffic_info_SLOT on the distance_SLOT route home to address_SLOT okay , thank you",home EOS_Z1,home EOS_Z1,you're welcome !,you're welcome; drive carefully .
+296,2,you're welcome; drive carefully . [end conversation],EOS_Z1,home EOS_Z1,"you're welcome , have a great day .",anytime
+69,3,,,,,
+69,0,please give me the address and directions via the fastest route to a pizza restaurant within 4 miles of me .,pizza restaurant EOS_Z1 traffic_info,pizza restaurant EOS_Z1,poi_SLOT is distance_SLOT away at address_SLOT,you will find poi_SLOT at address_SLOT it is distance_SLOT away without any traffic
+69,1,"you will find poi_SLOT at address_SLOT it is distance_SLOT away without any traffic ok , please direct me there via the fastest route .",EOS_Z1,pizza restaurant EOS_Z1,"i sent the info on your screen , drive carefully !",fastest route being programmed for poi_SLOT
+69,2,fastest route being programmed for poi_SLOT okay thanks,EOS_Z1,pizza restaurant EOS_Z1,you're welcome .,you're welcome !
+32,3,,,,,
+32,0,schedule meeting,meeting EOS_Z1,meeting EOS_Z1,what time is your event_SLOT ?,schedule a event_SLOT for what time and day ?
+32,1,schedule a meeting for what time and day ? i need it for saturday at 1pm with sales team to go over budget .,saturday ; sales team ; 1pm EOS_Z1,meeting ; sales team ; go over budget ; 1pm EOS_Z1,i have scheduled a event_SLOT with party_SLOT for date_SLOT at time_SLOT .,setting event_SLOT for date_SLOT at time_SLOT with party_SLOT to agenda_SLOT .
+32,2,"setting meeting for saturday at 1pm with sales team to go over budget . okay nice , thank you .",saturday ; sales team ; 1pm EOS_Z1,meeting ; sales team ; go over budget ; 1pm ; saturday EOS_Z1,you are welcome .,poi_type_SLOT pleasure .
+82,3,,,,,
+82,0,what is the weather like in the city,EOS_Z1,EOS_Z1,what city are you inquiring about ?,what city are you interested in ?
+82,1,what city are you interested in ? what is the weather in compton on sunday ?,sunday ; compton EOS_Z1,sunday ; compton EOS_Z1,the weather in location_SLOT on date_SLOT is weather_attribute_SLOT with a low of temperature_SLOT and a high of temperature_SLOT .,"it will be weather_attribute_SLOT , with a low of temperature_SLOT and a high of temperature_SLOT in location_SLOT on date_SLOT ."
+82,2,"it will be cloudy , with a low of temperature_SLOT and a high of temperature_SLOT in compton on sunday . thanks .",sunday ; compton EOS_Z1,sunday ; compton EOS_Z1,you're welcome .,anytime .
+100,3,,,,,
+100,0,"car i need a rest stop in the area , please pick something and avoid all heavy traffic",rest stop EOS_Z1 traffic_info,EOS_Z1 poi traffic_info,poi_SLOT is distance_SLOT away at address_SLOT,poi_SLOT is distance_SLOT away with traffic_info_SLOT will that help ?
+100,1,poi_SLOT is distance_SLOT away with traffic_info_SLOT will that help ? sounds great . send me that address .,rest stop EOS_Z1,EOS_Z1,poi_SLOT is at address_SLOT,poi_SLOT is at address_SLOT real . do you need me to set the navigation ?
+100,2,"poi_SLOT is at address_SLOT real . do you need me to set the navigation ? sure , please do !",rest stop EOS_Z1,EOS_Z1,"you're welcome , have a great day .",navigation set . have a great day .
+293,3,,,,,
+293,0,is it snowing in redwood city right now ?,snow ; redwood city EOS_Z1,redwood city EOS_Z1 weather_attribute,it is not weather_attribute_SLOT in location_SLOT right now .,it is weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .
+293,1,it is weather_attribute_SLOT in redwood city today . but it 's not snowing ?,snow ; today ; redwood city EOS_Z1,redwood city ; today EOS_Z1,it will not weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .,"no , it is not weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT ."
+293,2,"no , it is not snowing in redwood city today . thank you",snow ; today ; redwood city EOS_Z1,redwood city ; today EOS_Z1,you're welcome .,happy to help
+186,3,,,,,
+186,0,need the quickest route to home .,quickest ; home EOS_Z1,quickest ; home EOS_Z1,there is traffic_info_SLOT on the route .,"your poi_type_SLOT is distance_SLOT away but there is traffic_info_SLOT on our way , i sent the best available route on your screen"
+186,1,"your home is distance_SLOT away but there is traffic_info_SLOT on our way , i sent the best available route on your screen could you confirm the address for me please ?",home EOS_Z1,quickest ; home EOS_Z1,poi_type_SLOT is at address_SLOT,"sure , it 's address_SLOT , you can see it on your screen"
+186,2,"sure , it 's address_SLOT , you can see it on your screen thank you .",EOS_Z1,quickest ; home EOS_Z1,you're welcome .,you're welcome; drive safely .
+153,3,,,,,
+153,0,navigate home,home EOS_Z1,EOS_Z1,navigating you poi_type_SLOT .,poi_type_SLOT is distance_SLOT away at address_SLOT
+153,1,home is distance_SLOT away at address_SLOT is that route avoiding heavy traffic ?,EOS_Z1,EOS_Z1,there is traffic_info_SLOT on the route to poi_type_SLOT .,no the only route available has traffic_info_SLOT . i'm sorry .
+153,2,no the only route available has heavy traffic . i'm sorry . that is ok .,EOS_Z1,EOS_Z1,"you're welcome , have a great day .","sorry about it , enjoy some music in the meantime !"
+64,3,,,,,
+64,0,what 's the weather like today and tomorrow,today EOS_Z1,today EOS_Z1,what city are you inquiring about ?,for what city would you like weekly_time_SLOT_time_SLOT and party_SLOT 's weather for ?
+64,1,for what city would you like today and tomorrow 's weather for ? i need to know if it is going to be foggy in fresno today and tomorrow car .,foggy ; today ; fresno EOS_Z1,today ; foggy ; fresno EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT or party_SLOT .,it will not be weather_attribute_SLOT in location_SLOT in the coming days .
+64,2,it will not be foggy in fresno in the coming days . thanks buddy .,foggy ; today ; fresno EOS_Z1,today ; foggy ; fresno EOS_Z1,you are welcome .,you're welcome
+52,3,,,,,
+52,0,can you find me a chinese restaurant that is within 5 miles ?,chinese restaurant EOS_Z1,chinese restaurant EOS_Z1,there is a poi_SLOT distance_SLOT away .,poi_SLOT is distance_SLOT away .
+52,1,poi_SLOT is distance_SLOT away . how is the traffic to there ?,chinese restaurant EOS_Z1 traffic_info,chinese restaurant EOS_Z1 traffic_info,there is traffic_info_SLOT on the route .,there is currently traffic_info_SLOT
+52,2,"there is currently traffic_info_SLOT sounds good , set the gps please .",chinese restaurant EOS_Z1,chinese restaurant EOS_Z1,"gps set , have a great day .","gps set , happy to assist you ."
+15,3,,,,,
+15,0,is it going to snow this week,snow EOS_Z1,snow EOS_Z1,what city are you inquiring about ?,where should i check for weather_attribute_SLOT ?
+15,1,where should i check for snow ? corona,corona EOS_Z1,snow ; corona EOS_Z1,there is a poi_SLOT distance_SLOT away and poi_SLOT distance_SLOT away .,there will be no weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .
+15,2,there will be no snow in corona this week . thank you car !,EOS_Z1,snow ; corona EOS_Z1,you're welcome !,no problem poi_type_SLOT driver !
+137,3,,,,,
+137,0,find me a hotel somewhere near my current location,near EOS_Z1 distance,near EOS_Z1,the poi_SLOT is distance_SLOT away .,poi_SLOT is distance_SLOT away at address_SLOT
+137,1,poi_SLOT is distance_SLOT away at address_SLOT can you send me the fastest route to go there ?,EOS_Z1,near ; rest stop EOS_Z1 traffic_info,poi_SLOT is the only option i can find . it is distance_SLOT away with traffic_info_SLOT,there is currently traffic_info_SLOT on the way to the weather_attribute_SLOT; setting directions now .
+137,2,there is currently traffic_info_SLOT on the way to the hotel; setting directions now . thank you .,EOS_Z1,near ; rest stop EOS_Z1,you're welcome .,you're welcome !
+60,3,,,,,
+60,0,i need directions to a local fast food restaurant please,EOS_Z1,EOS_Z1 poi,poi_SLOT is distance_SLOT away .,there is a poi_SLOT distance_SLOT from you as well as a poi_SLOT distance_SLOT from you .
+60,1,there is a poi_SLOT distance_SLOT from you as well as a poi_SLOT distance_SLOT from you . please give me the address and directions to whichever restaurant is on a route where i can avoid heavy traffic .,EOS_Z1,EOS_Z1 traffic_info,poi_SLOT is at address_SLOT,poi_SLOT is at address_SLOT with traffic_info_SLOT noted .
+60,2,poi_SLOT is at address_SLOT with traffic_info_SLOT noted . sounds good . set the gps for the there . thanks .,EOS_Z1,EOS_Z1,you're welcome .,"i sent the info on your map , drive carefully !"
+204,3,,,,,
+204,0,is it supposed to snow today,snow ; today EOS_Z1,snow ; today EOS_Z1,what city are you inquiring about ?,where would you like to know if it will weather_attribute_SLOT ?
+204,1,where would you like to know if it will snow ? i want to know about corona please .,corona EOS_Z1,snow ; today ; corona EOS_Z1 weather_attribute,it will weather_attribute_SLOT on date_SLOT in location_SLOT .,no it 's not forecast to weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT; the forecast is weather_attribute_SLOT with a low of temperature_SLOT and a high of temperature_SLOT .
+204,2,no it 's not forecast to snow in corona today; the forecast is weather_attribute_SLOT with a low of temperature_SLOT and a high of temperature_SLOT . thank you so much .,EOS_Z1,snow ; today ; corona EOS_Z1,you're welcome .,you're welcome . have a great day .
+123,3,,,,,
+123,0,what 's the temperature going to be like this week,EOS_Z1,EOS_Z1,what city are you inquiring about ?,what city are you in ?
+123,1,what city are you in ? i'm in manhattan,manhattan EOS_Z1,manhattan EOS_Z1,"the weather in location_SLOT is forecast for date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT",this weekly_time_SLOT in location_SLOT the temperature will range from temperature_SLOT to temperature_SLOT
+123,2,this week in manhattan the temperature will range from temperature_SLOT to temperature_SLOT thank you very much car !,manhattan EOS_Z1,manhattan EOS_Z1,you're welcome !,i'm here to assist you !
+105,3,,,,,
+105,0,what 's the weather like today and tomorrow,today EOS_Z1,today EOS_Z1,what city are you inquiring about ?,what city are you wanting to know the weather for ?
+105,1,"what city are you wanting to know the weather for ? seatlle , i want to know if it will be foggy today and tomorrow .",foggy ; today EOS_Z1,tomorrow ; foggy ; seattle EOS_Z1 weather_attribute,it will not be weather_attribute_SLOT in the forecast for weekly_time_SLOT_time_SLOT and party_SLOT .,party_SLOT in location_SLOT is looking weather_attribute_SLOT with a low of temperature_SLOT and a high of temperature_SLOT . no sign of fog .
+105,2,tomorrow in seattle is looking weather_attribute_SLOT with a low of temperature_SLOT and a high of temperature_SLOT . no sign of fog . thanks !,foggy ; today EOS_Z1,tomorrow ; foggy ; seattle EOS_Z1,no problem .,no problem !
+75,3,,,,,
+75,0,i need shopping center .,shopping center EOS_Z1,EOS_Z1,poi_SLOT is distance_SLOT away .,there is a poi_type_SLOT distance_SLOT from you . the address is address_SLOT would you like directions ?
+75,1,"there is a shopping center distance_SLOT from you . the address is address_SLOT would you like directions ? yes , please .",shopping center EOS_Z1,shopping center EOS_Z1 poi,poi_SLOT is at address_SLOT,"setting navigation to the poi_SLOT there is a traffic_info_SLOT , so drive carefully ."
+75,2,"setting navigation to the poi_SLOT there is a car collision nearby , so drive carefully . thank you car , pick the shortest distance for me please !",shortest ; shopping center EOS_Z1,shopping center ; shortest EOS_Z1,"you're welcome , have a great day .","i sent the info on your screen , drive carefully !"
+138,3,,,,,
+138,0,what is the weather going to be like today and tomorrow,today EOS_Z1,today EOS_Z1,what city are you inquiring about ?,what city are you wanting to know the weather for ?
+138,1,what city are you wanting to know the weather for ? los angeles,today ; los angeles EOS_Z1,today ; los angeles EOS_Z1,the weather in location_SLOT is weather_attribute_SLOT with a low of temperature_SLOT and a high of temperature_SLOT .,"in location_SLOT , it is going to be weather_attribute_SLOT weekly_time_SLOT_time_SLOT with a low of temperature_SLOT and a high of temperature_SLOT . party_SLOT will be weather_attribute_SLOT with a low of temperature_SLOT and a high of temperature_SLOT ."
+138,2,"in los angeles , it is going to be weather_attribute_SLOT today with a low of temperature_SLOT and a high of temperature_SLOT . tomorrow will be rainy with a low of temperature_SLOT and a high of temperature_SLOT . awesome , thanks .",today ; los angeles EOS_Z1,today ; los angeles EOS_Z1,you are welcome .,anytime .
+298,3,,,,,
+298,0,remind me about tennis at 10am at the end of march with martha,martha ; tennis ; 10am EOS_Z1,martha ; tennis ; 10am EOS_Z1,"okay , setting a reminder for event_SLOT at time_SLOT at address_SLOT the end of march .",okay a reminder is set for event_SLOT with party_SLOT at time_SLOT . what is the date for the scheduled event_SLOT event ?
+298,1,okay a reminder is set for tennis with martha at 10am . what is the date for the scheduled tennis event ? just set it for the end of march,martha ; tennis ; 10am EOS_Z1,martha ; tennis ; 10am EOS_Z1,"okay , setting a reminder for your event_SLOT event with party_SLOT at 10 am .",ok setting reminder for your event_SLOT with party_SLOT at time_SLOT for the last weekly_time_SLOT of march .
+298,2,ok setting reminder for your tennis with martha at 10am for the last week of march . thanks,martha ; tennis ; 10am EOS_Z1,martha ; tennis ; 10am EOS_Z1,you are welcome .,you are welcome .
+119,6,,,,,
+119,0,take me to the nearest grocery store,nearest ; grocery store EOS_Z1,nearest ; grocery store EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,there is a poi_SLOT distance_SLOT away : would you like to get its address ?
+119,1,there is a poi_SLOT distance_SLOT away : would you like to get its address ? yes .,nearest ; grocery store EOS_Z1 poi,nearest ; grocery store EOS_Z1 poi,poi_SLOT is at address_SLOT,poi_SLOT is at address_SLOT
+119,2,"poi_SLOT is at address_SLOT thank you car , pick a route with no traffic and let 's go there !",nearest ; grocery store EOS_Z1,nearest ; grocery store EOS_Z1 traffic_info,"i sent the info on your screen , drive carefully !",the only route has traffic_info_SLOT is that going to be okay ?
+119,3,the only route has traffic_info_SLOT is that going to be okay ? where is the nearest grocery store with no traffic ?,nearest ; grocery store EOS_Z1,nearest ; grocery store EOS_Z1 poi traffic_info,the distance_SLOT poi_type_SLOT is poi_SLOT,"poi_SLOT is the only poi_type_SLOT listed , it has traffic_info_SLOT will that be ok ?"
+119,4,"poi_SLOT is the only grocery store listed , it has traffic_info_SLOT will that be ok ? yes please set the gps for there .",nearest ; grocery store EOS_Z1,nearest ; grocery store EOS_Z1,gps set for poi_SLOT at address_SLOT,setting destination now .
+119,5,setting destination now . thank you .,nearest ; grocery store EOS_Z1,nearest ; grocery store EOS_Z1,you're welcome !,you're welcome .
+254,3,,,,,
+254,0,car please give me the address of a good pizza restaurant in the shortest possible distance,pizza restaurant EOS_Z1,shortest ; pizza restaurant EOS_Z1,poi_SLOT is distance_SLOT away at address_SLOT,poi_type_SLOT chicago is distance_SLOT away .
+254,1,"pizza chicago is distance_SLOT away . nice , what 's the address there ?",pizza restaurant EOS_Z1,shortest ; pizza restaurant EOS_Z1,poi_SLOT is at address_SLOT,the address is address_SLOT would you like directions there ?
+254,2,the address is address_SLOT would you like directions there ? set gps for shortest route now .,shortest ; pizza restaurant EOS_Z1,shortest ; pizza restaurant EOS_Z1,gps set for distance_SLOT route to poi_SLOT,"okay , heading to poi_SLOT"
+182,3,,,,,
+182,0,set an appointment to swim next week,next week ; swim EOS_Z1,EOS_Z1,what day and time should i set the appointment for ?,what date and time is your swim appointment ?
+182,1,what date and time is your swim appointment ? thursday at 10 am please .,thursday ;swimming ; 10am EOS_Z1,10am ; thursday EOS_Z1,i have set a reminder for your weekly_time_SLOT_time_SLOT at 10 am .,i have added swim appointment to your calendar at address_SLOT date_SLOT .
+182,2,i have added swim appointment to your calendar at address_SLOT thursday . thanks .,thursday ; swimming ; 10am EOS_Z1,10am ; thursday EOS_Z1,you are welcome .,you are welcome .
+300,3,,,,,
+300,0,give me a location to a local parking lot,parking EOS_Z1,parking EOS_Z1,the distance_SLOT poi_type_SLOT is poi_SLOT at address_SLOT,there 's a poi_type_SLOT distance_SLOT away . would you like the name and address of it ?
+300,1,there 's a parking garage distance_SLOT away . would you like the name and address of it ? yes and please provide a quick route to get there .,EOS_Z1,parking EOS_Z1 poi,poi_SLOT is distance_SLOT away at address_SLOT with traffic_info_SLOT,navigating to poi_SLOT
+300,2,"navigating to poi_SLOT please pick the quickest route , thank you !",quickest EOS_Z1,parking ; quickest EOS_Z1,"i sent the info on your screen , you're welcome !","i did , and i sent the info on your screen : drive carefully !"
+166,3,,,,,
+166,0,give me directions to the local starbucks,EOS_Z1,EOS_Z1,there are no poi_SLOT distance_SLOT but there is traffic_info_SLOT distance_SLOT,i don't have info on the local poi_SLOT but i do see another poi_type_SLOT place . would you like to hear info on it ?
+166,1,"i don't have info on the local starbucks but i do see another coffee place . would you like to hear info on it ? yes , please ! which one is its address ? there is any quick route available ?",quick route EOS_Z1,quick route EOS_Z1 poi,poi_SLOT is distance_SLOT away at address_SLOT,"there is poi_SLOT located at address_SLOT ave , there is traffic_info_SLOT but you're just distance_SLOT away"
+166,2,"there is poi_SLOT located at address_SLOT ave , there is traffic_info_SLOT but you're just distance_SLOT away perfect !",EOS_Z1,quick route EOS_Z1,"i sent the info on your screen , drive carefully !",you are welcome !
+284,3,,,,,
+284,0,check today 's forecast for rain,rain EOS_Z1,rain ; today EOS_Z1,what city are you inquiring about ?,what city do you want to know if it 's going to weather_attribute_SLOT or not ?
+284,1,what city do you want to know if it 's going to rain or not ? fresno thanks,rain ; fresno EOS_Z1,rain ; today ; fresno EOS_Z1,there is no weather_attribute_SLOT scheduled in the forecast for location_SLOT .,there is no weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT but it will be weather_attribute_SLOT
+284,2,there is no rain in fresno today but it will be weather_attribute_SLOT thank you,rain ; today ; fresno EOS_Z1,rain ; today ; fresno EOS_Z1,no problem,you are welcome
+3,3,,,,,
+3,0,give me directions to the closest grocery store,grocery store EOS_Z1,grocery store EOS_Z1,the distance_SLOT poi_type_SLOT is distance_SLOT away .,there are poi_SLOT distance_SLOT away and poi_SLOT distance_SLOT away . where do we go ?
+3,1,there are poi_SLOT distance_SLOT away and poi_SLOT distance_SLOT away . where do we go ? i need the one that avoids all heavy traffic .,grocery store EOS_Z1,grocery store EOS_Z1 traffic_info,poi_SLOT is the only poi_type_SLOT i can find . it is distance_SLOT away and there is traffic_info_SLOT on our way,poi_SLOT is located distance_SLOT away with traffic_info_SLOT it 's located at address_SLOT
+3,2,poi_SLOT is located distance_SLOT away with traffic_info_SLOT it 's located at address_SLOT thank you .,grocery store EOS_Z1,grocery store EOS_Z1,you're welcome !,"great , glad i could help . have a great day . we will be there soon ."
+27,3,,,,,
+27,0,what 's the weather forecast for today and tomorrow,today EOS_Z1,today EOS_Z1,what city are you inquiring about ?,in what city are you interested ?
+27,1,in what city are you interested ? los angeles,today ; los angeles EOS_Z1,today ; los angeles EOS_Z1,"in location_SLOT it will be weather_attribute_SLOT weekly_time_SLOT_time_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute","in location_SLOT , it will weather_attribute_SLOT weekly_time_SLOT_time_SLOT and be temperature_SLOT . party_SLOT , it will be weather_attribute_SLOT and temperature_SLOT ."
+27,2,"in los angeles , it will weather_attribute_SLOT today and be temperature_SLOT . tomorrow , it will be weather_attribute_SLOT and temperature_SLOT . thanks .",today ; los angeles EOS_Z1,today ; los angeles EOS_Z1,you're welcome !,no problem .
+35,3,,,,,
+35,0,what 's the weather going to be like this week,EOS_Z1,EOS_Z1,what city are you inquiring about ?,what location should i look up the weekly_time_SLOT forecast for ?
+35,1,what location should i look up the weekly forecast for ? will it be hot in brentwood ?,hot ; brentwood EOS_Z1,brentwood ; hot EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,it should not be weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .
+35,2,it should not be hot in brentwood this week . thank you .,hot ; brentwood EOS_Z1,brentwood ; hot EOS_Z1,you're welcome .,you're welcome !
+144,3,,,,,
+144,0,will you find me the fastest route to a rest stop,rest stop EOS_Z1 traffic_info,rest stop EOS_Z1 traffic_info,the distance_SLOT poi_type_SLOT is distance_SLOT away .,poi_SLOT is located distance_SLOT away with traffic_info_SLOT setting directions now to address_SLOT real
+144,1,"poi_SLOT is located distance_SLOT away with traffic_info_SLOT setting directions now to address_SLOT real pick the fastest route please , thank you car !",rest stop EOS_Z1,rest stop EOS_Z1,"you're welcome , have a great day .",setting navigation now .
+144,2,setting navigation now . thank you car !,rest stop EOS_Z1,rest stop EOS_Z1,you're welcome !,you're welcome !
+225,3,,,,,
+225,0,please check the weather for this week,EOS_Z1,EOS_Z1,what city are you interested in ?,where are you interested in ?
+225,1,where are you interested in ? will it be stormy in camarillo ?,stormy ; camarillo EOS_Z1,stormy ; camarillo EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,in location_SLOT it will be weather_attribute_SLOT on date_SLOT
+225,2,in camarillo it will be stormy on tuesday thank you !,stormy ; camarillo EOS_Z1,stormy ; camarillo EOS_Z1,you're welcome !,happy to help
+61,3,,,,,
+61,0,get me the weather report for this week,EOS_Z1,EOS_Z1,what city are you inquiring about ?,what city do you want the weather for ?
+61,1,what city do you want the weather for ? exeter,exeter EOS_Z1,EOS_Z1,the weather in location_SLOT is weather_attribute_SLOT with a low of temperature_SLOT and a high of temperature_SLOT .,"it will be weather_attribute_SLOT other than date_SLOT , and the temperatures are expected to be between temperature_SLOT date_SLOT and date_SLOT , temperature_SLOT date_SLOT , temperature_SLOT date_SLOT , and 80-address_SLOT date_SLOT ."
+61,2,"it will be weather_attribute_SLOT other than sunday , and the temperatures are expected to be between temperature_SLOT monday and tuesday , temperature_SLOT wednesday , temperature_SLOT thursday , and 80-address_SLOT sunday . thanks !",exeter EOS_Z1,EOS_Z1,you are welcome .,you are welcome .
+235,3,,,,,
+235,0,find out if it 's supposed to rain,rain EOS_Z1,rain EOS_Z1,what city are you inquiring about ?,what city are you wanting to know if it 's going to weather_attribute_SLOT ?
+235,1,what city are you wanting to know if it 's going to rain ? redwood city .,rain ; redwood city EOS_Z1,rain ; redwood city EOS_Z1,it will weather_attribute_SLOT on date_SLOT in location_SLOT .,it will weather_attribute_SLOT on date_SLOT in location_SLOT .
+235,2,it will rain on wednesday in redwood city . thank you .,rain ; wednesday EOS_Z1,rain ; redwood city EOS_Z1,you're welcome .,"no problem , so long ."
+34,3,,,,,
+34,0,check forecast for today and tomorrow,today EOS_Z1,today EOS_Z1,what city are you interested in ?,what city do you want to hear the forecast for ?
+34,1,what city do you want to hear the forecast for ? mountain view,today ; mountain view EOS_Z1,today ; mountain view EOS_Z1,what city are you interested in ?,it will be weather_attribute_SLOT weekly_time_SLOT_time_SLOT and weather_attribute_SLOT party_SLOT in location_SLOT .
+34,2,it will be weather_attribute_SLOT today and weather_attribute_SLOT tomorrow in mountain view . thanks .,today ; mountain view EOS_Z1,today ; mountain view EOS_Z1,you're welcome .,you're welcome !
+241,3,,,,,
+241,0,what 's the temperature going to be this week,EOS_Z1,EOS_Z1,what city are you inquiring about ?,what city are you wanting to know the temperature for ?
+241,1,what city are you wanting to know the temperature for ? fresno,fresno EOS_Z1,fresno EOS_Z1,the temperature in location_SLOT is low of temperature_SLOT and high of temperature_SLOT .,"the weather_attribute_SLOT in location_SLOT this weekly_time_SLOT is predicted to be temperature_SLOT , the highest , temperature_SLOT"
+241,2,"the weather_attribute_SLOT in fresno this week is predicted to be temperature_SLOT , the highest , temperature_SLOT thanks .",fresno EOS_Z1,fresno EOS_Z1,you're welcome .,no problem .
+79,3,,,,,
+79,0,what is the weather like right now,EOS_Z1,EOS_Z1,what city do you want the weather for ?,what city shall i check for you ?
+79,1,what city shall i check for you ? please check exeter : is it humid ?,humid ; exeter EOS_Z1,humid ; exeter EOS_Z1,it is not weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,"weekly_time_SLOT_time_SLOT is not weather_attribute_SLOT in location_SLOT . it is weather_attribute_SLOT , low of temperature_SLOT , high of temperature_SLOT ."
+79,2,"today is not humid in exeter . it is stormy , low of temperature_SLOT , high of temperature_SLOT . thank you !",humid ; exeter EOS_Z1,humid ; exeter EOS_Z1,you're welcome !,you're welcome !
+268,3,,,,,
+268,0,what time is my meeting tomorrow and what is the agenda,meeting ; tomorrow EOS_Z1 agenda date,tomorrow ; meeting EOS_Z1,i have two event_SLOT scheduled for party_SLOT at time_SLOT,your event_SLOT is scheduled for address_SLOT the agenda is to agenda_SLOT
+268,1,your meeting is scheduled for address_SLOT the agenda is to agenda_SLOT thanks,meeting ; tomorrow EOS_Z1,tomorrow ; meeting ; discuss the merger ; 2pm EOS_Z1,you are welcome .,you are welcome .
+268,2,you are welcome . thanks again .,tomorrow EOS_Z1,tomorrow ; meeting ; discuss the merger ; 2pm EOS_Z1,you are welcome .,you are welcome
+48,3,,,,,
+48,0,what is the weather like this week,EOS_Z1,EOS_Z1,what city are you inquiring about ?,what city do you want the weather for ?
+48,1,what city do you want the weather for ? cleveland .,cleveland EOS_Z1,cleveland EOS_Z1,"the weather in location_SLOT is forecast for date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT","this weekly_time_SLOT in location_SLOT the weather will be weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on thrusday , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , and weather_attribute_SLOT on date_SLOT"
+48,2,"this week in cleveland the weather will be weather_attribute_SLOT on monday , weather_attribute_SLOT on tuesday , weather_attribute_SLOT on wednesday , weather_attribute_SLOT on thrusday , weather_attribute_SLOT on friday , weather_attribute_SLOT on saturday , and weather_attribute_SLOT on sunday thank .",cleveland EOS_Z1,cleveland EOS_Z1,you're welcome .,you're very welcome !
+242,3,,,,,
+242,0,what is the weather going to be like today and tomorrow,today EOS_Z1,today EOS_Z1,what city are you inquiring about ?,which city are you wanting to know the weather for ?
+242,1,"which city are you wanting to know the weather for ? seatlle , will it be windy ?",windy ; today ; seat le EOS_Z1,today ; windy ; seattle EOS_Z1,it will not be weather_attribute_SLOT in seat chicago weekly_time_SLOT_time_SLOT .,it will be weather_attribute_SLOT party_SLOT in location_SLOT .
+242,2,it will be windy tomorrow in seattle . thank you .,windy ; today ; seattle EOS_Z1,today ; windy ; seattle EOS_Z1,you are welcome .,you are welcome !
+301,3,,,,,
+301,0,what is the forecast for the next 7 days,next 7 days EOS_Z1,EOS_Z1,what city are you interested in ?,for what city are you interested in ?
+301,1,"for what city are you interested in ? cleveland , will it be windy ?",windy ; next 7 days ; cleveland EOS_Z1,windy ; cleveland EOS_Z1,it will not be weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,it will not be weather_attribute_SLOT in location_SLOT weekly_time_SLOT_time_SLOT .
+301,2,it will not be windy in cleveland next week . thank you .,windy ; next 7 days ; cleveland EOS_Z1,windy ; cleveland EOS_Z1,you're welcome .,no problem .
+139,3,,,,,
+139,0,what 's the weather forecast,EOS_Z1,EOS_Z1,what city are you inquiring about ?,what city are you inquiring about ?
+139,1,"what city are you inquiring about ? find out if there is hail outside right now , for seattle please .",hail ; seattle EOS_Z1,hail ; seattle EOS_Z1 weather_attribute,there is no forecast of weather_attribute_SLOT in location_SLOT this weekly_time_SLOT .,in location_SLOT there is weather_attribute_SLOT right now
+139,2,in seattle there is weather_attribute_SLOT right now thank you !,hail ; seattle EOS_Z1,hail ; seattle EOS_Z1,you're welcome !,you are most welcome .
+84,3,,,,,
+84,0,what 's the temperature going to be like today and tomorrow,today EOS_Z1,today EOS_Z1,what city are you inquiring about ?,what city are you wanting to know the temperature for ?
+84,1,what city are you wanting to know the temperature for ? seattle,today ; seattle EOS_Z1,today ; seattle EOS_Z1,the temperature in location_SLOT is between temperature_SLOT and temperature_SLOT .,it will be between temperature_SLOT weekly_time_SLOT_time_SLOT and temperature_SLOT party_SLOT in location_SLOT .
+84,2,it will be between temperature_SLOT today and temperature_SLOT tomorrow in seattle . thank you .,today ; seattle EOS_Z1,today ; seattle EOS_Z1,you're welcome .,no problem .
+237,3,,,,,
+237,0,i need a coffee shop within 4 miles .,coffee EOS_Z1,coffee EOS_Z1,there is a poi_SLOT distance_SLOT away .,poi_SLOT is distance_SLOT away at address_SLOT
+237,1,poi_SLOT is distance_SLOT away at address_SLOT is there a quickest route to reach it ?,quickest EOS_Z1,coffee or tea place EOS_Z1 traffic_info,there is traffic_info_SLOT on our way but i sent on your screen another route to reach it,"setting navigation now for the distance_SLOT route . there is traffic_info_SLOT distance_SLOT , so drive carefully ."
+237,2,"setting navigation now for the quickest route . there is traffic_info_SLOT nearby , so drive carefully . thanks !",quickest EOS_Z1,coffee or tea place EOS_Z1,you're welcome !,anytime .
+156,3,,,,,
+156,0,what is a quick route home ?,quick route ; home EOS_Z1,quick route ; home EOS_Z1,there is traffic_info_SLOT on the distance_SLOT route poi_type_SLOT,"there is traffic_info_SLOT in this moment but we're just distance_SLOT away , it shouldn't take too long to reach there"
+156,1,"there is traffic_info_SLOT in this moment but we're just distance_SLOT away , it shouldn't take too long to reach there please direct me via the quickest possible route .",home EOS_Z1,quickest ; home EOS_Z1,"i sent the info on your screen , drive carefully !","i sent all the info on your screen , drive carefully !"
+156,2,"i sent all the info on your screen , drive carefully ! thank you car !",EOS_Z1,quickest ; home EOS_Z1,you're welcome !,you are welcome !
+277,3,,,,,
+277,0,car what is the temperature going to be today and tomorrow,today EOS_Z1,today EOS_Z1,what city are you inquiring about ?,what city do you need the address_SLOT for ?
+277,1,what city do you need the address_SLOT for ? grand rapids .,today ; grand rapids EOS_Z1,today ; grand rapids EOS_Z1,"the address_SLOT is address_SLOT , i sent it on your map","in location_SLOT , it will be temperature_SLOT weekly_time_SLOT_time_SLOT and temperature_SLOT party_SLOT ."
+277,2,"in grand rapids , it will be temperature_SLOT today and temperature_SLOT tomorrow . thanks .",today ; grand rapids EOS_Z1,today ; grand rapids EOS_Z1,you're welcome .,you're welcome .
+175,3,,,,,
+175,0,check the weather forecast,EOS_Z1,EOS_Z1,what city are you interested in ?,what city do you want the weather for ?
+175,1,what city do you want the weather for ? i want to know if it will be stormy in manhattan over the next 7 days,stormy ; manhattan EOS_Z1,stormy ; next 7 days ; manhattan EOS_Z1,it will be weather_attribute_SLOT on date_SLOT in location_SLOT .,in location_SLOT it will be weather_attribute_SLOT on date_SLOT and date_SLOT
+175,2,in manhattan it will be stormy on wednesday and thursday thank you car !,stormy ; manhattan EOS_Z1,stormy ; next 7 days ; manhattan EOS_Z1,you're welcome !,anytime .
+252,3,,,,,
+252,0,what 's the temperature going to be for the week,week EOS_Z1,EOS_Z1,what city do you want the weather for ?,in what city are you asking ?
+252,1,in what city are you asking ? durham,durham EOS_Z1,durham EOS_Z1,"the weather in location_SLOT will be weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_","the temperature in location_SLOT will be : weather_attribute_SLOT , low of temperature_SLOT , high of temperature_SLOT date_SLOT . weather_attribute_SLOT , low of temperature_SLOT , high of temperature_SLOT date_SLOT ."
+252,2,"the temperature in durham will be : lowest temperature , low of temperature_SLOT , high of temperature_SLOT tuesday . highest temperature , low of temperature_SLOT , high of temperature_SLOT thursday . thank you car .",EOS_Z1,durham EOS_Z1,you are welcome .,you're very welcome !
+131,3,,,,,
+131,0,directions to the grocery store,grocery store EOS_Z1,grocery store EOS_Z1,the poi_SLOT is distance_SLOT away .,poi_SLOT located at address_SLOT is distance_SLOT away although there is a traffic_info_SLOT
+131,1,"poi_SLOT located at address_SLOT is distance_SLOT away although there is a traffic_info_SLOT ok , please give me directions via the quickest route .",grocery store EOS_Z1,grocery store EOS_Z1,"i sent the info on your screen , drive carefully !",the current route is the distance_SLOT
+131,2,"the current route is the quickest ok , thank you .",grocery store EOS_Z1,grocery store EOS_Z1,"you're welcome , have a great day .",you're welcome !
+110,3,,,,,
+110,0,give me weather forecast for today,today EOS_Z1,today EOS_Z1,what city are you interested in ?,what city do you want the weather forecast for ?
+110,1,"what city do you want the weather forecast for ? downtown chicago , please",today EOS_Z1,today ; downtown chicago EOS_Z1 weather_attribute,what city are you interested in ?,weekly_time_SLOT_time_SLOT in location_SLOT there should be weather_attribute_SLOT with a high of temperature_SLOT
+110,2,today in downtown chicago there should be weather_attribute_SLOT with a high of temperature_SLOT thanks,today EOS_Z1,today ; downtown chicago EOS_Z1,you're welcome .,you're welcome !
+270,3,,,,,
+270,0,is there snow in the forecast for the week,snow EOS_Z1,snow EOS_Z1,what city are you interested in ?,what city can i give you this weather information for ?
+270,1,what city can i give you this weather information for ? i need it for san jose .,snow ; san jose EOS_Z1,snow ; week ; san jose EOS_Z1,it will be weather_attribute_SLOT on date_SLOT in location_SLOT .,weather_attribute_SLOT is predicted to fall in location_SLOT on date_SLOT this weekly_time_SLOT .
+270,2,snow is predicted to fall in san jose on thursday this week . thanks .,fall ; thursday EOS_Z1,snow ; week ; san jose EOS_Z1,no problem .,you are very welcome
+145,3,,,,,
+145,0,"who 's showing up for tennis , and what 's the date on that ?",tennis EOS_Z1 date party,tennis EOS_Z1 event party,you have two event_SLOT activities scheduled; one on date_SLOT with party_SLOT and one on date_SLOT with party_SLOT,party_SLOT and party_SLOT will be attending your event_SLOT
+145,1,party_SLOT and party_SLOT will be attending your event_SLOT what time will they be there ?,tennis EOS_Z1,tennis EOS_Z1,you have two event_SLOT activities scheduled . one on date_SLOT at time_SLOT with party_SLOT and another on date_SLOT at time_SLOT with party_SLOT,they will be there at 1 pm .
+145,2,they will be there at 1 pm . thank you assistant !,EOS_Z1,tennis EOS_Z1,you're welcome .,you are welcome .
+50,3,,,,,
+50,0,check weather forecast for seattle,seattle EOS_Z1,seattle EOS_Z1,what days are you interested in ?,for what day would you like to know ?
+50,1,for what day would you like to know ? please tell me the forecast in seattle this week .,seattle EOS_Z1,seattle EOS_Z1 weather_attribute,"it will be weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_SLOT on date_SLOT , weather_attribute_","this weekly_time_SLOT in location_SLOT the weather is forecasted to be weather_attribute_SLOT , weather_attribute_SLOT , weather_attribute_SLOT , weather_attribute_SLOT , drzzle , weather_attribute_SLOT ,and weather_attribute_SLOT"
+50,2,"this week in seattle the weather is forecasted to be overcast , cloudy , windy , foggy , drzzle , weather_attribute_SLOT ,and weather_attribute_SLOT thank you .",overcast ; seattle EOS_Z1,seattle EOS_Z1,you are welcome .,you're welcome .
+170,3,,,,,
+170,0,find a coffee place,coffee EOS_Z1,coffee EOS_Z1,there is a poi_SLOT distance_SLOT away .,poi_SLOT serves poi_type_SLOT and is distance_SLOT away at address_SLOT
+170,1,"poi_SLOT serves coffee and is distance_SLOT away at address_SLOT sounds great , let 's go there .",EOS_Z1,coffee or tea place EOS_Z1,"i sent the info on your screen , drive carefully !",there is traffic_info_SLOT on the distance_SLOT route to poi_SLOT; enjoy .
+170,2,there is traffic_info_SLOT on the distance_SLOT route to philz; enjoy . thank you .,EOS_Z1,coffee or tea place EOS_Z1,you're welcome .,you're welcome .
