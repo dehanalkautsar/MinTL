@@ -809,10 +809,16 @@ class CamRestReader(_ReaderBase):
         self._load_data(cfg=cfg)
 
     def _load_data(self, cfg, save_temp=False):
-        self.data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.data_path+cfg.data_file, 'r', encoding='utf-8').read().lower()), self.db))
-        tr,de,_ = self._split_data(self.data, (8,1,1))
-        self.test_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.test_list, 'r', encoding='utf-8').read().lower()), self.db))
-        _,_,te = self._split_data(self.test_data, (8,1,1))
+        tr, de, te = [],[],[]
+        for file in cfg.data_file:
+            self.data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.data_path+file, 'r', encoding='utf-8').read().lower()), self.db))
+            temp_tr,temp_de,_ = self._split_data(self.data, (8,1,1))
+            tr.extend(temp_tr)
+            de.extend(temp_de)
+        for file in cfg.test_list:
+            self.test_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(file, 'r', encoding='utf-8').read().lower()), self.db))
+            _,_,temp_te = self._split_data(self.test_data, (8,1,1))
+            te.extend(temp_te)
         self.train, self.dev, self.test = [] , [], []
         self.ontology = json.loads(open(cfg.ontology).read().lower())
         self.get_entities(self.ontology)
@@ -1469,21 +1475,29 @@ class SMDReader(_ReaderBase):
         self.ontology = json.loads(open(cfg.ontology).read().lower())
         self.get_entities(self.ontology)
 
-        self.train_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.data_path+cfg.data_file, 'r', encoding='utf-8').read().lower()), cfg))
-        self.dev_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.dev_list, 'r', encoding='utf-8').read().lower()), cfg))
-        self.test_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.test_list, 'r', encoding='utf-8').read().lower()), cfg))
+        tr, de, te = [],[],[]
+        for file in cfg.data_file:
+            self.train_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(cfg.data_path+file, 'r', encoding='utf-8').read().lower()), cfg))
+            tr.extend(self.train_data)
+        for file in cfg.dev_list:
+            self.dev_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(file, 'r', encoding='utf-8').read().lower()), cfg))
+            de.extend(self.dev_data)
+        for file in cfg.test_list:
+            self.test_data = self._get_encoded_data_sequicity(self._get_tokenized_data(json.loads(open(file, 'r', encoding='utf-8').read().lower()), cfg))
+            te.extend(self.test_data)
+
         self.train, self.dev, self.test = [] , [], []
 
         train_count = 0
 
-        for dial in self.train_data:
+        for dial in tr:
             dial_id = dial[0]['dial_id']
             self.train.append(self._get_encoded_data(dial_id,dial))
             train_count += 1
-        for dial in self.dev_data:
+        for dial in de:
             dial_id = dial[0]['dial_id']
             self.dev.append(self._get_encoded_data(dial_id,dial))
-        for dial in self.test_data:
+        for dial in te:
             dial_id = dial[0]['dial_id']
             self.test.append(self._get_encoded_data(dial_id,dial))
 

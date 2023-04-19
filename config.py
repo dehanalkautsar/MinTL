@@ -9,33 +9,33 @@ class _CamRest_Config:
         # self.vocab_path_eval = None
         self.data_path = os.path.join(os.path.dirname(__file__),'data/CamRest676/')
         if exp_setting == 'en':
-            self.data_file = 'CamRest/CamRest676.json'
-            self.test_list = os.path.join(os.path.dirname(__file__),'data/CamRest676/CamRest/CamRest676.json')
+            self.data_file = ['CamRest/CamRest676.json']
+            self.test_list = [os.path.join(os.path.dirname(__file__),'data/CamRest676/CamRest/CamRest676.json')]
             self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/CamRest/CamRestDB.json')
             self.ontology = os.path.join(os.path.dirname(__file__),'data/CamRest676/CamRest/CamRestOTGY.json')
         elif exp_setting == 'id':
-            self.data_file = 'IndoCamRest/IndoCamRest676.json'
-            self.test_list = os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/IndoCamRest676.json')
+            self.data_file = ['IndoCamRest/IndoCamRest676.json']
+            self.test_list = [os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/IndoCamRest676.json')]
             self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/KB_indo.json')
             self.ontology = os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/ontology_indo.json')
         elif exp_setting == 'cross':
-            self.data_file = 'CamRest/CamRest676.json'
-            self.test_list = os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/IndoCamRest676.json')
+            self.data_file = ['CamRest/CamRest676.json']
+            self.test_list = [os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/IndoCamRest676.json')]
             self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/kb_indo_bi.json')
             self.ontology = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/ontology_indo_bi.json')
         elif exp_setting == 'bi':
-            self.data_file = 'bi/IndoCamRest676_bi.json'
-            self.test_list = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/IndoCamRest676_bi.json')
+            self.data_file = ['CamRest/CamRest676.json','IndoCamRest/IndoCamRest676.json']
+            self.test_list = [os.path.join(os.path.dirname(__file__),'data/CamRest676/CamRest/CamRest676.json'), os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/IndoCamRest676.json')]
             self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/kb_indo_bi.json')
             self.ontology = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/ontology_indo_bi.json')
         elif exp_setting == 'bi-en':
-            self.data_file = 'bi/IndoCamRest676_bi.json'
-            self.test_list = os.path.join(os.path.dirname(__file__),'data/CamRest676/CamRest/CamRest676.json')
+            self.data_file = ['CamRest/CamRest676.json','IndoCamRest/IndoCamRest676.json']
+            self.test_list = [os.path.join(os.path.dirname(__file__),'data/CamRest676/CamRest/CamRest676.json')]
             self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/kb_indo_bi.json')
             self.ontology = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/ontology_indo_bi.json')
         elif exp_setting == 'bi-id':
-            self.data_file = 'bi/IndoCamRest676_bi.json'
-            self.test_list = os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/IndoCamRest676.json')
+            self.data_file = ['CamRest/CamRest676.json','IndoCamRest/IndoCamRest676.json']
+            self.test_list = [os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/IndoCamRest676.json')]
             self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/kb_indo_bi.json')
             self.ontology = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/ontology_indo_bi.json')
         self.glove_path = os.path.join(os.path.dirname(__file__),'data/glove/glove.6B.50d.txt')
@@ -156,39 +156,39 @@ class _SMD_Config:
         # self.vocab_path_eval = None
         self.data_path = os.path.join(os.path.dirname(__file__),'data/kvret/')
         if exp_setting == 'en':
-            self.data_file = 'smd/kvret_train_public.json'
-            self.dev_list = os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_dev_public.json')
-            self.test_list = os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_test_public.json')
+            self.data_file = ['smd/kvret_train_public.json']
+            self.dev_list = [os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_dev_public.json')]
+            self.test_list = [os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_test_public.json')]
             # self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/CamRest/CamRestDB.json')
             self.ontology = os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_entities.json')
         elif exp_setting == 'id':
-            self.data_file = 'indosmd/IndoSMD_train.json'
-            self.dev_list = os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/IndoSMD_dev.json')
-            self.test_list = os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/IndoSMD_test.json')
+            self.data_file = ['indosmd/IndoSMD_train.json']
+            self.dev_list = [os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/IndoSMD_dev.json')]
+            self.test_list = [os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/IndoSMD_test.json')]
             # self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/IndoCamRest/KB_indo.json')
             self.ontology = os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/kvret_indo_entities.json')
         elif exp_setting == 'cross':
-            self.data_file = 'smd/kvret_train_public.json'
-            self.dev_list = os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_dev_public.json')
-            self.test_list = os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/IndoSMD_test.json')
+            self.data_file = ['smd/kvret_train_public.json']
+            self.dev_list = [os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_dev_public.json')]
+            self.test_list = [os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/IndoSMD_test.json')]
             # self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/kb_indo_bi.json')
             self.ontology = os.path.join(os.path.dirname(__file__),'data/kvret/bi/kvret_indo_entities_bi.json')
         elif exp_setting == 'bi':
-            self.data_file = 'bi/IndoSMD_train_bi.json'
-            self.dev_list = os.path.join(os.path.dirname(__file__),'data/kvret/bi/IndoSMD_dev_bi.json')
-            self.test_list = os.path.join(os.path.dirname(__file__),'data/kvret/bi/IndoSMD_test_bi.json')
+            self.data_file = ['smd/kvret_train_public.json','indosmd/IndoSMD_train.json']
+            self.dev_list = [os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_dev_public.json'),os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/IndoSMD_dev.json')]
+            self.test_list = [os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_test_public.json'),os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/IndoSMD_test.json')]
             # self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/kb_indo_bi.json')
             self.ontology = os.path.join(os.path.dirname(__file__),'data/kvret/bi/kvret_indo_entities_bi.json')
         elif exp_setting == 'bi-en':
-            self.data_file = 'bi/IndoSMD_train_bi.json'
-            self.dev_list = os.path.join(os.path.dirname(__file__),'data/kvret/bi/IndoSMD_dev_bi.json')
-            self.test_list = os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_test_public.json')
+            self.data_file = ['smd/kvret_train_public.json','indosmd/IndoSMD_train.json']
+            self.dev_list = [os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_dev_public.json'),os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/IndoSMD_dev.json')]
+            self.test_list = [os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_test_public.json')]
             # self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/kb_indo_bi.json')
             self.ontology = os.path.join(os.path.dirname(__file__),'data/kvret/bi/kvret_indo_entities_bi.json')
         elif exp_setting == 'bi-id':
-            self.data_file = 'bi/IndoSMD_train_bi.json'
-            self.dev_list = os.path.join(os.path.dirname(__file__),'data/kvret/bi/IndoSMD_dev_bi.json')
-            self.test_list = os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/IndoSMD_test.json')
+            self.data_file = ['smd/kvret_train_public.json','indosmd/IndoSMD_train.json']
+            self.dev_list = [os.path.join(os.path.dirname(__file__),'data/kvret/smd/kvret_dev_public.json'),os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/IndoSMD_dev.json')]
+            self.test_list = [os.path.join(os.path.dirname(__file__),'data/kvret/indosmd/IndoSMD_test.json')]
             # self.db = os.path.join(os.path.dirname(__file__),'data/CamRest676/bi/kb_indo_bi.json')
             self.ontology = os.path.join(os.path.dirname(__file__),'data/kvret/bi/kvret_indo_entities_bi.json')
         self.glove_path = os.path.join(os.path.dirname(__file__),'data/glove/glove.6B.50d.txt')
